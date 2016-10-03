@@ -1,0 +1,48 @@
+html, body {
+  height: 100%;
+}
+
+#main {
+  padding-top: 50px;
+}
+
+body {
+  background-color: #fbfbfb;
+}
+
+.sidebar-offcanvas {
+  overflow-y: scroll;
+  height: calc(100vh - 60px);
+}
+
+#CasePage small {
+  color: #888;
+  padding-left: 15px;
+}
+#CasePage .table td, .table th {
+   text-align: center;   
+   vertical-align: middle;
+}
+#CasePage .table td.left, .table th.left {
+  text-align: left;
+}
+
+#CasePage .unarbitrated-row:nth-child(odd) {
+  background-color: #ffdede;
+}
+#CasePage .unarbitrated-row:nth-child(even) {
+  background-color: #ffeeee;
+}
+
+#CasePage .unarbitrated-row {
+  outline: 2px solid #bf8181;
+  outline-offset: -1px;
+}
+
+#CasePage .accept-button {
+  font-weight: bold;
+}
+
+#CasePage .arbitrate-button {
+  width: 80px;
+}
