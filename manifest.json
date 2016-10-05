@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Qualbitrator",
+  "name": "Arbitrator",
   "version": "0.1",
   "minimum_chrome_version": "29",
   "icons": {
@@ -10,5 +10,15 @@
     "background": {
       "scripts": ["main.js"]
     }
-  }
+  },
+  "file_handlers": {
+    "text": {
+        "extensions": [
+            "arbc"
+        ]
+    }
+  },
+  "permissions": [
+      {"fileSystem": ["write"]}
+  ]
 }

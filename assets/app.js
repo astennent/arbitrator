@@ -1,108 +1,141 @@
-angular.module('Arbitrator', [])
+var app = angular.module('Arbitrator', [])
 
-angular.module('Arbitrator').controller('projectController', ['$scope', 'Project', function($scope, Project) {
+app.controller('projectController', ['$scope', 'Project', function($scope, Project) {
    $scope.projectName = Project.name();
    $scope.questions = Project.questions();
 }])
 
-angular.module('Arbitrator').factory('Project', function() {
+app.factory('Project', function() {
 
    var project = {
       name: 'Guardian Coding 3.0'
    }
-
-   var questions = {
-      1: 'Does the site contain any images or videos?',
-      2: 'Does the site include an image or video of victim (person killed by police)...',
-      3: 'Site 1 URL of images or videos of victim. Separate urls with commas. If una...',
-      4: 'Does the site include an image or video of officer responsible for the deat...',
-   };
 
    return {
       name: function() {
          return project.name;
       },
       questions: function() {
-         return questions;
+         return []; // TODO: For coding
       }
    }
 
+});
+
+app.factory('currentPage', function() {
+   var currentPage = 'Setup';
+   return {
+      isOnSetup: function () {
+         return currentPage === 'Setup';
+      },
+      isOnCase: function () {
+         return currentPage === 'Case';
+      },
+      switchToCase: function() {
+         currentPage = 'Case';
+      },
+      switchToSetup: function() {
+         currentPage = 'Setup;'
+      }
+   }
 })
+app.controller('pageController', ['$scope', 'currentPage', function($scope, currentPage) {
+   $scope.isOnCase = currentPage.isOnCase;
+   $scope.isOnSetup = currentPage.isOnSetup;
+}]);
 
-angular.module('Arbitrator').controller('sidebarController', ['$q', function($q) {
-   console.log($q);
-}])
 
-angular.module('Arbitrator').factory('CoderData', function() {
+app.controller('sidebarController', ['$scope', 'coderData', 'currentPage', 'Case', function($scope, coderData, currentPage, Case) {
+   $scope.getCases = coderData.getCases;
+   $scope.switchToCase = function(caseKey) {
+      currentPage.switchToCase();
+      Case.setKey(caseKey);
+   }
+}]);
+
+
+app.controller('setupController', ['$scope', 'coderData', function($scope, coderData) {
+
+   $scope.caseIdKey = 'Q2 - ID #'; // TODO: Don't hardcode this.
+
+   $scope.handleLoad = function(element, rawContents) {
+      var coderNum = element[0].id === 'coder1Source' ? 1 : 2;
+      var parsedContents = Papa.parse(rawContents, {header: true});
+      var data = {};
+      parsedContents.data.forEach(function (caseObject) {
+         var caseId = caseObject[$scope.caseIdKey];
+         data[caseId] = caseObject;
+      });
+      coderData.setCaseData(coderNum, data);
+   }
+}]);
+
+app.factory('coderData', function() {
 
    var responses = {
-      1: {
-         3: {
-            1: 'Yes',
-            2: 'No',
-            3: 'google.com',
-            4: 'No'
-         }
-      },
-      2: {
-         3: {
-            1: 'Yes',
-            2: 'Yes',
-            3: 'google.com',
-            4: 'No'
-         }      
-      }
+      1: {},
+      2: {}
    }
 
+   var cases = [];
+
    return {
-      getCaseData: function(coder, caseNumber) {
-         return responses[coder][caseNumber];
+      getCases: function() {
+         return cases;
+      },
+      getCaseData: function(coder, caseId) {
+         return responses[coder][caseId] || [];
+      },
+      setCaseData: function(coder, parsedData) {
+         responses[coder] = parsedData;
+         cases = Object.keys(parsedData);
       }
    }
 
 });
 
-angular.module('Arbitrator').factory('Case', function() {
-
-   var currentCase = {
-      number: 3,
-      description: 'Long Beach police shoot, kill man who was seated at arcade with knife',
-   };
-
+app.factory('Case', function() {
+   var currentCase = null;
    return {
-      number: function() {
-         return currentCase.number;
+      getKey: function() {
+         return currentCase;
       },
-      description: function() {
-         return currentCase.description;
-      },
+      setKey: function(value) {
+         currentCase = value;
+      }
    };
 });
 
 
-angular.module('Arbitrator').controller('caseController', ['$scope', 'Case', 'CoderData', function($scope, Case, CoderData) {
-   $scope.caseNumber = Case.number();
-   $scope.description = Case.description();
+app.controller('caseController', ['$scope', 'Case', 'coderData', function($scope, Case, coderData) {
+   $scope.caseId = Case.getKey();
 
-   $scope.coder1 = CoderData.getCaseData(1, $scope.caseNumber);
-   $scope.coder2 = CoderData.getCaseData(2, $scope.caseNumber);
+   $scope.coder1 = coderData.getCaseData(1, $scope.caseId);
+   $scope.coder2 = coderData.getCaseData(2, $scope.caseId);
 
-   $scope.arbitrator = {1: 'test'};
+   var coder1Questions = Object.keys($scope.coder1);
+   var coder2Questions = Object.keys($scope.coder2);
 
+
+   var isCoder1Dominant = (coder1Questions.length > coder2Questions.length);
+   var dominantCoder = isCoder1Dominant ? $scope.coder1 : $scope.coder2;
+   $scope.questionIds = isCoder1Dominant ? coder1Questions : coder2Questions;
+
+   $scope.arbitrator = {}; // TODO: Load
    var arbitratedSet = {};
 
    function getQuestionsToResolve() {
-      return Object.keys($scope.coder1).filter(function(key) {
-         var alreadyArbitrated = (key in arbitratedSet);
-         return !alreadyArbitrated && $scope.coder1[key] === $scope.coder2[key];
+      return $scope.questionIds.filter(function(questionId) {
+         var alreadyArbitrated = (questionId in arbitratedSet);
+         return !alreadyArbitrated && $scope.coder1[questionId] === $scope.coder2[questionId];
       })
    }
 
    $scope.autoResolve = function() {
       var questions = getQuestionsToResolve();
-      questions.forEach(function(num) {
-         $scope.enableArbitration(num);
-         $scope.arbitrator[num] = $scope.coder1[num];
+      questions.forEach(function(questionId) {
+         $scope.enableArbitration(questionId);
+         $scope.arbitrator[questionId] = dominantCoder[questionId];
       })
    }
 
@@ -111,43 +144,44 @@ angular.module('Arbitrator').controller('caseController', ['$scope', 'Case', 'Co
    }
 
    $scope.progress = function() {
-      return 100 * Object.keys(arbitratedSet).length / Object.keys($scope.coder1).length;
+      return Math.floor(100 * Object.keys(arbitratedSet).length / Object.keys(dominantCoder).length);
    }
 
-   $scope.isEquivalent = function(num) {
-      var value1 = $scope.coder1[num];
-      var value2 = $scope.coder2[num];
+   $scope.isEquivalent = function(questionId) {
+      var value1 = $scope.coder1[questionId];
+      var value2 = $scope.coder2[questionId];
       return value1 === value2;
    }
 
-   $scope.isArbitrated = function(num) {
-      return arbitratedSet[num];
+   $scope.isArbitrated = function(questionId) {
+      return arbitratedSet[questionId];
    }
 
-   $scope.disableArbitration = function(num) {
-      delete arbitratedSet[num];
+   $scope.disableArbitration = function(questionId) {
+      delete arbitratedSet[questionId];
    }
 
-   $scope.enableArbitration = function(num) {
-      arbitratedSet[num] = true;
+   $scope.enableArbitration = function(questionId) {
+      arbitratedSet[questionId] = true;
    }
 
-   $scope.toggleArbitration = function(num) {
-      if ($scope.isArbitrated(num)) {
-         $scope.disableArbitration(num);
+   $scope.toggleArbitration = function(questionId) {
+      if ($scope.isArbitrated(questionId)) {
+         $scope.disableArbitration(questionId);
       } else {
-         $scope.enableArbitration(num);
+         $scope.enableArbitration(questionId);
       }
    }
 
-   $scope.acceptCoder = function(num, coder) {
-      $scope.arbitrator[num] = coder[num];
+   $scope.acceptCoder = function(questionId, coder) {
+      $scope.arbitrator[questionId] = coder[questionId];
    }
-}])
+
+   $scope.questions = dominantCoder
+}]);
 
 
-
-angular.module('Arbitrator').directive('ngEnter', function () {
+app.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
             if(event.which === 13) {
@@ -159,4 +193,25 @@ angular.module('Arbitrator').directive('ngEnter', function () {
             }
         });
     };
+});
+
+app.directive('fileReader', function() {
+  return {
+    scope: true,
+    link: function($scope, element) {
+      element.on('change', function(changeEvent) {
+        var files = changeEvent.target.files;
+        if (files.length) {
+          var r = new FileReader();
+          r.onload = function(e) {
+              var contents = e.target.result;
+              $scope.$apply(function () {
+                  $scope.handleLoad(element, contents);
+              });
+          };
+          r.readAsText(files[0]);
+        }
+      });
+    }
+  };
 });

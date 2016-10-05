@@ -7,164 +7,143 @@
     <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
     <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/papaparse/papaparse.min.js"></script>
     <script src="assets/app.js"></script>
 </head>
 
-<body >
+<body>
 
+<!-- Top bar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-   <div class="container-fluid">
-     <div class="navbar-header">
-       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-         <span class="sr-only">Toggle navigation</span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-       </button>
-       <a class="navbar-brand" href="#">Arbitrator</a>
-     </div>
-     <div class="navbar-collapse collapse">
-       <ul class="nav navbar-nav navbar-right">
-         <li><a href="#">Dashboard</a></li>
-         <li><a href="#">Settings</a></li>
-         <li><a href="#">Profile</a></li>
-         <li><a href="#">Help</a></li>
-       </ul>
-       <form class="navbar-form navbar-right">
-         <input type="text" class="form-control" placeholder="Search...">
-       </form>
-     </div>
-   </div>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Arbitrator</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Help</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
-<div id="main" class="container-fluid" ng-controller="caseController" >
-   <div class="row row-offcanvas row-offcanvas-left" >
-     
-      <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-        
-         <ul class="nav nav-sidebar">
-           <li class="active"><a href="#">Overview</a></li>
-           <li><a href="http://bootstrapzero.com" target="_ext">Themes</a></li>
-           <li><a href="http://bootstrap.theme.cards" target="_ext">Analytics</a></li>
-           <li><a href="https://wrapbootstrap.com?ref=skelly" target="_ext">Export</a></li>
-         </ul>
-         <br>
-         <ul class="nav nav-sidebar">
-           <li><a href="">Nav item</a></li>
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-           <li><a href="">More navigation</a></li>
-         </ul>
-         <ul class="nav nav-sidebar">
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-         </ul>
-       
-                   <ul class="nav nav-sidebar">
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-         </ul>
-                     <ul class="nav nav-sidebar">
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-         </ul>
-                     <ul class="nav nav-sidebar">
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-         </ul>
-                     <ul class="nav nav-sidebar">
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-         </ul>
-                     <ul class="nav nav-sidebar">
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-         </ul>
-                     <ul class="nav nav-sidebar">
-           <li><a href="">Nav item again</a></li>
-           <li><a href="">One more nav</a></li>
-           <li><a href="">Another nav item</a></li>
-         </ul>
-     </div><!--/span-->
-     
-     <div class="col-sm-9 col-md-10 main" id="CasePage">
-       
-       <!--toggle sidebar button-->
-       <p class="visible-xs">
-         <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
-       </p>
-       
-     <h1 class="page-header"> Case {{caseNumber}}
-         <small> {{progress()}}%</small>
-         <button class="btn btn-success"
-                 ng-click="autoResolve()"
-                 ng-disabled="!canAutoResolve()"> Auto-arbitrate </button>
-     </h1>
-     <h3 class="sub-header"> {{description}} </h3>
-      
-      
-     <div class="progress">
-        <div class="progress-bar"
-             role="progressbar" 
-             ng-class="{'progress-bar-success': progress() === 100}"
-             aria-valuenow="{{progress()}}" 
-             aria-valuemin="0" aria-valuemax="100" 
-             style="width: {{progress()}}%;">
-        </div>
-      </div>
+<div id="main" class="container-fluid" ng-controller="pageController">
+    <table class="table">
+    <tr>
 
-       <div class="table-responsive">
-         <table class="table table-striped">
-           <thead>
-             <tr>
-               <th style="width: 2%">#</th>
-               <th style="width: 30%">Coder 1</th>
-               <th style="width: 30%">Coder 2</th>
-               <th style="width: 35%">Arbitrator</th>
-               <th style="width: 3%"></th>
-             </tr>
-           </thead>
-           <tbody>
-            <tr ng-repeat='(num, question) in questions' ng-class="{'unarbitrated-row': !isArbitrated(num)}">
-               <div class="form-group">
-                  <td> {{num}} </td>
-                  <td> {{coder1[num]}} </td>
-                  <td> {{coder2[num]}} </td>
-                  <td> 
-                     <button tabindex=-1 type="button" class="btn btn-default accept-button" ng-click='acceptCoder(num, coder1)'> 1 </button>
-                     <button tabindex=-1 type="button" class="btn btn-default accept-button" ng-click='acceptCoder(num, coder2)'> 2 </button>
-                     <input type='text' ng-model='arbitrator[num]' 
-                            ng-enter='enableArbitration(num)'
-                            ng-change='disableArbitration(num)'
-                     </input> 
-                     <button tabindex=-1 type="button" 
-                             class="btn arbitrate-button" 
-                             ng-class="isArbitrated(num) ? 'btn-info' : 'btn-success'"
-                             ng-click='toggleArbitration(num)'>
-                                <span ng-if="isArbitrated(num)"> Clear </span>
-                                <span ng-if="!isArbitrated(num)"> Arbitrate </span>
-                             </button>
-                  </td>
-                  <td>
+    <td style="width: 20%">
+
+        <!-- Sidebar -->
+        <div class="sidebar-offcanvas" id="sidebar" role="navigation"
+             ng-controller="sidebarController">
+            <ul class="nav nav-sidebar">
+               <li class='active' ng-repeat="case in getCases()">
+                  <a href="#" ng-click="switchToCase(case)" >Case {{case}}</a>
+               </li>
+            </ul>
+            <span id='no-cases' ng-if="getCases().length === 0"> No Cases </span>
+        </div>
+
+    </td>
+
+    <td style="width: 80%">
+
+        <!-- Setup Page -->
+        <div id="SetupPage" ng-if="isOnSetup()" ng-controller='setupController' col-sm-3 col-md-10 >
+                <div class="form-group">
+                    <label for="caseIdKey">Case Merging Key</label>
+                    <input type="text"class="form-control" id='caseIdKey' ng-model='caseIdKey'>
+                </div>
+                <div class="form-group">
+                    <label for="coder1Source">Coder 1 Source</label>
+                    <input type="file" file-reader='coder1Content' class="form-control" id='coder1Source'>
+                </div>
+                <div class="form-group">
+                    <label for="coder2Source">Coder 2 Source</label>
+                    <input type="file" file-reader='coder2Content' class="form-control" id='coder2Source'>
+                </div>
+        </div>
+
+        <!-- Case Page -->
+        <div ng-if="isOnCase()"
+             class="col-sm-9 col-md-10 main"
+             id="CasePage"
+             ng-controller="caseController">
+
+            <h1 class="page-header"> Case {{caseId}}
+                <small> {{progress()}}%</small>
+                <button class="btn btn-success"
+                        ng-click="autoResolve()"
+                        ng-disabled="!canAutoResolve()"> Auto-arbitrate
+                </button>
+            </h1>
+            <div class="progress">
+                <div class="progress-bar"
+                     role="progressbar"
+                     ng-class="{'progress-bar-success': progress() === 100}"
+                     aria-valuenow="{{progress()}}"
+                     aria-valuemin="0" aria-valuemax="100"
+                     style="width: {{progress()}}%;">
+                </div>
+            </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th style="width: 30%">Coder 1</th>
+                        <th style="width: 30%">Coder 2</th>
+                        <th style="width: 35%">Arbitrator</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat='questionId in questionIds' ng-class="{'unarbitrated-row': !isArbitrated(questionId)}">
+                        <div class="form-group">
+                            <td> {{questionId}} </td>
+                            <td> {{coder1[questionId]}} </td>
+                            <td> {{coder2[questionId]}} </td>
+                            <td>
+                                <button tabindex=-1 type="button" class="btn btn-default accept-button"
+                                        ng-click='acceptCoder(questionId, coder1)'> 1
+                                </button>
+                                <button tabindex=-1 type="button" class="btn btn-default accept-button"
+                                        ng-click='acceptCoder(questionId, coder2)'> 2
+                                </button>
+                                <input type='text' ng-model='arbitrator[questionId]'
+                                       ng-enter='enableArbitration(questionId)'
+                                       ng-change='disableArbitration(questionId)'
+                                </input>
+                                <button tabindex=-1 type="button"
+                                        class="btn arbitrate-button"
+                                        ng-class="isArbitrated(questionId) ? 'btn-info' : 'btn-success'"
+                                        ng-click='toggleArbitration(questionId)'>
+                                    <span ng-if="isArbitrated(questionId)"> Clear </span>
+                                    <span ng-if="!isArbitrated(questionId)"> Arbitrate </span>
+                                </button>
+                            </td>
+                            <td>
                      <span class="glyphicon"
-                           ng-class="isArbitrated(num) ? 'glyphicon-ok' : 'glyphicon-remove'"
+                           ng-class="isArbitrated(questionId) ? 'glyphicon-ok' : 'glyphicon-remove'"
                            aria-hidden="true">
                      </span>
-                  </td>
-               </div>
-            </tr>
-           </tbody>
-         </table>
-       </div>
-   </div><!--/row-->
-</div>
-</div><!--/.container-->
+                            </td>
+                        </div>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
 
-</body></html>
+        </td>
+        </tr></table>
+    </div>
+</div>
+
+</body>
+</html>
