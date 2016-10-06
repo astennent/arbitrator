@@ -42,13 +42,28 @@
     <tr>
 
     <td style="width: 20%">
-
         <!-- Sidebar -->
-        <div class="sidebar-offcanvas" id="sidebar" role="navigation"
+        <div class="sidebar-offcanvas" id="Sidebar" role="navigation"
              ng-controller="sidebarController">
+            <hr>
+            <div class='sidebar-filters'>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input class="form-check-input" type="checkbox" value="" ng-model='includeFullyArbitrated'>
+                     Include fully arbitrated cases
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input class="form-check-input" type="checkbox" value="" ng-model='includeSingleCoded'>
+                     Include single-coded cases
+                  </label>
+               </div>
+            </div>
+            <hr>
             <ul class="nav nav-sidebar">
-               <li class='active' ng-repeat="case in getCases()">
-                  <a href="#" ng-click="switchToCase(case)" >Case {{case}}</a>
+               <li class='active' ng-repeat="case in getCases() | filter:shouldDisplay"">
+                  <a href="#" ng-click="switchToCase(case.id)" >Case {{case.id}}</a>
                </li>
             </ul>
             <span id='no-cases' ng-if="getCases().length === 0"> No Cases </span>

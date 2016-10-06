@@ -66,16 +66,21 @@ body {
 }
 
 #SetupPage .form-group {
-  position: relative;
-  display: inline-block;
-  padding-top: 20px;
-  padding-left: 20px;
-  width: 450px;
+   position: relative;
+   display: inline-block;
+   padding-top: 20px;
+   padding-left: 20px;
+   width: 450px;
 }
 
-#no-cases {
-  font-style: italic;
-  font-color: #999;
-  padding-top: 15px;
-  display: flex;
+#sidebar #no-cases {
+   font-style: italic;
+   font-color: #999;
+   padding-top: 15px;
+   display: flex;
+}
+
+#Sidebar hr {
+   margin-top: 10px;
+   margin-bottom: 10px;
 }

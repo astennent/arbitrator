@@ -17,7 +17,7 @@ app.factory('Project', function() {
       name: 'Guardian Coding 3.0'
    }
 
-   var dirty = true;
+   var dirty = false;
 
    return {
       name: function() {
@@ -65,6 +65,14 @@ app.controller('pageController', ['$scope', 'currentPage', function($scope, curr
 
 app.controller('sidebarController', ['$scope', 'coderData', 'currentPage', 'Case', function($scope, coderData, currentPage, Case) {
    $scope.getCases = coderData.getCases;
+   $scope.includeFullyArbitrated = true; // TODO: Load
+   $scope.includeSingleCoded = true;
+
+   $scope.shouldDisplay = function(caseObject) {
+      return (caseObject.count > 1 || $scope.includeSingleCoded) &&
+             (!caseObject.isFullyArbitrated || $scope.includeFullyArbitrated);
+   }
+
    $scope.switchToCase = function(caseKey) {
       currentPage.switchToCase();
       Case.setCurrent(caseKey);
@@ -89,22 +97,33 @@ app.controller('setupController', ['$scope', 'coderData', function($scope, coder
 }]);
 
 app.factory('coderData', function() {
-   var cases = {}
+   var cases = {};
+   var displayCases = {};
+
+   function updateDisplayCases() {
+      displayCases = Object.keys(cases).map(function(caseId) {
+         return {
+            id: caseId,
+            count: Object.keys(cases[caseId]).length
+         }
+      });
+   }
 
    return {
       getCases: function () {
-         return Object.keys(cases);
+         return displayCases;
       },
-      getCase: function (caseKey) {
-         return cases[caseKey];
+      getCase: function (caseId) {
+         return cases[caseId];
       },
       setCaseData: function(coder, parsedData) {
-         for (var caseKey in parsedData) {
-            if (!cases[caseKey]) {
-               cases[caseKey] = {};
+         for (var caseId in parsedData) {
+            if (!cases[caseId]) {
+               cases[caseId] = {};
             } 
-            cases[caseKey][coder] = parsedData[caseKey];
+            cases[caseId][coder] = parsedData[caseId];
          }
+         updateDisplayCases();
       }
    }
 });
@@ -137,7 +156,6 @@ app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
          currentCase.statuses[questionId] = status;
          cases[caseKey] = currentCase;
          Project.markDirty();
-         console.log(cases);
       }
 
    }
