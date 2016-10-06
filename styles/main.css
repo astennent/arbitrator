@@ -10,6 +10,17 @@ html, body {
 
 body {
   background-color: #fbfbfb;
+  overflow-y: scroll; /* required for apps */
+}
+
+#TopBar .glyphicon {
+  font-size: 20px;
+  color: #9d9d9d;
+}
+
+#TopBar.dirty .glyphicon {
+  cursor: pointer;
+  color: #00b5ff;
 }
 
 .sidebar-offcanvas {
@@ -20,6 +31,7 @@ body {
 #CasePage {
   padding-left: 0;
 }
+
 
 #CasePage small {
   color: #888;

@@ -5,11 +5,19 @@ app.controller('projectController', ['$scope', 'Project', function($scope, Proje
    $scope.questions = Project.questions();
 }])
 
+app.controller('topBarController', ['$scope', 'Project', 'currentPage', function($scope, Project, currentPage) {
+   $scope.save = Project.save;
+   $scope.dirty = Project.isDirty;
+   $scope.switchToSetup = currentPage.switchToSetup;
+}]);
+
 app.factory('Project', function() {
 
    var project = {
       name: 'Guardian Coding 3.0'
    }
+
+   var dirty = true;
 
    return {
       name: function() {
@@ -17,6 +25,16 @@ app.factory('Project', function() {
       },
       questions: function() {
          return []; // TODO: For coding
+      },
+      isDirty: function() {
+         return dirty;
+      },
+      markDirty: function() {
+         dirty = true;
+      },
+      save: function() {
+         //TODO: Save
+         dirty = false;
       }
    }
 
@@ -35,7 +53,7 @@ app.factory('currentPage', function() {
          currentPage = 'Case';
       },
       switchToSetup: function() {
-         currentPage = 'Setup;'
+         currentPage = 'Setup';
       }
    }
 })
@@ -71,7 +89,6 @@ app.controller('setupController', ['$scope', 'coderData', function($scope, coder
 }]);
 
 app.factory('coderData', function() {
-
    var cases = {}
 
    return {
@@ -90,8 +107,43 @@ app.factory('coderData', function() {
          }
       }
    }
-
 });
+
+
+app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
+   var cases = {};
+
+   var loadPromise = load();
+
+   function load() {
+      return $q.when();
+   }
+
+   function save() {
+
+   }
+
+   function emptyCase() {
+      return {values: {}, statuses: {}};
+   }
+
+   return {
+      getCase: function (caseKey) {
+         return cases[caseKey] || emptyCase();
+      },
+      storeArbitration: function(caseKey, questionId, value, status) {
+         var currentCase = cases[caseKey] || emptyCase();
+         currentCase.values[questionId] = value;
+         currentCase.statuses[questionId] = status;
+         cases[caseKey] = currentCase;
+         Project.markDirty();
+         console.log(cases);
+      }
+
+   }
+
+}]);
+
 
 app.factory('Case', function() {
    var currentCase = null;
@@ -114,7 +166,7 @@ app.factory('Case', function() {
 });
 
 
-app.controller('caseController', ['$scope', 'Case', 'coderData', function($scope, Case, coderData) {
+app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData', function($scope, Case, coderData, arbitratorData) {
 
    Case.subscribe(onSetCase);
 
@@ -137,13 +189,14 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', function($scope
       dominantCoder = isCoder1Dominant ? $scope.coder1 : $scope.coder2;
       $scope.questionIds = isCoder1Dominant ? coder1Questions : coder2Questions;
 
-      loadArbitratedData();
+      loadArbitratedData(caseId);
       guessArbitratedData();
    }
 
-   function loadArbitratedData() {
-      $scope.arbitrator = {}; // TODO: Load
-      arbitratedSet = {};
+   function loadArbitratedData(caseId) {
+      var storedArbitration = arbitratorData.getCase(caseId);
+      $scope.arbitrator = storedArbitration.values;
+      arbitratedSet = storedArbitration.statuses;
    }
 
    function guessArbitratedData() {
@@ -160,8 +213,8 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', function($scope
    $scope.autoResolve = function() {
       var questions = getQuestionsToResolve();
       questions.forEach(function(questionId) {
-         $scope.enableArbitration(questionId);
          $scope.arbitrator[questionId] = dominantCoder[questionId];
+         $scope.enableArbitration(questionId);
       })
    }
 
@@ -183,12 +236,26 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', function($scope
       return arbitratedSet[questionId];
    }
 
+   function storeArbitration(questionId) {
+      arbitratorData.storeArbitration($scope.caseId, questionId, $scope.arbitrator[questionId], arbitratedSet[questionId]);
+   }
+
+   function setArbitrated(questionId, value) {
+      arbitratedSet[questionId] = value;
+      storeArbitration(questionId);
+   }
+
    $scope.disableArbitration = function(questionId) {
-      delete arbitratedSet[questionId];
+      setArbitrated(questionId, false)
    }
 
    $scope.enableArbitration = function(questionId) {
-      arbitratedSet[questionId] = true;
+      setArbitrated(questionId, true);
+   }
+
+   $scope.onArbitrationChange = function(questionId) {
+      $scope.disableArbitration(questionId);
+      storeArbitration(questionId);
    }
 
    $scope.toggleArbitration = function(questionId) {
@@ -201,6 +268,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', function($scope
 
    $scope.acceptCoder = function(questionId, coder) {
       $scope.arbitrator[questionId] = coder[questionId];
+      setArbitrated(questionId, true);
    }
 
    $scope.questions = dominantCoder
