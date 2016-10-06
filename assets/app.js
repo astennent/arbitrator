@@ -49,7 +49,7 @@ app.controller('sidebarController', ['$scope', 'coderData', 'currentPage', 'Case
    $scope.getCases = coderData.getCases;
    $scope.switchToCase = function(caseKey) {
       currentPage.switchToCase();
-      Case.setKey(caseKey);
+      Case.setCurrent(caseKey);
    }
 }]);
 
@@ -72,23 +72,22 @@ app.controller('setupController', ['$scope', 'coderData', function($scope, coder
 
 app.factory('coderData', function() {
 
-   var responses = {
-      1: {},
-      2: {}
-   }
-
-   var cases = [];
+   var cases = {}
 
    return {
-      getCases: function() {
-         return cases;
+      getCases: function () {
+         return Object.keys(cases);
       },
-      getCaseData: function(coder, caseId) {
-         return responses[coder][caseId] || [];
+      getCase: function (caseKey) {
+         return cases[caseKey];
       },
       setCaseData: function(coder, parsedData) {
-         responses[coder] = parsedData;
-         cases = Object.keys(parsedData);
+         for (var caseKey in parsedData) {
+            if (!cases[caseKey]) {
+               cases[caseKey] = {};
+            } 
+            cases[caseKey][coder] = parsedData[caseKey];
+         }
       }
    }
 
@@ -96,33 +95,60 @@ app.factory('coderData', function() {
 
 app.factory('Case', function() {
    var currentCase = null;
+   var callbacks = [];
+
    return {
-      getKey: function() {
+      getCurrent: function() {
          return currentCase;
       },
-      setKey: function(value) {
+      subscribe: function(callback) {
+         callbacks.push(callback);
+      },
+      setCurrent: function(value) {
          currentCase = value;
+         callbacks.forEach(function(callback) {
+            callback(currentCase);
+         })
       }
    };
 });
 
 
 app.controller('caseController', ['$scope', 'Case', 'coderData', function($scope, Case, coderData) {
-   $scope.caseId = Case.getKey();
 
-   $scope.coder1 = coderData.getCaseData(1, $scope.caseId);
-   $scope.coder2 = coderData.getCaseData(2, $scope.caseId);
+   Case.subscribe(onSetCase);
 
-   var coder1Questions = Object.keys($scope.coder1);
-   var coder2Questions = Object.keys($scope.coder2);
-
-
-   var isCoder1Dominant = (coder1Questions.length > coder2Questions.length);
-   var dominantCoder = isCoder1Dominant ? $scope.coder1 : $scope.coder2;
-   $scope.questionIds = isCoder1Dominant ? coder1Questions : coder2Questions;
-
-   $scope.arbitrator = {}; // TODO: Load
+   var dominantCoder;
    var arbitratedSet = {};
+   onSetCase(Case.getCurrent());
+
+   function onSetCase(caseId) {
+      var caseData = coderData.getCase(caseId);
+
+      $scope.caseId = caseId;
+      $scope.coder1 = caseData[1] || {};
+      $scope.coder2 = caseData[2] || {};
+
+      var coder1Questions = Object.keys($scope.coder1);
+      var coder2Questions = Object.keys($scope.coder2);
+
+      // TODO: Merge, not choose.
+      var isCoder1Dominant = (coder1Questions.length > coder2Questions.length);
+      dominantCoder = isCoder1Dominant ? $scope.coder1 : $scope.coder2;
+      $scope.questionIds = isCoder1Dominant ? coder1Questions : coder2Questions;
+
+      loadArbitratedData();
+      guessArbitratedData();
+   }
+
+   function loadArbitratedData() {
+      $scope.arbitrator = {}; // TODO: Load
+      arbitratedSet = {};
+   }
+
+   function guessArbitratedData() {
+      // TODO: Fill in arbitrator.
+   }
 
    function getQuestionsToResolve() {
       return $scope.questionIds.filter(function(questionId) {
