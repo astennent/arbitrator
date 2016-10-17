@@ -5,13 +5,11 @@ var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
-var gulpIf = require('gulp-if');
-var cssnano = require('gulp-cssnano');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
-
+var browserSync = require('browser-sync').create();
 
 // Development Tasks 
 // -----------------
@@ -28,22 +26,32 @@ gulp.task('sass', function() {
   return gulp.src('src/scss/**/*.scss') // Gets all files ending with .scss in src/scss and children dirs
     .pipe(sass()) // Passes it through a gulp-sass
     .pipe(gulp.dest('dist')) // Outputs it in the css folder
-})
+});
 
 // Watchers
 gulp.task('watch', function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
   gulp.watch('src/js/**/*.js', ['javascript']);
-})
+});
 
-// Optimization Tasks 
+// Static Server + watching scss/html files
+gulp.task('serve', ['sass'], function() {
+
+  browserSync.init({
+    server: "./"
+  });
+
+  gulp.watch("dist/*").on('change', browserSync.reload);
+});
+
+// Optimization Tasks
 // ------------------
 
 // Build Sequences
 // ---------------
 
 gulp.task('default', function(callback) {
-  runSequence(['sass', 'javascript', 'watch'],
+  runSequence(['sass', 'javascript', 'watch', 'serve'],
     callback
   )
-})
+});
