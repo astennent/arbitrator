@@ -7,6 +7,7 @@ app.controller('projectController', ['$scope', 'Project', function($scope, Proje
 
 app.controller('topBarController', ['$scope', 'Project', 'currentPage', function($scope, Project, currentPage) {
    $scope.save = Project.save;
+   $scope.open = Project.open;
    $scope.dirty = Project.isDirty;
    $scope.switchToSetup = currentPage.switchToSetup;
 }]);
@@ -32,9 +33,33 @@ app.factory('Project', function() {
       markDirty: function() {
          dirty = true;
       },
+      open: function() {
+         //
+         chrome.fileSystem.chooseEntry({type: 'openFile', accepts:[ {extensions: ['html']}] }, function(fileEntry) {
+            if (!fileEntry) {
+               alert("Did not choose file");
+               return;
+            }
+            fileEntry.file(function(file) {
+               var reader = new FileReader();
+               reader.onload = function(e) {
+                  alert(e.target.result);
+               };
+               reader.readAsText(file);
+            });
+         });
+      },
       save: function() {
          //TODO: Save
          dirty = false;
+         chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: 'myfile.html'}, function(writableFileEntry) {
+            writableFileEntry.createWriter(function(writer) {
+               writer.onwriteend = function(e) {
+                  alert("Write complete!")
+               };
+               writer.write(new Blob(["TESTTT"], {type: 'text/plain'}));
+            }, null);
+         });
       }
    }
 
@@ -85,20 +110,20 @@ app.controller('setupController', ['$scope', 'coderData', function($scope, coder
    $scope.caseIdKey = 'Q2 - ID #'; // TODO: Don't hardcode this.
 
    $scope.handleLoad = function(element, rawContents) {
-      var coderNum = element[0].id === 'coder1Source' ? 1 : 2;
+      var coderId = element[0].id;
       var parsedContents = Papa.parse(rawContents, {header: true});
       var data = {};
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[$scope.caseIdKey];
          data[caseId] = caseObject;
       });
-      coderData.setCaseData(coderNum, data);
+      coderData.setCaseData(coderId, data);
    }
 }]);
 
 app.factory('coderData', function() {
    var cases = {};
-   var displayCases = {};
+   var displayCases = [];
 
    function updateDisplayCases() {
       displayCases = Object.keys(cases).map(function(caseId) {
@@ -116,12 +141,12 @@ app.factory('coderData', function() {
       getCase: function (caseId) {
          return cases[caseId];
       },
-      setCaseData: function(coder, parsedData) {
+      setCaseData: function(coderId, parsedData) {
          for (var caseId in parsedData) {
             if (!cases[caseId]) {
                cases[caseId] = {};
             } 
-            cases[caseId][coder] = parsedData[caseId];
+            cases[caseId][coderId] = parsedData[caseId];
          }
          updateDisplayCases();
       }
@@ -188,7 +213,6 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
 
    Case.subscribe(onSetCase);
 
-   var dominantCoder;
    var arbitratedSet = {};
    onSetCase(Case.getCurrent());
 
@@ -196,16 +220,11 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       var caseData = coderData.getCase(caseId);
 
       $scope.caseId = caseId;
-      $scope.coder1 = caseData[1] || {};
-      $scope.coder2 = caseData[2] || {};
+      var coderKeys = Object.keys(caseData);
+      $scope.coder1 = caseData[coderKeys[0]];
+      $scope.coder2 = coderKeys.length > 1 ? caseData[coderKeys[1]] : {};
 
-      var coder1Questions = Object.keys($scope.coder1);
-      var coder2Questions = Object.keys($scope.coder2);
-
-      // TODO: Merge, not choose.
-      var isCoder1Dominant = (coder1Questions.length > coder2Questions.length);
-      dominantCoder = isCoder1Dominant ? $scope.coder1 : $scope.coder2;
-      $scope.questionIds = isCoder1Dominant ? coder1Questions : coder2Questions;
+      $scope.questionIds = Object.keys($scope.coder1);
 
       loadArbitratedData(caseId);
       guessArbitratedData();
@@ -231,7 +250,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    $scope.autoResolve = function() {
       var questions = getQuestionsToResolve();
       questions.forEach(function(questionId) {
-         $scope.arbitrator[questionId] = dominantCoder[questionId];
+         $scope.arbitrator[questionId] = $scope.coder1[questionId];
          $scope.enableArbitration(questionId);
       })
    }
@@ -241,7 +260,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    }
 
    $scope.progress = function() {
-      return Math.floor(100 * Object.keys(arbitratedSet).length / Object.keys(dominantCoder).length);
+      return Math.floor(100 * Object.keys(arbitratedSet).length / $scope.questionIds.length);
    }
 
    $scope.isEquivalent = function(questionId) {
@@ -288,8 +307,6 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       $scope.arbitrator[questionId] = coder[questionId];
       setArbitrated(questionId, true);
    }
-
-   $scope.questions = dominantCoder
 }]);
 
 

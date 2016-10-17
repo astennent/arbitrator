@@ -1,0 +1,25 @@
+{
+  "name": "arbitration-app",
+  "version": "0.0.0",
+  "authors": [
+    "Alan Tennent <atennent@factset.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.8",
+    "papaparse": "~4.1.2",
+    "bootstrap": "~3.3.7"
+  }
+}

@@ -1,0 +1,95 @@
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  padding-top: 50px;
+}
+
+#main {
+  margin-top: -50px;
+}
+
+body {
+  background-color: #fbfbfb;
+  overflow-y: scroll; /* required for apps */
+}
+
+#TopBar {
+   .glyphicon {
+      font-size: 20px;
+      color: #9d9d9d;
+   }
+
+   &.dirty {
+      .glyphicon {
+        cursor: pointer;
+        color: #00b5ff;
+      }
+   }
+}
+
+.sidebar-offcanvas {
+  overflow-y: scroll;
+  height: calc(100vh - 60px);
+}
+
+#CasePage {
+  padding-left: 0;
+
+  small {
+     color: #888;
+     padding-left: 15px;
+   }
+
+   .table td, .table th {
+      text-align: center;
+      vertical-align: middle;
+   }
+
+   .table td.left, .table th.left {
+      text-align: left;
+   }
+
+   .unarbitrated-row {
+     outline: 2px solid #bf8181;
+     outline-offset: -1px;
+
+
+     &:nth-child(even) {
+        background-color: #ffeeee;
+     }
+
+     &:nth-child(odd) {
+        background-color: #ffdede;
+     }
+   }
+
+   .accept-button {
+     font-weight: bold;
+   }
+
+   .arbitrate-button {
+     width: 80px;
+   }
+}
+
+#SetupPage {
+   .form-group {
+      position: relative;
+      display: inline-block;
+      padding-top: 20px;
+      padding-left: 20px;
+      width: 450px;
+   }
+
+   hr {
+      margin-top: 10px;
+      margin-bottom: 10px;
+   }
+}
+
+#sidebar #no-cases {
+   font-style: italic;
+   font-color: #999;
+   padding-top: 15px;
+   display: flex;
+}

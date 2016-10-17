@@ -1,0 +1,532 @@
+Q1 - Victim Name,Q2 - ID #,Q3 - Guardian Description of Case (copy and paste text),Q4 - Status of Investigation,"Q4_5_TEXT - Other, Specify:",Q5 - URL for site 1,"Q6 - Title of site 1 article. If URL is broken enter ""BROKEN"" for all following...",Q7 - Text from site 1,Q8 - Does the site contain any images or videos?,Q9 - Does the site include an image or video of victim (person killed by police)...,Q10 - Site 1 URL of images or videos of victim. Separate urls with commas. If una...,Q11 - Does the site include an image or video of officer responsible for the deat...,Q12 - Site 1 URL of images or videos of officer(s). Separate urls with commas. If...,Q13 - Site 1 URL of all other images or videos.  Separate urls with commas. If un...,Q14 - URL for site 2,"Q15 - Title of site 2 article. If URL is broken enter ""BROKEN"" for all following...",Q16 - Text from site 2,Q17 - Does the site contain any images or videos?,Q18 - Does the site include an image or video of victim (person killed by police)...,Q19 - Site 2 URL of images or videos of victim. Separate urls with commas. If una...,Q20 - Does the site include an image or video of officer responsible for the deat...,Q21 - Site 2 URL of images or videos of officer(s). Separate urls with commas. If...,Q22 - Site 2 URL of all other images or videos.  Separate urls with commas. If un...,Q23 - Is there a third site?,Q24 - URL for site 3.,"Q25 - Title of site 3 article. If URL is broken enter ""BROKEN"" for all following...",Q26 - Text from site 3,Q27 - Does the site contain any images or videos?,Q28 - Does the site include an image or video of victim (person killed by police)...,Q29 - Site 3 URL of images or videos of victim. Separate urls with commas. If una...,Q30 - Does the site include an image or video of officer responsible for the deat...,Q31 - Site 3 URL of images or videos of officer(s). Separate urls with commas. If...,Q32 - Site 3 URL of all other images or videos.  Separate URLs with commas. If un...,Q33 - Is there a fourth site?,Q34 - URL for site 4,"Q35 - Title of site 4 article. If URL is broken enter ""BROKEN"" for all following...",Q36 - Text from site 4,Q37 - Does the site contain images or videos,Q38 - Does the site include an image or video of victim (person killed by police)...,Q39 - Site 4 URL of images or videos of victim. Separate urls with commas. If una...,Q40 - Does the site include an image or video of officer responsible for the deat...,Q41 - Site 4 URL of images or videos of officer(s). Separate urls with commas. If...,Q42 - Site 4 URL of all other images or videos.  Separate URLs with commas.If una...,Q43 - What time of day did the incident take place? Provide an exact time if poss...,Q44 - Did the death occur indoors or outdoors?,Q45 - Location of death:,Q45_8_TEXT - Other. Specify:,Q46 - What initiated the contact with the police?,Q46_8_TEXT - Other,Q47 - Was the victim allegedly committing any of the following crimes when the po...,"Q47_20_TEXT - Other Crime, specify:",Q48 - Was the victim allegedly exhibiting any of the following behaviors when the...,Q48_8_TEXT - Other disruptive behavior. Specify:,Q49 - Were the police responding to a domestic incident?,Q50 - Were there any witnesses to the death?,Q51 - Was the victim in the vicinity of family or friends when they were killed?,Q52 - Were any children present or witnesses to the death?,Q53 - Did the victim allegedly do any of the following during their interaction w...,Q53_19_TEXT - Other aggressive or non-compliant behavior. Specify:,Q54 - Did the officer(s) use any of the following tactics before using lethal for...,Q54_13_TEXT - Other non-lethal tactic. Specify:,Q55 - What is the primary justification the police gave for the death?,Q55_11_TEXT - Other. Specify:,Q122 - What is the primary justification you can infer for the death?,Q122_11_TEXT - Other. Specify:,Q56 - How many shots were fired? Does the article state:,Q56_1_TEXT - Exact number given. Enter number:,Q57 - How many shots struck the victim?,Q57_1_TEXT - Exact number given. Enter number:,Q58 - Was the victim shot in the back?,Q59 - How many officers were present at the scene at the time of the death?,Q59_1_TEXT - Exact number provided. Enter number:,Q60 - How many officers fired their weapons or used lethal force?,Q60_1_TEXT - Exact number provided. Enter number:,Q61 - Do the articles provide the names of any of the officers?,"Q62 - Enter the names of the officers. Include titles if given (e.g. Capt., Troop...",Q63 - Do the articles mention how many years the officers have been on the force?,"Q64 - Enter the number of years on the force. For multiple officers, write the ye...",Q65 - Do the articles indicate the officer(s) gender?  Indicate how many officers...,Q65_1_TEXT - Male. Number of officers:,Q65_2_TEXT - Female. Number of officers:,Q65_3_TEXT - Unknown. Number of officers:,Q66 - Do the articles indicate the race or ethnicity of the officer(s) who used l...,Q67 - Was the officer undercover?,Q68 - Was the officer off-duty?,Q69 - Did the police deploy a SWAT team or special operations unit?,"Q70 - Did the officer personally know the person they killed? (Spouse, family mem...",Q71 - Do the articles state that the police actions violated departmental policy?,Q72 - Was a grand jury involved in the investigation?,"Q73 - Were there any professional or criminal repercussions for the officer(s), o...",Q74 - What repercussions did the officer face? Mark all that apply,Q74_6_TEXT - Other. Specify:,Q75 - Do the articles state that the officer(s) were involved in previous shootin...,Q75_1_TEXT - Previous shooting. Provide number if given:,Q75_2_TEXT - Previous complaint. Provide number if given:,Q76 - Do the articles mention previous police shootings in the area?,Q76_1_TEXT - Yes. Provide number and time frame if given:,Q77 - Do the articles mention that the victim had mental health problems or was s...,Q78 - Which mental health issues do the articles mention? Mark all that apply,Q78_6_TEXT - Other. Specify:,"Q79 - Did any of the articles use the term ""suicide by cop""?",Q80 - Was the person intoxicated with drugs or alcohol?,Q81 - Which type?. Mark all that apply,Q81_2_TEXT - Drugs. Specify type:,Q81_3_TEXT - Other,Q82 - Do the articles provide any of the following personal information about the...,Q83 - Do the articles describe the victim in any of the following ways? Mark all...,Q83_16_TEXT - Documented immigrant. Specify country of origin:,Q83_17_TEXT - Undocumented immigrant. Specify country of origin:,Q84 - Do the articles provide any of the following occupation or education inform...,Q84_1_TEXT - Employed. Specify occupation and/or business,Q84_5_TEXT - In school. Specify school name:,Q84_6_TEXT - Education history. Specify school name(s) and/or fields of study:,Q84_7_TEXT - Former military. Enter military branch:,Q84_8_TEXT - Current military. Enter military branch:,Q84_10_TEXT - Other. Specify:,Q85 - Do they mention a criminal record for the victim?,"Q86 - Do they mention any violent crimes in their record? 
+(These include: assaul...",Q87 - Was there a videotape of events?,Q88 - What was the source of the video? Check all that apply,Q88_5_TEXT - Other. Specify:,Q89 - Was the video made public?,Q90 - Do the articles include direct quotes from family or friends?,"Q91 - Are the events that the police claim disputed by bystanders, friends or fam...",Q92 - Was a vigil held after the death?,Q93 - Do the articles mention if there was a protest in response to the death?,"Q94 - Does a Google search for the victim's name, state and the word ""protest"" yi...",Q95 - Enter any and all urls to articles which mention protest. Separate links by...,Q96 - Did the family file a lawsuit?,Q97 - Did you use information from any additional websites (including sites found...,Q98 - Enter the urls for each site. Separate urls with comma,Q99 - Would you like to flag this case for additional review?,"Q99_1_TEXT - Yes, Flag this case. Reason:",Q100 - Name of Coder,Q100_4_TEXT - Other,Q101 - Additional notes about the case:
+Yohans Leon,1026,"Police were pursuing Leon after he robbed a fast-food restaurant at gunpoint, according to authorities. Leon was fatally shot after he pulled out a gun.",Under Investigation,,http://www.miamiherald.com/news/local/community/miami-dade/article45170145.html,"Police shoot, kill robbery suspect who they say pulled gun on officer
+
+Read more here: http://www.miamiherald.com/news/local/community/miami-dade/article45170145.html#storylink=cpy","Miami-Dade police shot and killed a man Tuesday morning who they said robbed a Wendy’s at gunpoint, took off on a mile-long run on a canal bank footpath and drew his gun when confronted by an officer.
+
+The Tuesday morning shooting in the old Oak Park neighborhood just beyond Florida’s Turnpike and west of Cutler Bay was the fifth time a Miami-Dade police officer has shot a person suspected of robbing or stealing since Friday night.
+
+It was the first time in this recent spate that the person shot was killed. Police said they recovered a gun a few feet from the body.
+
+“We don’t know if the subject shot at the officers or at the restaurant,” said Miami-Dade police Detective Marjorie Eloi. “Both officers shot their weapons.”
+
+Police would later amend Eloi’s statement, saying it was too early to tell if the two officers who confronted the suspect actually fired their weapons. Detectives quickly connected the dead man to the early morning Wendy’s robbery.
+
+“They were able to identify him because he had what he stole from the Wendy’s,” said Miami-Dade Detective Alvaro Zabaleta.
+
+What he stole wasn’t exactly clear Tuesday afternoon. Neither was the name of the person who stole it: By early evening police still had not identified the suspect, only saying that he was a black male. The officer or officers who fired their weapons were not named.
+
+What they did release was nine seconds of audio that seems to justify the shooting. But even the audio created more questions than answers: Police would not say if the officer warning others that the suspect had pulled a gun was one of the officers who fired his weapon. They also wouldn’t say how long the actual audio is or what else it contained.
+
+
+On the audio, after a dispatcher asks if the alleged offender is on the north side of the canal, an officer can very clearly be heard warning other cops, “Heads up, he just pulled out a gun. He’s got a gun in his hand. Units on the other side seek some cover.”
+
+The shooting death, like the four other Miami-Dade police shootings in the past few days, will be investigated by the Florida Department of Law Enforcement. A sixth person was shot over the weekend by a South Miami police officer. He survived.
+
+The Tuesday shooting at Southwest 206th Street and 127th Avenue in a sleepy South Dade residential community of single-family homes and old oaks drew curious onlookers not used to crime scene investigation trucks and yellow police crime tape blocking their streets.
+
+One woman, who only gave her name as Diana, said she lost her brother-in-law to a shooting in Perrine a year ago. She said the case hasn’t been solved. She also said it’s not the first time someone has been killed near the canal that runs through Southwest 127th Avenue and east out to U.S. 1, though police couldn’t confirm that.
+
+Walking with two young girls, Diana, who has lived in the neighborhood for 28 years, said, “I think I wanna move.”
+
+Police said they first recieved a call about a robbery in progress at Wendy’s on U.S. 1 and 211th Street just before 9 a.m. Tuesday. A description of the suspect was immediately sent to police. The officers who would eventually confront the suspect were advised he was running along the canal, police said.
+
+Not long after the robbery, just east of where the canal hits Southwest 127th Avenue and next to a home, “a confrontation ensued and shots were fired,” said Eloi. “There was a gun involved and a firearm was found at the scene.”
+
+Police spent the morning and afternoon gathering evidenc and seeking witnesses. They are also reviewing surveillance video from the Wendy’s.
+
+ FACEBOOK  TWITTER  EMAIL  SHARE
+Video: Surveillance video of man robbing Wendy's
+Miami-Dade police released this surveillance video of a robbery at a Wendy's restaurant Tuesday, Nov. 17, 2015. According to police the man later drew his gun when confronted by police and was shot to death.
+Courtesy of Miami-Dade Police Department
+The recent string of shootings by Miami-Dade police began Friday night at a Speedway Gas Station in South Miami-Dade. An officer gave chase after spotting a police truck that had been stolen earlier in the week. The five teenagers in the truck are alleged to have stolen a case of Heineken from the gas station.
+
+The truck eventually crashed, and a detective walked toward it to confront the driver. It was then, police said, that the driver steered the truck toward the officer and accelerated. The officer fired, striking three people. They all survived and were charged with crimes ranging from petty theft to aggravated assault of a police officer.
+
+On Sunday, a man suspected of a carjacking and two robberies was shot after a brief chase. Police said they recovered a gun at the scene, but didn’t say if it had been fired. The man survived.
+
+Additionally Sunday, a South Miami police officer shot a man at a gas station in Coral Gables after pulling him over. The officer said the man refused to obey commands and wouldn’t take his hand out of his pocket. He, too, lived.
+
+Read more here: http://www.miamiherald.com/news/local/community/miami-dade/article45170145.html#storylink=cpy",Yes,No,,No,,"NA, NA, NA, NA",http://www.local10.com/news/robbery-suspect-in-fatal-police-involved-shooting-identified,Robbery suspect in fatal police-involved shooting identified,"MIAMI-DADE COUNTY, Fla. - A robbery suspect who police said was fatally shot Tuesday morning by officers has been identified.
+
+Miami-Dade police on Wednesday identified the 28-year-old suspect as Yohans Leon.
+
+Detective Marjorie Eloi said Leon robbed a Wendy's restaurant on Southwest 211th Street at U.S. Highway 1 on Tuesday morning.
+
+Eloi said officers arrived shortly after the robbery and spotted the suspect running along a trail that borders a canal near Southwest 127th Avenue and Southwest 206th Terrace.
+
+A confrontation ensued, and two officers opened fire, killing Leon, Eloi said.
+
+Neither officer was injured.
+
+Audio recorded from police radio transmissions provides a clearer picture of what prompted officers to shoot.
+
+""He's got a gun in his hand,"" an officer said in the recording.
+
+The Florida Department of Law Enforcement is investigating the shooting.",Yes,Yes,NA,No,,NONE,No,,,,,,,,,,,,,,,,,,,,Unknown,Outdoors,Street/Road,,Police responding to a reported offense by the victim,,None of the above,,Erratic Behavior,,No,Unclear,No,No,"Run away from police,Reach for own weapon",,None of the above,,Pulled out gun,,,,Unknown (does not mention any quantity),,Unknown (does not mention any quantity),,No,Unknown,,Unknown,,No,,No,,Unknown. Number of officers:,,,,Unknown,No,No,No,No,No,No,No,,,None,,,Yes. Provide number and time frame if given:,5; 2015,No,,,,No,,,,None of the above,None of the above,,,No employment or education info given,,,,,,,No,,No,,,,No,No,No,No,,,,,,,,,,
+Richard Perkins,1019,"Perkins approached officers and pointed a gun at them as they towed cars involved in recent 'sideshows' of vehicle stunts, police said. Investigators later discovered that the gun was a replica.",Under Investigation,,http://www.eastbaytimes.com/2015/11/15/oakland-second-night-of-sideshow-activity-leads-to-fatal-police-shooting/,Oakland: Second night of sideshow activity leads to fatal police shooting,"OAKLAND — Oakland police shot and killed a man who pointed a gun at officers towing cars involved in sideshow activity Sunday evening — less than 24 hours after massive sideshows shut down numerous intersections in East Oakland and reportedly led to gunfire.
+
+Authorities received word of the shooting near 90th and Bancroft avenues at 5:34 p.m., Officer James Moore said.
+
+A man was pronounced dead at the scene, Moore said.
+
+According to a news release from Oakland police spokeswoman Johnna Watson, a group of uniformed officers were towing vehicles related to sideshow activity when a man approached and pointed a gun in their direction.
+
+Several officers fired their service weapons, hitting the person. Afterward, the officers performed lifesaving measures until an ambulance arrived.
+
+No officers were injured, and the gun was determined to be a replica, Watson said.
+
+The department’s homicide and internal affairs divisions will investigate the shooting, and only limited information will be released, Watson said.
+
+As many as 700 cars were involved in sideshow activity — drivers performing stunts and peeling out in their cars — that shut down numerous intersections and a portion of Interstate 880 early Sunday morning. There were several reports of shots being fired.",No,,,,,,http://www.sfgate.com/bayarea/article/Hundreds-of-cars-in-early-morning-sideshow-on-6634373.php,"Police: Suspect shot, killed by Oakland cops amid massive sideshows","Oakland police officers shot and killed a suspect Sunday night after weekend sideshows in the city, according to a statement.
+According to Oakland police, officers were towing vehicles near 90th Ave. and Bancroft Ave. on Sunday evening. The officers were ""approached by a subject who pointed a firearm in their direction,"" according to the release. The suspect was shot multiple times by officers.
+Early Sunday morning, Oakland police and the California Highway Patrol responded to a sideshow involving hundreds of vehicles on Interstate Highway 880 in Oakland.
+
+At 12:44 a.m., CHP officers were first dispatched to the southbound lanes of the highway, near the High Street offramp, according to the CHP.
+MORE BAY AREA NEWS
+In ‘Art of Fire’ photo exhibit, creativity rises from destruction
+Deputy and 86-year-old Saratoga man he shot dead IDd
+Man dies after projectile smashes through windshield in South Bay
+About 200 vehicles entered the highway's southbound lanes through the offramp, driving in the opposite direction, CHP officials said.
+
+Some of the vehicles involved began spinning and performing ""donuts,"" causing vehicles to back up on the highway, the CHP said.
+At 1:27 a.m., many of the vehicles exited the highway at High Street. Minutes later, the CHP received a report of a large sideshow happening near International Boulevard and 55th Avenue, according to CHP officials.
+The CHP and police are continuing to investigate the incident.",Yes,No,,No,,"http://ww1.hdnux.com/photos/42/14/46/8964480/4/920x920.jpg, http://ww4.hdnux.com/photos/41/20/20/8717359/11/1024x1024.jpg, NA",Yes,https://www.theguardian.com/us-news/2015/nov/16/the-counted-killed-by-police-1000,"Number of people killed by US police in 2015 at 1,000 after Oakland shooting","The number of people killed by law enforcement in the US this year has reached 1,000 after officers in Oakland, California, shot dead a man who allegedly pointed a replica gun at them.
+
+Authorities said several officers opened fire on the man on Sunday evening when he walked toward them as they towed away cars that had been used to perform so-called “sideshow” stunts in east Oakland. Officers discovered later that the gun was a replica, police said.
+
+“Officers working sideshow approached by subject who pointed firearm in their direction,” the Oakland police department said on Twitter. “Officers fatally shot subject.” A spokeswoman said the department would investigate the shooting itself. The man’s name was not released.
+
+app
+Download the free Guardian app
+Download the free Guardian app
+Specially crafted for Windows 10, this app gives you full access to the Guardian's award-winning content. With automatic caching, you can keep reading even when you’re offline.
+Click here
+Hundreds of cars had been involved in hours of chaotic sideshow stunts that shut down several intersections in Oakland from late on Saturday into the early hours of Sunday, according to police. One man was arrested and several shots were fired.
+
+The man shot in Oakland became the 1,000th database entry in The Counted, an ongoing investigation by the Guardian to record every fatality caused by police and other law enforcement officers in 2015, to monitor the demographics of the people who died and detail how and why they were killed.
+
+Sunday’s incident was the 883rd fatal shooting by a law enforcement officer so far in 2015, according to the Guardian’s records. Another 47 people died after being shocked with an officer’s Taser, 33 died after being struck by a law enforcement officer’s vehicle, and 36 were killed in custody. Another received a deadly blow to the head during a fight with an officer.
+
+The shooting was also the 183rd death recorded in California, by far the greatest total of any state. Nine states, however, have recorded more deaths per capita, with Oklahoma having the highest rate.
+
+The Counted: the definitive map of US police killings in 2015
+The Guardian has created the most detailed map of police killings ever published. Find your hometown and explore the most lethal police departments in America
+ Read more
+The US government publishes no comprehensive record of people killed by law enforcement, even after a series of controversial deaths unleashed a national protest movement and demands from activists and lawmakers alike for better data on the subject.
+
+An analysis of the statistics collected so far found the rate of deaths currently stands at 3.1 per day. This rate has remained relatively steady throughout the year, peaking through the month of March to a daily rate of almost four and dipping to an average of 2.6 through June.
+
+The Counted was launched on 1 June, logging 464 deaths in the year to that point. At that time 102 or 22% of those killed had been unarmed. This proportion has since fallen slightly to 20% or 198 of the total 1,000. In 59 deaths, however, it remains unclear whether the suspect was armed.
+
+Advertisement
+
+As of 1 June, black Americans were more than twice as likely to be unarmed as white Americans when killed by police. At that point 32% of the 135 black people killed by police had been unarmed, compared with 15% of the 234 white people. This disparity has since shrunk, with 26% of the 248 black people and 18% of 490 white people being recorded as unarmed.
+
+Brittany Packnett, a member of Barack Obama’s taskforce on 21st century policing and a founder of the Campaign Zero movement that lobbies to curb the levels of police violence in America, said the milestone should be met with “sadness, but not deep shock”.
+
+“Black folks like me have known for a long time that the police do not always represent safety for us and that an encounter could be deadly,” said Packnett. “But having these statistics that add to our personal stories should continue to move everyone towards wanting to having a part in correcting this.”
+
+The Counted: people killed by police in the United States – interactive
+The Guardian has been counting the people killed by US law enforcement agencies since 2015. Read their stories and contribute to our ongoing, crowdsourced project
+ Read more
+Obama’s taskforce, convened after unrest in Ferguson, followed the decision not to prosecute the white officer who shot dead Michael Brown, an unarmed black 18-year-old, and made the collection of more reliable data on the number of police killings in the US one of its central recommendations.
+
+FBI director James Comey said earlier this year that it was “ridiculous and embarrassing” that the Guardian and a separate project by the Washington Post had better information than the federal government about deaths at the hands of law enforcement officers.
+
+The Department of Justice is trialling a new program, which resembles The Counted, to proactively collect data on killings by police. Currently, the FBI records the number of “justifiable homicides” reported to the bureau voluntarily by police departments that choose to participate.
+
+Packnett said that while the government was “still in the beginning stages” of instigating that process, campaigners realised “it’s not enough just to talk about police involved shootings”.
+
+“We have to talk about in custody deaths, we have to talk about non-lethal police violence, we need to talk about particularly vulnerable communities like children and the LGBTQ community,” Packnett said.
+
+“We have to track it all, and we have to track it knowing that stronger, more comprehensive data can better lead us to the place of building solutions.”",No,No,,No,,https://i.guim.co.uk/img/media/41a44039259cad6a2aff2f332da5ab7f85afc6c7/0_0_2560_1535/master/2560.jpg?w=620&q=55&auto=format&usm=12&fit=max&s=c2c25526d4db562f40e23656fe17c2e9,Yes,http://www.mercurynews.com/2016/07/22/family-of-fatal-oakland-police-shooting-victim-files-lawsuit/,Family of fatal Oakland police shooting victim files lawsuit,"OAKLAND — The daughter of Richard Perkins, who was fatally shot in November by Oakland police, filed a civil rights lawsuit Friday against the city.
+
+Perkins was shot and killed Nov. 15 by four officers near the corner of 90th and Bancroft avenues when he allegedly pointed a pellet gun at police.
+
+The officers were identified as seven-year department veteran Sgt. Joseph Turner and officers Jonathan Cairo, Joshua Barnard and Allahno Hughes, who had between seven months and one year experience at the time of the incident.
+
+In a lawsuit, Perkins’ daughter said her father was armed with an Airsoft toy pistol and was trying to get rid of it before getting closer to police. The lawsuit was filed in the U.S. District Court in Oakland.
+
+“As Mr. Perkins was dropping the toy pistol, one of the defendant officers yelled something in the effect of ‘He’s got a gun!’ and without warning, defendants Turner, Cairo, Barnard, and Hughes opened fire on Mr. Perkins, causing at least 15 bullet wounds to his body,” the lawsuit said.
+
+The family’s attorney, Michael Haddad, said police showed him some of the surveillance video footage from a nearby gas station. The video showed Perkins walking on the sidewalk — not toward officers — dropping a fake gun and falling down as he was shot.
+
+Perkins was the 1,000th person reportedly shot and killed by police in America last year, Haddad said.
+
+“I just think that his death is kind of symbolic of a lot of unnecessary police shooting deaths around the country,” he said. “Here, like many situations, police shot him before he posed an immediate threat on anybody, which is unlawful.” The officers were towing vehicles involved in a sideshow in the area of 90th and Bancroft avenues around 5:30 p.m. before the shooting happened. Police do not believe Perkins was involved in the sideshow.
+
+The lawsuit names the city, former Police Chief Sean Whent and the officers as defendants. The suit seeks unspecified damages.
+
+
+Turner has been linked to an incident three weeks after the shooting. After drinking at a bar in the Oakland hills, Turner and Officer Cullen William Faeth reportedly showed up at the residence of Olga Cortez, an Alameda County deputy probation officer.
+
+Faeth allegedly threw Cortez to the ground and refused to leave after he tried to force himself into the home. Cortez said Turner also appeared at her home that night, but eventually ran off and was not arrested.",No,,,,,,5:34 PM,Outdoors,Street/Road,,Police responding to a reported offense by the victim,,Traffic Law Violations,,"Erratic Behavior,Threatening behavior (unarmed)",,No,Unclear,No,No,Point weapon at officer,,None of the above,,Pointed gun at officer,,,,Unknown (does not mention any quantity),,Unknown (does not mention any quantity),,No,Exact number provided. Enter number:,4,Unknown,,Yes,"Sgt. Joseph Turner,Jonathan Cairo, Joshua Barnard, Allahno Hughes",Yes,7,Male. Number of officers:,4,,,Unknown,No,No,No,No,No,No,No,,,None,,,No,,No,,,,No,,,,None of the above,None of the above,,,No employment or education info given,,,,,,,No,,No,,,,Yes,Yes,No,No,Yes,,,,,,,,,
+Brian Fritze,117,"Fritze led police on a high-speed chase after they responded to a complaint of domestic violence. When his vehicle was disabled with spike strips, he allegedly emerged with a gun and failed to obey police commands to drop it.",Ruled justified,,http://www.postindependent.com/news/da-fritze-turned-to-deputies-raised-gun-before-they-shot-him/,"DA: Fritze turned to deputies, raised gun before they shot him","No charges are warranted against Garfield County sheriff’s officers Justin Wareham and Lester Gherardini in the February shooting death on Interstate 70 of Brian Fritze, Ninth Judicial District Attorney Sherry Caloia said in a letter to the Colorado Bureau of Investigation.
+
+Fritze was shot to death on Feb. 10 after a high-speed chase along I-70.
+
+After the Colorado State Patrol used spikes to flatten the front tires of the truck, Fritze exited the interstate at Canyon Creek where police said he got out of the truck and held a gun to his head. Then, according to Caloia’s letter, he walked toward the eastbound lanes despite orders to surrender before turning toward officers and raising the weapon, prompting Wareham and Gheradini to fire.
+
+In the aftermath, Fritze’s father, Melvin, said his son was “always friendly and never knew a stranger,” but “alcohol and drugs were always there as his demons.” After turning his life around for a while, he said Brian had a “break with reality” in 2014. Melvin Fritze suggested that his son may have let law officers “do the job he couldn’t do.”
+
+Fritze was a suspect in a domestic violence case on the day of his death and, according to Caloia, would have faced charges of assault, menacing, eluding, driving under the influence and reckless endangerment, among others, had he survived.
+
+“Under the specific facts of the case, the Office of the District Attorney finds that the deputies’ actions in shooting and ultimately killing Fritze were justified in defense of themselves and others,” she wrote.",Yes,Yes,http://www.postindependent.com/wp-content/uploads/2016/06/ShootingFolo-GPI-021215-1-1-218x325.jpg,No,,"http://www.postindependent.com/wp-content/uploads/2016/06/ShootingFolo-GPI-021215-1-1-1-325x216.jpg, http://www.postindependent.com/wp-content/uploads/2016/06/ShootingFolo-GPI-021215-1-2-325x183.jpg",http://www.gjsentinel.com/news/articles/man-shot-by-cops-had-demons-father-says,"Man shot by cops had ‘demons,’ father says","Alcohol and drugs were demons for a man shot and killed by law enforcement in Garfield County this week, and “he could never quite get a handle on his demons,” his father says.
+
+Melvin “Skip” Fritze said his son, Brian, also had said he didn’t want to go back to prison. While Skip was not aware of his son ever having attempted suicide, he suggested his son’s last actions may have been a case of suicide-by-cop.
+
+“Personally, I feel that he let the law enforcement people do the job he couldn’t do,” Skip said.
+
+Fritze, 45, of Parachute, died from multiple gunshot wounds Tuesday after being fired upon by one or both Garfield sheriff deputies who were on the scene when he pulled off Interstate 70 interchange at Canyon Creek west of Glenwood Springs.
+
+Fritze had led authorities on a chase on I-70 after a domestic violence call in the Parachute area in which he reportedly had beaten a woman in the face and on the head.
+
+After stopping his vehicle at Canyon Creek, he had first pointed a handgun at his head, headed on foot toward the interstate with the gun, and then was shot, authorities said.
+
+Authorities haven’t said whether Fritze fired his gun. The Colorado Bureau of Investigation is investigating the shooting, and the two deputies are on paid administrative leave while that investigation occurs. Sheriff’s spokesman Walt Stowe said the leave is not a  disciplinary action.
+
+Authorities haven’t released the deputies’ names.
+
+Audio from the emergency dispatch traffic suggests a frantic and confusing situation for the deputies in the brief minutes after Fritze pulled over.
+
+At one point, someone says over the radio, “It looks like we’ve got one in custody.”
+
+But seconds later, someone clarifies, “Not one in custody. One at gunpoint.”
+
+It’s not entirely clear in the audio whether one or more deputies is speaking. But almost immediately, a deputy shouts out, “Negative, not in custody, not in custody, he’s got a handgun, he’s running into traffic!”
+
+Then, seconds later, “Shots fired, shots fired, suspect down!”
+
+The audio also indicates that earlier, during the pursuit, a deputy said they would call off the late-afternoon chase if Fritze couldn’t be stopped using tack strips and had continued into South Canyon and Glenwood Springs.
+
+“We’re not going to chase him through the canyon or into town at this time of day,” the deputy said.
+
+Deputies had earlier responded to a Parachute-area home after a woman reported having been attacked, said Stowe. The woman said Fritze had shown up and the two had an argument, then he went out and got his gun, grabbed her and forced her into the house, knocked her into a door jam, got on top of her and started pummeling her with his fists.
+
+Someone else heard the altercation and pulled Fritze off the woman, Fritze left, and authorities were called. Stowe said the woman’s face was covered with blood and some of her hair had been pulled out.
+
+Stowe said the woman’s name is being withheld to protect her as a victim. He said the incident didn’t happen at Fritze’s home.
+
+Deputies later began chasing Fritze after spotting his vehicle.
+
+He got on Interstate 70 at the Rulison interchange and raced east at speeds of 95-100 mph before a tack strip deployed just east of New Castle eventually forced him to a stop.
+
+Fritze had an extensive criminal record. He served time in Oklahoma for assault and battery and also was convicted there on grand larceny, drug possession and other charges.
+
+After moving to Garfield County, he was arrested on multiple occasions starting in 2008 on suspicion of driving under the influence and other offenses. Parachute police arrested him Dec. 27 on suspicion of misdemeanor offenses related to domestic violence.
+
+Skip Fritze was notified of his son’s death late Tuesday night when two police officers in Norman, Oklahoma, showed up at his door.
+
+In a telephone interview and an e-mail, he spoke extensively of his son’s life and struggles.
+
+“Brian made very poor choices, from (his) early teens. Alcohol and drugs were always there as his demons. He had his good drug-free periods and years. His family is thinking of the good memories of him these last few days,” Skip said.
+
+He enjoyed playing soccer and football as a teen, Skip said. He spent his last two years of high school in Japan, where Skip was working through his job with the Federal Aviation Administration, and did well there.
+
+SERVED IN FIRST GULF WAR
+
+Brian spent four years in the Army and, after being sent to Germany, served in the first Gulf War in Iraq. During the multi-day ground war, he drove an armored carrier across the desert.
+
+Skip said his son told him that if he and fellow soldiers ever had problems in front of them, they called in Apache helicopters that would take out the opposing forces.
+
+He said his son came back from the war mentally OK, as far as he knew.
+
+“He did well in the Army, perhaps because it was a structured environment,” his father said.
+
+Brian’s struggles came in civilian life.
+
+“We, as a family, tried hard to give him help,” Skip said.
+
+When Brian was younger, the family got him set up with counselors and treatments. After his Army service, he had access to Veterans Affairs services “but would check in and not stay,” his father said.
+
+“He ran the streets in the early 2000s, and the family never knew if he was alive or dead most days,” Skip said.
+
+That culminated in his son’s time in prison. After he got out, he headed to Colorado to work concrete jobs and then got on as an apprentice driller with Helmerich & Payne.
+
+He did “very well, making good money, and married his second wife, a lovely person. He soon worked into a consultant job,” Skip said.
+
+He said Brian was drug-free for about five or six years. But he didn’t handle his money well because material things didn’t matter to him much, and he had a hard time handling adversity and marital problems.
+
+“Our family suspected bipolar condition, never diagnosed, but we all thought he had this illness for a long time. When given meds, he would not stay on them,” Skip said.
+
+Still, he described Brian as having been someone who was “always friendly and never knew a stranger.”
+
+He helped the family of his wife over the past few years, and helped his mother in Oklahoma with expenses. Brian also had two children — a younger one with him in Colorado and an older one who is being raised by his first wife. Skip said his son was a good father who loved his children.
+
+Skip said that during the last few months, things, “turned very sour with his wife, and he started to use again.”
+
+“Talking to him on the phone several times, he was irrational and angry. I suggested he check in at the VA in Grand Junction and get some help, but he didn’t. His wife was being subject to difficult times and abuse. We are on good terms with her, and helping her.”
+
+Skip said he believes that the “break from reality” his son was experiencing “was too much for him to overcome.”
+
+“His last phone call was horribly irrational and made no sense,” Skip said. “The entire family here kept saying we loved him and told him we always would.
+
+“… It’s a very human tragedy and our entire family grieves, but we all feel Brian has at last found some peace.”",Yes,Yes,http://www.gjsentinel.com/images/photos/imgkit_sized/FRITZE_Brian_190x250.jpg,No,,NONE,Yes,http://www.postindependent.com/news/man-shot-on-i-70-armed-extremely-high-on-meth/,"Man shot on I-70 armed, extremely high on meth","Garfield County deputies Justin Wareham and Lester Gherardini were justified in the February shooting death of Brian Fritze after a chase on Interstate 70, 9th Judicial District Attorney Sherry Caloia said in a letter this week to the Colorado Bureau of Investigation.
+
+Fritze was armed with a loaded handgun and had an extraordinarily high level of methamphetamine in his system when the deputies simultaneously opened fire with AR-15 rifles, Caloia’s letter and an autopsy report made public Tuesday said.
+
+Caloia said no changes would be filed.
+
+“We commend the deputies for their dogged actions to this quickly evolving situation,” Caloia wrote. “The deputies reasonably believed that Fritze was irrational, armed and dangerous and desperate and could very well use deadly physical force against members of the general public as an attempt to flee the scene. Under the specific facts of the case, the Office of the District Attorney finds that the deputies’ actions in shooting and ultimately killing Fritze were justified in defense of themselves and others.”
+
+“The timing of the shots fired by each deputy independent of the other illustrates the reasonableness of their fears. The number of shots taken by deputies was necessary, and the firing ceased when the suspect was no longer standing and ceased to move.”from letter written by 9th Judicial District Attorney Sherry Caloia
+
+In her letter, Caloia laid out a detailed chronology of the events before Fritze was shot to death on the side of I-70 near Canyon Creek on Feb. 10.
+
+Around 2 p.m., Caloia wrote, Fritze violated a protection order by slamming his wife against a wall and brandishing a weapon that later turned out to be a BB gun. He had a real firearm, Caloia wrote, on I-70.
+
+He fled the scene of the attack on his wife before police arrived, but was later spotted near a well pad near Parachute, prompting a 90-100 mph chase along the Interstate beginning at mile marker 81, with Fritze weaving his red Dodge pickup truck in and out of traffic.
+
+After the Colorado State Patrol used spikes to flatten the front tires of the truck, Fritze exited the interstate at Canyon Creek, where he was trapped by deputies and police on both side of the ramp.
+
+A K-9 unit was brought out while Wareham instructed Fritze to get out of the truck with his hands up. He continued to order Fritze to surrender as Fritze exited the truck and pointed a handgun at his own head before lowering it and fleeing on foot back toward the highway, which still had traffic in both directions.
+
+“Fritze turned his hand and body to look toward the deputies and then raised his right arm with the weapon. Wareham ordered him once again to stop or that he would shoot,” Caloia wrote.
+
+DEPUTIES ASSESSED
+
+Wareham and Gherardini fired almost simultaneously with their sheriff’s office issue AR-15 rifles. They kicked Fritze’s gun away and checked his vitals before another set of deputies performed CPR until EMS arrived and transported him to Valley View Hospital, where he was pronounced dead at 5:05 p.m.
+
+Per protocol, Wareham and Gherardini were removed from the scene and assessed by a trauma team. They underwent a psychological assessment before they returned to duty several weeks later.
+
+“We want to make sure we take care of our guys,” said Sheriff Lou Vallario.
+
+“Both of them gave a lot of credit to the amount of training we provide to help them to make the decision,” he added.
+
+Meanwhile, the Colorado Bureau of Investigation conducted an extensive investigation, which included taped interviews with law enforcement from on the scene, passing motorists, the deputy who responded to the earlier call, and friends of Fritze and his wife.
+
+The report has not yet been made public, but was provided to the DA’s office.
+
+“The witnesses and officers present at the scene recounted very similar facts and timelines of events,” she wrote.
+
+Gherardini, in his interview, recalled responding to a previous domestic violence call in which “Fritze was openly hostile to Gherardini and told Gherardini during the previous contact that he ‘would not go back to jail,’” Caloia wrote. He told investigator that he feared that Fritze might hijack a vehicle or start shooting on passersby, a sentiment echoed by some civilian witnesses. Wareham expressed concern for the residents of nearby Canyon Creek.
+
+An interview with Fritze’s wife, who had recently served him divorce papers, portrayed him as “erratic and emotional” in recent weeks. She said he had been using meth and losing weight, and she suspected he may have taken her .22-caliber handgun.
+
+A loaded .22-caliber Ruger handgun was recovered at the scene of the shooting, along with some shells and a pipe with white residue consistent with meth.
+
+HIGH METH LEVEL
+
+Fritze’s father Melvin later wrote that his son was “always friendly and never knew a stranger,” but “alcohol and drugs were always there as his demons.” After turning his life around for a while, he said Brian had a “break with reality” in late 2014. His father suggested that he may have let law officers “do the job he couldn’t do.”
+
+“It’s a very human tragedy and our entire family grieves, but we all feel Brian has at last found some peace,” he wrote.
+
+An autopsy report would later reveal that Fritze had a blood methamphetamine concentration well in excess of the 200-600 nanograms per mililiter level reported in methamphetamine users who “exhibited violent and irrational behavior.”
+
+The autopsy further found that Fritze was struck by four direct shots in the chest, back and side, and was struck by at least one and probably two ricochets. Although a chronology was impossible to establish, the report indicated that the shot to his chest, which passed through his heart and both lungs “was not instantly incapacitating but was rapidly fatal.”
+
+The autopsy found no indication that any of the shots were fired at close range, and Caloia indicated that the deputies were about 40 yards away when they fired, too far to use a Taser. The officer in charge of the K-9 unit, meanwhile, chose not to release the dog for fear that it might go after Wareham instead of Fritze, or potentially end up in the highway and be hit by a car.
+
+Caloia also viewed the deputies’ simultaneous decision to use deadly force as telling.
+
+“The timing of the shots fired by each deputy independent of the other illustrates the reasonableness of their fears. The number of shots taken by deputies was necessary, and the firing ceased when the suspect was no longer standing and ceased to move,” she wrote.
+
+“It is impossible to know what Fritze was thinking when he fled with a handgun and refused to heed commands, but his history, his prior statements to others, and the presence of excessive amounts of methamphetamine in his system provide context for his actions.”
+
+Had he survived, she said, Fritze likely would have faced charges of assault, menacing, eluding, driving under the influence and reckless endangerment, among others.
+
+Vallario said he didn’t believe Fritze’s previous criminal history played a role in the officers’ decision to shoot.
+
+“The event that occurred is based on what occurred at that moment,” he said.
+
+Vallario wasn’t surprised by the district attorney’s decision.
+
+“I wasn’t privy to all of the investigation, but I’ve seen nothing to indicate that these guys did anything wrong,” he said. “I’m very sorry for the Fritze family, but I’m glad that no one else was hurt.”",Yes,Yes,http://www.postindependent.com/wp-content/uploads/2016/06/ShootingFolo-GPI-021215-1-3-218x325.jpg,No,,"http://www.postindependent.com/wp-content/uploads/2016/06/ShootingFolo-GPI-021215-1-1-2-325x183.jpg, http://www.postindependent.com/wp-content/uploads/2016/06/ShootingFolo-GPI-021215-1-2-1-325x216.jpg",No,,,,,,,,,,Unknown,Outdoors,Street/Road,,Police responding to a reported offense by the victim,,Traffic Law Violations,,Erratic Behavior,,Yes,Unclear,No,No,"Drive away from police,Disobey or ignore police orders,Lead a car chase",,Issue verbal commands,,Refused to follow officer orders,,,,Unknown (does not mention any quantity),,Unknown (does not mention any quantity),,No,Unknown,,Exact number provided. Enter number:,2,Yes,"Justin Wareham, Lester Gherardini",No,,"Male. Number of officers:,Unknown. Number of officers:",2,,,Unknown,No,No,No,No,No,No,No,,,None,,,No,,No,,,,Yes,Drugs. Specify type:,Meth,,None of the above,None of the above,,,Former military. Enter military branch:,,,,Army,,,No,,No,,,,,,,,,,,,,,,,,
+Darin Hutchins,67,"Hutchins was allegedly threatening people with a knife at a party. When officers arrived, Hutchins allegedly did not drop the knife as instructed and was shot. Witnesses said Hutchins was given no time to respond to officers' commands.",Ruled justified,,http://www.wbaltv.com/news/baltimore-police-involved-in-officerinvolved-shooting/30905860,Man dies in officer-involved shooting in west Baltimore,"Man dies in officer-involved shooting in west Baltimore
+Darin Hutchins, 26, had knife, wouldn't obey commands, police say
+
+UPDATED 10:29 AM EST Jan 27, 2015
+
+
+
+NEXT STORY
+Dog dies after shielding infant from fire
+
+Text Size:AAA
+1:31
+Baltimore County superintendent delivers message of equity
+WATCHED BY
+94%of viewers like you
+2:15
+Baltimore County lacks drug treatment facility
+WATCHED BY
+80%of viewers like you
+1:39
+Maryland names top medical marijuana applicants
+WATCHED BY
+91%of viewers like you
+1:48
+JEANNE MOOS- WORLD'S FASTEST MAN HAS QUICK SMILE
+NEW VIDEO
+62%already watched it
+1:18
+Man found biting skin off murder victim's face
+TOP VIEWED BY
+87%of viewers like you
+1:47
+Firefighters, family dog save girl from house fire
+WATCHED BY
+97%of viewers like you
+
+SHOW TRANSCRIPT
+BALTIMORE —Police are investigating a fatal officer-involved shooting Saturday night in the 1900 block of McHenry Street in west Baltimore.
+
+RELATED
+ Federal complaint filed against UMBC
+ Boston's Betts drives in 5 to beat O's
+ Watch Olympics videos from Day 11
+ Authorities find seventh body in...
+ Baltimore firefighter gives boy drums
+Mobile users tap here to watch video
+
+Authorities said a person flagged down an officer on routine patrol and that a man was threatening to stab people at a house celebrating a toddler's birthday.
+
+According to police, when the officer located the man, identified Tuesday as 26-year-old Darin Hutchins, he refused to drop the knife and obey commands. The officer shot him once in the chest.
+
+Authorities said the officer, who has been on the force for about two years, made the appropriate notifications and then tried to help.
+
+""This is indicative of a couple of things, one is, the officer being at the right place, the officer courageously confronting an individual who was armed and unfortunately, individuals who, in spite of an officer being in full uniform and giving very clear and precise directions, their refusing to follow those directions in what could be a a very deadly situation,"" Deputy Police Commissioner Jerry Rodriguez said.
+
+Police said Hutchins received immediate medical treatment but later died at a hospital.
+
+The officer, Donald Gaff, has been placed on administrative duty. Gaff has been a member of the Baltimore City Police Department since 2013. This was his first officer-involved shooting.",Yes,No,,No,,NA,N/A,N/A,N/A,No,No,,No,,N/A,No,,,,,,,,,,,,,,,,,,,,8:30 PM,Unknown,Residence,,Police responding to a reported offense by the victim,,Intimidation/Threats,,Threatening behavior (armed),,Yes,Yes,Yes,Yes,None of the above,,Issue verbal commands,,Refused to follow officer orders,,,,Exact number given. Enter number:,2,Exact number given. Enter number:,1,No,Exact number provided. Enter number:,1,Exact number provided. Enter number:,1,Yes," officer, Donald Gaff",Yes,2 Years,Male. Number of officers:,1,,,White,No,No,No,No,No,No,No,,,None,,,No,,Yes,General or unspecified mental health issues,,No,No,,,,None of the above,None of the above,,,No employment or education info given,,,,,,,No,,No,,,,No,Yes,No,No,Yes,,,,,,,,,
+Nephi Arriguin,388,"Officials said Arriguin, who was in his car, was shot because he tried to run down a deputy who was responding to reports of a 'suspicious couple knocking on doors'.",Under Investigation,,http://www.loscerritosnews.net/2015/05/10/vigil-held-in-cerritos-for-man-shot-by-deputies/,Vigil Held in Cerritos for Man Shot By Deputies,"Vigil Held in Cerritos for Man Shot By Deputies
+
+Email, RSS Follow
+Family and friends held a vigil Saturday for Nephi Arriguin, shot and killed by a Los Angeles County sheriff’s deputy in Cerritos.
+
+“I’m completely devastated,” Arriguin’s uncle Zachary Wade said. “I’m completely baffled as to what reason a deputy would have to murder my nephew.”
+
+A crowd gathered at the scene on Pires Avenue. Deputies said 21-year-old Arriguin was shot Thursday and that  he attempted to run over a deputy with his car.
+
+Deputies were investigating reports of a suspicious couple in the neighborhood.
+
+After he was shot, Arriguin’s car crashed, shearing a fire hydrant. He was pronounced dead at the scene.
+
+The shooting remained under investigation. Anyone with further information about this incident shoud contact the L.A. County Sheriff’s Department’s Homicide Bureau at (323) 890-5500.",No,,,,,,http://ktla.com/2015/05/07/apparent-deputy-involved-shooting-prompts-emergency-response-in-cerritos/,"Driver Who Struck Deputy With Car Killed After Being Shot, Short Pursuit","Driver Who Struck Deputy With Car Killed After Being Shot, Short Pursuit
+POSTED 5:18 PM, MAY 7, 2015, BY MELISSA PAMER, KENNEDY RYAN, KIMBERLY CHENG AND KAREEN WYNTER
+FACEBOOK1K+	TWITTER	GOOGLE	LINKEDIN9	PINTEREST	EMAIL	
+This is an archived article and the information in the article may be outdated. Please look at the time stamp on the story to see when it was last updated.
+ 
+A motorist who allegedly struck a Los Angeles County Sheriff's Deputy with his car was shot and later died after a short pursuit Thursday evening that ended with the man's vehicle crashing into a fire hydrant.
+
+Authorities responded to an apparent deputy-involved shooting Cerritos on May 7, 2015. (Credit: KTLA)
+Authorities responded to an apparent deputy-involved shooting Cerritos on May 7, 2015. (Credit: KTLA)
+The incident began about 4:30 p.m. after a resident called 911 about a suspicious woman in the 13000 block of Beach Street in Cerritos.
+
+""There was a female knocking on doors asking for people inside the residence that didn't live there,"" Lt. Eddie Hernandez said.
+
+When a deputy responded to the neighborhood, he spotted a car matching the caller's description with a woman standing nearby. The deputy detained the woman and approached the car, according to a news release from the Sheriff's Department.
+
+Authorities had initially reported that multiple people were detained, but later clarified that only the one woman was being held for questioning.
+
+Firefighters looked into a vehicle after a deputy-involved shooting in Cerritos on May 7, 2015. (Credit: KTLA)
+Firefighters looked into a vehicle after a deputy-involved shooting in Cerritos on May 7, 2015. (Credit: KTLA)
+""As (the deputy) got closer to the vehicle, he saw that the driver ... looking like he was trying to conceal himself from the deputy,"" Hernandez said.
+
+The driver appeared to be ""fumbling around in his pocket and waist area,"" Hernandez said.
+
+When the deputy ordered the driver to show his hands, the man accelerated forward, striking the deputy, the release stated.
+
+""Fearing for his safety, the deputy fire at the suspect,"" Hernandez said.
+
+The man continued driving and was followed by a patrol vehicle, according to the release. He lost control in the 17200 block of Pires Avenue, about a half-mile away, and crashed into a fire hydrant and electrical pole, triggering an explosion, authorities said.
+
+The site of a deputy-involved shooting and crash in Cerritos are shown on May 7, 2015. (Credit: LoudLabs)
+The site of a deputy-involved shooting and crash in Cerritos are shown on May 7, 2015. (Credit: LoudLabs)
+The driver of the car was declared dead at the scene and the deputy was hospitalized with minor injuries.
+
+The woman was being detained for questioning, the release stated.
+
+Crime scene tape was blocking off Aclare Street about one block away. It was not clear how the scenes were related.
+
+Records for the license plate of the crashed vehicle indicated it was a rental car.
+
+KTLA's Nidia Becerra Tijerino and Scott Williams contributed to this article.
+
+Correction: An earlier version of this story had an incorrect timeline of events. It has been updated.",Yes,No,,No,,"http://ktla.com/2015/05/07/apparent-deputy-involved-shooting-prompts-emergency-response-in-cerritos/#ooid=cxNHd4dDrK0aSfA_tbvxNVrf-WTe2iix  ,
+
+https://tribktla.files.wordpress.com/2015/05/scene.jpg?w=300&quality=85&strip=all&h=169  ,
+
+https://tribktla.files.wordpress.com/2015/05/treat.jpg?w=300&quality=85&strip=all&h=169  ,
+
+https://tribktla.files.wordpress.com/2015/05/loud.jpg?w=300&quality=85&strip=all&h=169  ,
+
+http://ktla.com/2015/05/07/apparent-deputy-involved-shooting-prompts-emergency-response-in-cerritos/#ooid=lkdnJ4dDqbk3tl0briB8Q-puZs-tSPcf",No,,,,,,,,,,,,,,,,,,,,4:30 PM,Outdoors,Street/Road,,Police responding to a reported offense by the victim,,None of the above,,None of the above,,No,Unclear,No,No,"Disobey or ignore police orders,Lead a car chase,Injure officer",,Issue verbal commands,,Drove vehicle at officer,,,,Unknown (does not mention any quantity),,Unknown (does not mention any quantity),,No,Unknown,,Unknown,,No,,No,,Unknown. Number of officers:,,,,Unknown,No,No,No,No,No,No,No,,,None,,,No,,No,,,,No,,,,Had children,None of the above,,,No employment or education info given,,,,,,,No,,No,,,,Yes,No,Yes,No,Yes,,,,,,,,,
+David Garcia,72,Garcia was accused of charging at deputies at his home while brandishing a knife. Authorities said they had forced their way into the property while responding to suicide threats made by Garcia. Garcia's family alleged that he was not holding the knife at the time of the shooting and have filed a wrongful death lawsuit.,Ruled justified,,http://www.turnto23.com/news/local-news/kcso-on-scene-of-officer-involved-shooting-in-wasco-012615,One man dead after officer involved shooting in Wasco,"One man dead after officer involved shooting in Wasco
+Stacy Haynes, Tarik Dugas
+8:28 AM, Jan 26, 2015
+8:22 AM, Feb 11, 2015
+
+Copyright 2015 Scripps Media, Inc. All rights reserved. This material may not be published, broadcast, rewritten, or redistributed.
+SHOW CAPTION
+WASCO, Calif. - A 34-year-old Hispanic man is dead after an officer involved shooting early Monday morning in the 1100 block of E Street in Wasco.
+
+
+
+According to deputies, around 6:39 a.m. they responded to a call of a suspect making threats to himself. 
+
+When they arrived they saw his vehicle in the driveway, and due to previous calls to this home where the suspect would leave, a deputy used his car to block the suspect's vehicle and prevent him from leaving.
+
+One deputy said he got out and heard yelling and screaming from inside the home. The deputy forced entry and saw the suspect on a couch in the living room armed with a knife.
+
+One deputy attempted to talk to the suspect, another later deployed a taser unsuccessfully.
+
+Deputies said the man then charged them brandishing a knife, so one deputy then fired and struck the suspect who was later taken into custody.
+
+CPR was performed and the suspect was taken to Delano Regional Medical Center where he was pronounced dead.
+
+On Tuesday, February 10, the Kern County Sheriff's Incident Review Board convened and found that the use of force by Sr. Deputy Reed was within Sheriff's Office policy.
+
+---
+
+Download our 23ABC mobile and tablet app to stay up-to-date with this story and community news.
+
+iPhone -   http://bit.ly/23ABCiPhone   
+Android -   http://bit.ly/23ABCAndroid 
+iPad -   http://bit.ly/23ABCiPad   
+Kindle -   http://bit.ly/23ABCKindle 
+Windows 8 - http://bit.ly/23ABCWindows
+
+Like 23ABC’s Facebook page here: www.facebook.com/23ABCBakersfield
+
+Follow us on Twitter: @23ABCNews
+
+Copyright 2015 Scripps Media, Inc. All rights reserved. This material may not be published, broadcast, rewritten, or redistributed.
+
+Print this article Back to Top",Yes,No,,No,,http://media.turnto23.com/photo/2015/01/26/Wasco_Shooting_1422291620145_12812887_ver1.0_640_480.JPG,http://www.kerngoldenempire.com/news/top-stories/family-files-wrongful-death-claim-against-kern-county,Family files wrongful death claim against Kern County,"Family files wrongful death claim against Kern County
+Published 05/29 2015 07:49AMUpdated 05/29 2015 08:10AM
+
+
+BAKERSFIELD, CA - The family of a Wasco man shot and killed by law enforcement earlier this year, has filed a claim against Kern County.
+
+David Garcia died in January after a bullet fired by Kern County sheriff's senior deputy Robert Reed, struck him.
+     
+Garcia's wife, Denise Bonilla is seeking damages from the county and 10 deputies or other employees of the department not named in the claim.
+     
+The filing cites excessive force used by deputies, wrongful death, negligence, and infliction of emotional distress among other things.
+     
+Bonilla is asking for funeral, burial, and trial expenses to be paid by the county.
+     
+The incident started as a domestic violence call but ended in the shooting death of Garcia.
+     
+His wife has insisted Garcia was did not have a knife when he was shot, as the sheriff's office has stated.
+     
+There are also conflicting reports of how many times Garcia was shot and why 32-caliber casings were found at the scene.
+     
+Sheriff Donny Youngblood has said Garcia was only shot twice with a 40-caliber handgun.
+Copyright 2016 Nexstar Broadcasting, Inc. All rights reserved. This material may not be published, broadcast, rewritten, or redistributed.",Yes,No,,No,,http://www.kerngoldenempire.com/news/top-stories/family-files-wrongful-death-claim-against-kern-county,Yes,http://bakersfieldnow.com/news/local/shots-fired-by-deputy-in-wasco-encounter-ruled-justified,Shots fired by deputy in Wasco encounter ruled justified,"Shots fired by deputy in Wasco encounter ruled justified
+BY BAKERSFIELDNOW STAFF SUNDAY, JANUARY 25TH 2015
+
+share now!
+tweet now!
+BAKERSFIELD, Calif. (KBAK/KBFX) - The Kern County Sheriff's Office has ruled on a shooting involving one of its deputies.
+
+David Garcia, 33, was shot and killed Jan. 26 at a home on E Street in Wasco.
+
+The sheriff's office said Garcia, who was also wanted on warrants for assault with a deadly weapon and spousal abuse, was armed with a knife when he charged at Sr. Deputy Robert Reed, who opened fire.
+
+Another deputy first tried to get control of Garcia by using a stun gun, but that wasn't successful.
+
+The department review board determined Reed's shots were within policy.",Yes,No,,No,,http://bakersfieldnow.com/news/local/shots-fired-by-deputy-in-wasco-encounter-ruled-justified,No,,,,,,,,,,6:39 AM,Indoors,Residence,,Victim made voluntary contact with the police (eg. called for assistance),,None of the above,,Suicidal behavior or threats. (e.g. holding gun to own head),,Yes,Unclear,Yes,No,Charge/lunge at officer,,"Use TASER,Issue verbal commands",,Lunged/charged at officer,,,,Exact number given. Enter number:,2,Exact number given. Enter number:,2,No,Exact number provided. Enter number:,10,Exact number provided. Enter number:,1,Yes,Sr. Deputy Robert Reed,No,,"Male. Number of officers:,Unknown. Number of officers:",1,,9,Unknown,No,No,No,No,No,No,No,,,None,,,No,,Yes,Suicidal thoughts,,No,No,,,,Married,None of the above,,,No employment or education info given,,,,,,,No,,No,,,,,,,,,,,,,,,,,

@@ -25,6 +25,8 @@ with open('Guardian Coding 3.0_Sept- 26-2016.csv', 'rb') as csvfile:
 
     for row in reader:
         coder = row[coderIdIndex]
+        if coder == '':
+            coder = 'Unknown'
         if coder not in coderData:
             coderData[coder] = []
 
@@ -37,8 +39,6 @@ with open('Guardian Coding 3.0_Sept- 26-2016.csv', 'rb') as csvfile:
         coderData[coder].append(case)
 
     for coder in coderData.keys():
-        if coder == '':
-            continue
         outputFile = open(coder + '.csv', 'wb') 
         writer = csv.writer(outputFile, delimiter = ',')
         writer.writerow(codableHeaders)
