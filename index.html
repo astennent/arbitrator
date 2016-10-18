@@ -122,9 +122,9 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th style="width: 30%">Coder 1</th>
-                            <th style="width: 30%">Coder 2</th>
+                            <th style="width: 9%">#</th>
+                            <th style="width: 28%">Coder 1</th>
+                            <th style="width: 28%">Coder 2</th>
                             <th style="width: 35%">Arbitrator</th>
                             <th></th>
                         </tr>
@@ -133,8 +133,22 @@
                         <tr ng-repeat='questionId in questionIds' ng-class="{'unarbitrated-row': !isArbitrated(questionId)}">
                             <div class="form-group">
                                 <td> {{questionId}} </td>
-                                <td> {{coder1[questionId].substring(0, 80)}} </td>
-                                <td> {{coder2[questionId].substring(0, 80)}} </td>
+                                <td>
+                                    <span ng-if="!expandedRows[questionId]" class="coder-label"> {{coder1[questionId] | limitTo:100 }} </span>
+                                    <span ng-if="expandedRows[questionId]" class="coder-label"> {{coder1[questionId] }} </span>
+                                    <span ng-if="coder1[questionId].length > 100">
+                                        <hr>
+                                        <button class="button" ng-click="expandedRows[questionId] = !expandedRows[questionId]"> <span class="glyphicon glyphicon-option-horizontal"></span> </button>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span ng-if="!expandedRows[questionId]" class="coder-label"> {{coder2[questionId] | limitTo:100 }} </span>
+                                    <span ng-if="expandedRows[questionId]" class="coder-label"> {{coder2[questionId] }} </span>
+                                    <span ng-if="coder2[questionId].length > 100">
+                                        <hr>
+                                        <button class="button" ng-click="expandedRows[questionId] = !expandedRows[questionId]"> <span class="glyphicon glyphicon-option-horizontal"></span> </button>
+                                    </span>
+                                </td>
                                 <td>
                                     <button tabindex=-1 type="button" class="btn btn-default accept-button"
                                             ng-click='acceptCoder(questionId, coder1)'> 1
@@ -153,12 +167,6 @@
                                         <span ng-if="isArbitrated(questionId)"> Clear </span>
                                         <span ng-if="!isArbitrated(questionId)"> Arbitrate </span>
                                     </button>
-                                </td>
-                                <td>
-                     <span class="glyphicon"
-                           ng-class="isArbitrated(questionId) ? 'glyphicon-ok' : 'glyphicon-remove'"
-                           aria-hidden="true">
-                     </span>
                                 </td>
                             </div>
                         </tr>

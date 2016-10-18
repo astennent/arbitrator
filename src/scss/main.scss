@@ -14,17 +14,17 @@ body {
 }
 
 #TopBar {
-   .glyphicon {
-      font-size: 20px;
-      color: #9d9d9d;
-   }
+  .glyphicon {
+    font-size: 20px;
+    color: #9d9d9d;
+  }
 
-   &.dirty {
-      .glyphicon {
-        cursor: pointer;
-        color: #00b5ff;
-      }
-   }
+  &.dirty {
+    .glyphicon {
+      cursor: pointer;
+      color: #00b5ff;
+    }
+  }
 }
 
 .sidebar-offcanvas {
@@ -36,55 +36,68 @@ body {
   padding-left: 0;
 
   small {
-     color: #888;
-     padding-left: 15px;
-   }
+    color: #888;
+    padding-left: 15px;
+  }
 
-   .table td, .table th {
-      text-align: center;
-      vertical-align: middle;
-   }
+  .table {
+    table-layout: fixed;
+  }
 
-   .table td.left, .table th.left {
-      text-align: left;
-   }
+  .table td, .table th {
+    text-align: center;
+    vertical-align: middle;
+  }
 
-   .unarbitrated-row {
-     outline: 2px solid #bf8181;
-     outline-offset: -1px;
+  .table td.left, .table th.left {
+    text-align: left;
+  }
 
+  .unarbitrated-row {
+    outline: 2px solid #bf8181;
+    outline-offset: -1px;
 
-     &:nth-child(even) {
-        background-color: #ffeeee;
-     }
+    &:nth-child(even) {
+      background-color: #ffeeee;
+    }
 
-     &:nth-child(odd) {
-        background-color: #ffdede;
-     }
-   }
+    &:nth-child(odd) {
+      background-color: #ffdede;
+    }
+  }
 
-   .accept-button {
-     font-weight: bold;
-   }
+  .accept-button {
+    font-weight: bold;
+  }
 
-   .arbitrate-button {
-     width: 80px;
-   }
+  .arbitrate-button {
+    width: 80px;
+  }
+
+  .coder-label {
+    text-overflow: ellipsis;
+  }
+
+  hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #5c5c5c;
+  }
 }
 
 #SetupPage {
-   .form-group {
-      position: relative;
-      display: inline-block;
-      padding-top: 20px;
-      padding-left: 20px;
-      width: 450px;
-   }
+  .form-group {
+    position: relative;
+    display: inline-block;
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 450px;
+  }
 
-   hr {
-      margin-top: 10px;
-      margin-bottom: 10px;
-   }
+  hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 #Sidebar {
@@ -99,3 +112,5 @@ body {
     margin-bottom: 10px;
   }
 }
+
+

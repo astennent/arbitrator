@@ -12,6 +12,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       var coderKeys = Object.keys(caseData);
       $scope.coder1 = caseData[coderKeys[0]];
       $scope.coder2 = coderKeys.length > 1 ? caseData[coderKeys[1]] : {};
+      $scope.expandedRows = {};
 
       $scope.questionIds = Object.keys($scope.coder1);
 
