@@ -16,7 +16,7 @@
 <body>
 
 <!-- Top bar -->
-<nav id="TopBar" 
+<nav id="TopBar"
      ng-class="dirty() ? 'dirty' : ''"
      ng-controller='toolbarController'
      class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -42,133 +42,133 @@
 
 <div id="main" class="container-fluid" ng-controller="pageController">
     <table class="table">
-    <tr>
+        <tr>
 
-    <td style="width: 20%">
-        <!-- Sidebar -->
-        <div class="sidebar-offcanvas" id="Sidebar" role="navigation"
-             ng-controller="sidebarController">
-            <hr>
-            <div class='sidebar-filters'>
-               <div class="form-check">
-                  <label class="form-check-label">
-                     <input class="form-check-input" type="checkbox" value="" ng-model='includeFullyArbitrated'>
-                     Include fully arbitrated cases
-                  </label>
-               </div>
-               <div class="form-check">
-                  <label class="form-check-label">
-                     <input class="form-check-input" type="checkbox" value="" ng-model='includeSingleCoded'>
-                     Include single-coded cases
-                  </label>
-               </div>
-            </div>
-            <hr>
-            <ul class="nav nav-sidebar">
-               <li class='active' ng-repeat="case in getCases() | filter:shouldDisplay"">
-                  <a href="#" ng-click="switchToCase(case.id)" >Case {{case.id}}</a>
-               </li>
-            </ul>
-            <span id='no-cases' ng-if="getCases().length === 0"> No Cases </span>
-        </div>
-
-    </td>
-
-    <td style="width: 80%">
-
-        <!-- Setup Page -->
-        <div id="SetupPage" ng-if="isOnSetup()" ng-controller='setupController' col-sm-3 col-md-10 >
-                <div class="form-group">
-                    <label for="caseIdKey">Case Merging Key</label>
-                    <input type="text"class="form-control" id='caseIdKey' ng-model='caseIdKey'>
+            <td style="width: 20%">
+                <!-- Sidebar -->
+                <span class="sidebar-offcanvas" id="Sidebar" role="navigation"
+                     ng-controller="sidebarController">
+                    <hr>
+                    <div class='sidebar-filters'>
+                        <div class="form-check" ng-repeat="filter in filters">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value="" ng-model='filter.value'>
+                                {{filter.display}}
+                            </label>
+                        </div>
+                    </div>
+                    <hr>
+                    <span ng-if="getCases().length > 0">
+                       <span id='case-count'> Displaying <b> {{filteredCases.length}} / {{getCases().length}} </b> cases </span>
+                        <hr>
+                    </span>
+                    <span ng-if="getCases().length === 0">
+                       <span id='no-cases'> No Cases </span>
+                    </span>
+                    <ul class="nav nav-sidebar">
+                        <li class='active' ng-repeat="case in getCases() | filter:shouldDisplay as filteredCases">
+                        <a href="#" ng-click="switchToCase(case.id)" >Case {{case.id}}</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="form-group">
-                    <label for="coder1Source">Coder 1 Source</label>
-                    <input type="file" file-reader='coder1Content' class="form-control" id='coder1Source'>
-                </div>
-                <div class="form-group">
-                    <label for="coder2Source">Coder 2 Source</label>
-                    <input type="file" file-reader='coder2Content' class="form-control" id='coder2Source'>
-                </div>
-                <div class="form-group">
-                    <label for="coder3Source">Coder 3 Source</label>
-                    <input type="file" file-reader='coder3Content' class="form-control" id='coder3Source'>
-                </div>
-        </div>
 
-        <!-- Case Page -->
-        <div ng-if="isOnCase()"
-             class="main"
-             id="CasePage"
-             ng-controller="caseController">
+            </td>
 
-            <h1 class="page-header"> Case {{caseId}}
-                <small> {{progress()}}%</small>
-                <button class="btn btn-success"
-                        ng-click="autoResolve()"
-                        ng-disabled="!canAutoResolve()"> Auto-arbitrate
-                </button>
-            </h1>
-            <div class="progress">
-                <div class="progress-bar"
-                     role="progressbar"
-                     ng-class="{'progress-bar-success': progress() === 100}"
-                     aria-valuenow="{{progress()}}"
-                     aria-valuemin="0" aria-valuemax="100"
-                     style="width: {{progress()}}%;">
+            <td style="width: 80%">
+
+                <!-- Setup Page -->
+                <div id="SetupPage" ng-if="isOnSetup()" ng-controller='setupController' col-sm-3 col-md-10 >
+                    <div class="form-group">
+                        <label for="caseIdKey">Case Merging Key</label>
+                        <input type="text"class="form-control" id='caseIdKey' ng-model='caseIdKey'>
+                    </div>
+                    <div class="form-group">
+                        <label for="coder1Source">Coder 1 Source</label>
+                        <input type="file" file-reader='coder1Content' class="form-control" id='coder1Source'>
+                    </div>
+                    <div class="form-group">
+                        <label for="coder2Source">Coder 2 Source</label>
+                        <input type="file" file-reader='coder2Content' class="form-control" id='coder2Source'>
+                    </div>
+                    <div class="form-group">
+                        <label for="coder3Source">Coder 3 Source</label>
+                        <input type="file" file-reader='coder3Content' class="form-control" id='coder3Source'>
+                    </div>
                 </div>
-            </div>
 
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th style="width: 30%">Coder 1</th>
-                        <th style="width: 30%">Coder 2</th>
-                        <th style="width: 35%">Arbitrator</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat='questionId in questionIds' ng-class="{'unarbitrated-row': !isArbitrated(questionId)}">
-                        <div class="form-group">
-                            <td> {{questionId}} </td>
-                            <td> {{coder1[questionId].substring(0, 80)}} </td>
-                            <td> {{coder2[questionId].substring(0, 80)}} </td>
-                            <td>
-                                <button tabindex=-1 type="button" class="btn btn-default accept-button"
-                                        ng-click='acceptCoder(questionId, coder1)'> 1
-                                </button>
-                                <button tabindex=-1 type="button" class="btn btn-default accept-button"
-                                        ng-click='acceptCoder(questionId, coder2)'> 2
-                                </button>
-                                <input type='text' ng-model='arbitrator[questionId]'
-                                       ng-enter='enableArbitration(questionId)'
-                                       ng-change='onArbitrationChange(questionId)'
-                                </input>
-                                <button tabindex=-1 type="button"
-                                        class="btn arbitrate-button"
-                                        ng-class="isArbitrated(questionId) ? 'btn-info' : 'btn-success'"
-                                        ng-click='toggleArbitration(questionId)'>
-                                    <span ng-if="isArbitrated(questionId)"> Clear </span>
-                                    <span ng-if="!isArbitrated(questionId)"> Arbitrate </span>
-                                </button>
-                            </td>
-                            <td>
+                <!-- Case Page -->
+                <div ng-if="isOnCase()"
+                     class="main"
+                     id="CasePage"
+                     ng-controller="caseController">
+
+                    <h1 class="page-header"> Case {{caseId}}
+                        <small> {{progress()}}%</small>
+                        <button class="btn btn-success"
+                                ng-click="autoResolve()"
+                                ng-disabled="!canAutoResolve()"> Auto-arbitrate
+                        </button>
+                    </h1>
+                    <div class="progress">
+                        <div class="progress-bar"
+                             role="progressbar"
+                             ng-class="{'progress-bar-success': progress() === 100}"
+                             aria-valuenow="{{progress()}}"
+                             aria-valuemin="0" aria-valuemax="100"
+                             style="width: {{progress()}}%;">
+                        </div>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="width: 30%">Coder 1</th>
+                            <th style="width: 30%">Coder 2</th>
+                            <th style="width: 35%">Arbitrator</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat='questionId in questionIds' ng-class="{'unarbitrated-row': !isArbitrated(questionId)}">
+                            <div class="form-group">
+                                <td> {{questionId}} </td>
+                                <td> {{coder1[questionId].substring(0, 80)}} </td>
+                                <td> {{coder2[questionId].substring(0, 80)}} </td>
+                                <td>
+                                    <button tabindex=-1 type="button" class="btn btn-default accept-button"
+                                            ng-click='acceptCoder(questionId, coder1)'> 1
+                                    </button>
+                                    <button tabindex=-1 type="button" class="btn btn-default accept-button"
+                                            ng-click='acceptCoder(questionId, coder2)'> 2
+                                    </button>
+                                    <input type='text' ng-model='arbitrator[questionId]'
+                                           ng-enter='enableArbitration(questionId)'
+                                           ng-change='onArbitrationChange(questionId)'
+                                    </input>
+                                    <button tabindex=-1 type="button"
+                                            class="btn arbitrate-button"
+                                            ng-class="isArbitrated(questionId) ? 'btn-info' : 'btn-success'"
+                                            ng-click='toggleArbitration(questionId)'>
+                                        <span ng-if="isArbitrated(questionId)"> Clear </span>
+                                        <span ng-if="!isArbitrated(questionId)"> Arbitrate </span>
+                                    </button>
+                                </td>
+                                <td>
                      <span class="glyphicon"
                            ng-class="isArbitrated(questionId) ? 'glyphicon-ok' : 'glyphicon-remove'"
                            aria-hidden="true">
                      </span>
-                            </td>
-                        </div>
-                    </tr>
-                    </tbody>
-                </table>
-        </div>
+                                </td>
+                            </div>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        </td>
+            </td>
         </tr></table>
-    </div>
+</div>
 </div>
 
 </body>

@@ -38,17 +38,14 @@ gulp.task('watch', function() {
 gulp.task('serve', ['sass', 'javascript', 'watch'], function() {
 
   browserSync.init({
-    server: "./"
+     baseDir: "./"
   });
 
-  gulp.watch("dist/*").on('change', browserSync.reload);
+   gulp.watch("dist/*").on('change', browserSync.reload);
+   gulp.watch("index.html").on('change', browserSync.reload);
 });
 
 // Build Sequences
-// ---------------
+// --------------
 
-gulp.task('default', function(callback) {
-  runSequence(['serve'],
-    callback
-  )
-});
+gulp.task('default', ['serve']);

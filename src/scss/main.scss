@@ -87,9 +87,15 @@ body {
    }
 }
 
-#sidebar #no-cases {
-   font-style: italic;
-   font-color: #999;
-   padding-top: 15px;
-   display: flex;
+#Sidebar {
+  #no-cases {
+    font-style: italic;
+    font-color: #999;
+    padding-top: 15px;
+  }
+
+  hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
