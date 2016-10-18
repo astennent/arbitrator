@@ -21,7 +21,7 @@ gulp.task('javascript', function() {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist'));
 });
- 
+
 gulp.task('sass', function() {
   return gulp.src('src/scss/**/*.scss') // Gets all files ending with .scss in src/scss and children dirs
     .pipe(sass()) // Passes it through a gulp-sass
@@ -35,7 +35,7 @@ gulp.task('watch', function() {
 });
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['sass', 'javascript', 'watch'], function() {
 
   browserSync.init({
     server: "./"
@@ -44,14 +44,11 @@ gulp.task('serve', ['sass'], function() {
   gulp.watch("dist/*").on('change', browserSync.reload);
 });
 
-// Optimization Tasks
-// ------------------
-
 // Build Sequences
 // ---------------
 
 gulp.task('default', function(callback) {
-  runSequence(['sass', 'javascript', 'watch', 'serve'],
+  runSequence(['serve'],
     callback
   )
 });
