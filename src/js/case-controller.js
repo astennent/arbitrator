@@ -1,8 +1,14 @@
-app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData', function($scope, Case, coderData, arbitratorData) {
+app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData', 'Project',
+   function($scope, Case, coderData, arbitratorData, Project) {
 
    Case.subscribe(onSetCase);
 
-   var arbitratedSet = {};
+
+   var Status = {
+      NotArbitrated: 0,
+      Arbitrated: 1
+   };
+
    onSetCase(Case.getCurrent());
 
    function onSetCase(caseId) {
@@ -10,10 +16,19 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
 
       $scope.caseId = caseId;
       var coderKeys = Object.keys(caseData);
-      $scope.coder1 = caseData[coderKeys[0]];
-      $scope.coder2 = coderKeys.length > 1 ? caseData[coderKeys[1]] : {};
-      $scope.expandedRows = {};
 
+      $scope.coder1Name = coderKeys[0];
+      $scope.coder1 = caseData[$scope.coder1Name];
+
+      if (coderKeys.length > 1) {
+         $scope.coder2Name = coderKeys[1];
+         $scope.coder2 = caseData[$scope.coder2Name];
+      } else {
+         $scope.coder2Name = "None";
+         $scope.coder2 = {};
+      }
+
+      $scope.expandedRows = {};
       $scope.questionIds = Object.keys($scope.coder1);
 
       loadArbitratedData(caseId);
@@ -21,9 +36,13 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    }
 
    function loadArbitratedData(caseId) {
-      var storedArbitration = arbitratorData.getCase(caseId);
-      $scope.arbitrator = storedArbitration.values;
-      arbitratedSet = storedArbitration.statuses;
+      var storedArbitration  = arbitratorData.getCase(caseId);
+      angular.forEach($scope.questionIds, function(questionId) {
+         if (angular.isUndefined(storedArbitration[questionId])) {
+            storedArbitration[questionId] =  {value: "", status:Status.NotArbitrated};
+         }
+      });
+      $scope.arbitrator = storedArbitration;
    }
 
    function guessArbitratedData() {
@@ -32,7 +51,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
 
    function getQuestionsToResolve() {
       return $scope.questionIds.filter(function(questionId) {
-         var alreadyArbitrated = (questionId in arbitratedSet);
+         var alreadyArbitrated = $scope.arbitrator[questionId] && $scope.arbitrator[questionId].status;
          return !alreadyArbitrated && $scope.coder1[questionId] === $scope.coder2[questionId];
       })
    }
@@ -40,18 +59,25 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    $scope.autoResolve = function() {
       var questions = getQuestionsToResolve();
       questions.forEach(function(questionId) {
-         $scope.arbitrator[questionId] = $scope.coder1[questionId];
-         $scope.enableArbitration(questionId);
-      })
-   }
+         $scope.arbitrator[questionId].value = $scope.coder1[questionId];
+         $scope.arbitrator[questionId].status = Status.Arbitrated;
+      });
+      Project.markDirty();
+   };
 
    $scope.canAutoResolve = function() {
       return getQuestionsToResolve().length > 0;
-   }
+   };
 
    $scope.progress = function() {
-      return Math.floor(100 * Object.keys(arbitratedSet).length / $scope.questionIds.length);
-   }
+      var arbitratedCount = 0;
+      angular.forEach($scope.questionIds, function(questionId) {
+         if ($scope.isArbitrated(questionId)) {
+            arbitratedCount++;
+         }
+      });
+      return Math.floor(100 * arbitratedCount / $scope.questionIds.length);
+   };
 
    $scope.isEquivalent = function(questionId) {
       var value1 = $scope.coder1[questionId];
@@ -60,29 +86,25 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    };
 
    $scope.isArbitrated = function(questionId) {
-      return arbitratedSet[questionId];
+      return $scope.arbitrator[questionId].status === Status.Arbitrated;
    };
 
-   function storeArbitration(questionId) {
-      arbitratorData.storeArbitration($scope.caseId, questionId, $scope.arbitrator[questionId], arbitratedSet[questionId]);
-   }
-
    function setArbitrated(questionId, value) {
-      arbitratedSet[questionId] = value;
-      storeArbitration(questionId);
+      $scope.arbitrator[questionId].status = value;
+      Project.markDirty();
    }
 
    $scope.disableArbitration = function(questionId) {
-      setArbitrated(questionId, false)
+      setArbitrated(questionId, Status.NotArbitrated)
    };
 
    $scope.enableArbitration = function(questionId) {
-      setArbitrated(questionId, true);
+      setArbitrated(questionId, Status.Arbitrated);
    };
 
    $scope.onArbitrationChange = function(questionId) {
       $scope.disableArbitration(questionId);
-      storeArbitration(questionId);
+      Project.markDirty();
    };
 
    $scope.toggleArbitration = function(questionId) {

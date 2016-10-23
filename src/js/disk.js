@@ -6,7 +6,13 @@ app.factory('disk', ['Project', 'arbitratorData', '$q', function(Project, arbitr
             writer.onwriteend = function(e) {
                console.log("File saved complete!")
             };
-            writer.write(new Blob([JSON.stringify(saveData)]), {type: 'text/json'});
+
+            var pretty = true;
+            var stringData = pretty ?
+               JSON.stringify(saveData, null, 3) :
+               JSON.stringify(saveData);
+
+            writer.write(new Blob([stringData]), {type: 'text/json'});
          }, null);
       });
    }
