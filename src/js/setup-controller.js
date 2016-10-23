@@ -1,15 +1,9 @@
 app.controller('setupController', ['$scope', 'coderData', function($scope, coderData) {
 
-   $scope.caseIdKey = 'Q2 - ID #'; // TODO: Don't hardcode this.
+   $scope.caseIdKey = 'Q2 - ID #'; // TODO: Don't hard-code these.
+   $scope.coderIdKey = 'Q100 - Name of Coder';
 
-   $scope.handleLoad = function(element, rawContents) {
-      var coderId = element[0].id;
-      var parsedContents = Papa.parse(rawContents, {header: true});
-      var data = {};
-      parsedContents.data.forEach(function (caseObject) {
-         var caseId = caseObject[$scope.caseIdKey];
-         data[caseId] = caseObject;
-      });
-      coderData.setCaseData(coderId, data);
+   $scope.handleLoad = function(fileContents) {
+      coderData.importRawData(fileContents, $scope.caseIdKey, $scope.coderIdKey);
    }
 }]);

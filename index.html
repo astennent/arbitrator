@@ -32,7 +32,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li> <a class="glyphicon glyphicon-floppy-disk" ng-click='save()' aria-hidden="true"></a></li>
+                <li> <a class="glyphicon glyphicon-floppy-disk"
+                        uib-tooltip="{{dirty() ? 'Save Changes' : 'No New Changes'}}"
+                        ng-click='dirty() && save()'
+                        aria-hidden="true"></a></li>
                 <li> <a class="glyphicon glyphicon-folder-open" ng-click='open()' aria-hidden="true"></a></li>
                 <li> <a href="#">Help</a> </li>
             </ul>
@@ -79,20 +82,17 @@
                 <!-- Setup Page -->
                 <div id="SetupPage" ng-if="isOnSetup()" ng-controller='setupController' col-sm-3 col-md-10 >
                     <div class="form-group">
-                        <label for="caseIdKey">Case Merging Key</label>
-                        <input type="text"class="form-control" id='caseIdKey' ng-model='caseIdKey'>
+                        <label for="caseIdHeader">Case Id Header</label>
+                        <input type="text" class="form-control" id='caseIdHeader' ng-model='caseIdKey'>
                     </div>
                     <div class="form-group">
-                        <label for="coder1Source">Coder 1 Source</label>
-                        <input type="file" file-reader='coder1Content' class="form-control" id='coder1Source'>
+                        <label for="coderHeader">Coder Header</label>
+                        <input type="text" class="form-control" id='coderHeader' ng-model='coderIdKey'>
                     </div>
+                    <br>
                     <div class="form-group">
-                        <label for="coder2Source">Coder 2 Source</label>
-                        <input type="file" file-reader='coder2Content' class="form-control" id='coder2Source'>
-                    </div>
-                    <div class="form-group">
-                        <label for="coder3Source">Coder 3 Source</label>
-                        <input type="file" file-reader='coder3Content' class="form-control" id='coder3Source'>
+                        <label for="coderFiles">Coder Files</label>
+                        <input type="file" multiple file-reader='coder1Content' class="form-control" id='coderFiles'>
                     </div>
                 </div>
 
