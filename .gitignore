@@ -3,3 +3,4 @@ npm-cache/
 node_modules/
 dist/
 bower_components/
+src/conversion/
