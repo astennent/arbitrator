@@ -1,4 +1,4 @@
-app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
+app.factory('arbitratorData', function() {
    var cases = {};
 
    function remapKeys(keyMap, object) {
@@ -40,8 +40,8 @@ app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
          var fullToShortKeyMap = keyMaps.fullToShortKeyMap;
          var shortToFullKeyMap = keyMaps.shortToFullKeyMap;
          var remapped = {};
-         for (var caseKey in cases) {
-            remapped[caseKey] = remapKeys(fullToShortKeyMap, cases[caseKey]);
+         for (var caseId in cases) {
+            remapped[caseId] = remapKeys(fullToShortKeyMap, cases[caseId]);
          }
          return {
             data: remapped,
@@ -57,4 +57,4 @@ app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
       }
    }
 
-}]);
+});
