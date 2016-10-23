@@ -2,8 +2,7 @@ var app = angular.module('Arbitrator', [])
 
 app.controller('projectController', ['$scope', 'Project', function($scope, Project) {
    $scope.projectName = Project.name();
-   $scope.questions = Project.questions();
-}])
+}]);
 
 
 app.factory('currentPage', function() {

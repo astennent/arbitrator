@@ -1,16 +1,6 @@
 app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
    var cases = {};
 
-   var loadPromise = load();
-
-   function load() {
-      return $q.when();
-   }
-
-   function save() {
-
-   }
-
    function emptyCase() {
       return {values: {}, statuses: {}};
    }
@@ -19,6 +9,12 @@ app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
       getCase: function (caseKey) {
          return cases[caseKey] || emptyCase();
       },
+      getDataForSaving: function() {
+         return cases;
+      },
+      setDataFromLoading: function(loadedCases) {
+         cases = loadedCases;
+      },
       storeArbitration: function(caseKey, questionId, value, status) {
          var currentCase = cases[caseKey] || emptyCase();
          currentCase.values[questionId] = value;
@@ -26,7 +22,6 @@ app.factory('arbitratorData', ['$q', 'Project', function($q, Project) {
          cases[caseKey] = currentCase;
          Project.markDirty();
       }
-
    }
 
 }]);
