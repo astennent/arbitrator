@@ -5,7 +5,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
-var flatten = require('gulp-flatten');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
