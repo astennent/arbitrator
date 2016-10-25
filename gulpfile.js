@@ -1,13 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
-var useref = require('gulp-useref');
-var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
-var cache = require('gulp-cache');
-var del = require('del');
 var connect = require('gulp-connect')
 
 // Development Tasks 
