@@ -9,6 +9,7 @@ var flatten = require('gulp-flatten');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
+var connect = require('gulp-connect')
 var browserSync = require('browser-sync').create();
 
 // Development Tasks 
@@ -34,7 +35,7 @@ gulp.task('watch', function() {
 });
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass', 'javascript', 'watch'], function() {
+gulp.task('default', ['sass', 'javascript', 'watch'], function() {
 
   browserSync.init({
      baseDir: "./"
@@ -44,23 +45,12 @@ gulp.task('serve', ['sass', 'javascript', 'watch'], function() {
    gulp.watch("index.html").on('change', browserSync.reload);
 });
 
-gulp.task('serveprod', ['sass', 'javascript', 'watch'], function() {
+gulp.task('serveprod', ['build', 'watch'], function() {
    connect.server({
-      root: ".",
+      root: ["."],
       port: process.env.PORT || 5000, // localhost:5000
       livereload: false
    });
 });
 
-gulp.task('moveLibs', function() {
-   gulp.src([
-      'bower_components/angular/angular.min.js',
-      'bower_components/papaparse/papaparse.min.js',
-      'bower_components/lodash/dist/lodash.min.js',
-      'bower_components/bootstrap/dist/css/bootstrap.css',
-      'bower_components/bootstrap/dist/css/bootstrap-theme.css'
-   ],{base:"." })
-   .pipe(gulp.dest('dist/'))
-});
-
-gulp.task('default', ['moveLibs', 'serve']);
+gulp.task('build', ['sass', 'javascript']);
