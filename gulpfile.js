@@ -44,6 +44,14 @@ gulp.task('serve', ['sass', 'javascript', 'watch'], function() {
    gulp.watch("index.html").on('change', browserSync.reload);
 });
 
+gulp.task('serveprod', ['sass', 'javascript', 'watch'], function() {
+   connect.server({
+      root: ".",
+      port: process.env.PORT || 5000, // localhost:5000
+      livereload: false
+   });
+});
+
 gulp.task('moveLibs', function() {
    gulp.src([
       'bower_components/angular/angular.min.js',
