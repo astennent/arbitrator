@@ -10,7 +10,6 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var connect = require('gulp-connect')
-var browserSync = require('browser-sync').create();
 
 // Development Tasks 
 // -----------------
@@ -34,16 +33,9 @@ gulp.task('watch', function() {
   gulp.watch('src/js/**/*.js', ['javascript']);
 });
 
-// Static Server + watching scss/html files
-gulp.task('default', ['sass', 'javascript', 'watch'], function() {
+gulp.task('build', ['sass', 'javascript']);
 
-  browserSync.init({
-     baseDir: "./"
-  });
-
-   gulp.watch("dist/*").on('change', browserSync.reload);
-   gulp.watch("index.html").on('change', browserSync.reload);
-});
+gulp.task('default', ['serveprod']);
 
 gulp.task('serveprod', ['build', 'watch'], function() {
    connect.server({
@@ -53,4 +45,3 @@ gulp.task('serveprod', ['build', 'watch'], function() {
    });
 });
 
-gulp.task('build', ['sass', 'javascript']);

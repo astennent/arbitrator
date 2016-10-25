@@ -2,7 +2,7 @@ app.factory('arbitratorData', function() {
    var cases = {};
 
    function remapKeys(keyMap, object) {
-      return _.reduce(object, function(result, value, key) {
+      return _.reduce(object, function (result, value, key) {
          key = keyMap[key];
          result[key] = value;
          return result;
