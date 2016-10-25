@@ -2,5 +2,5 @@
 set -x #echo on
 
 node node_modules/bower/bin/bower install
-npm cache clean
+sleep 1
 node node_modules/gulp/bin/gulp build
