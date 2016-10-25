@@ -5,10 +5,10 @@ var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
+var flatten = require('gulp-flatten');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
-var runSequence = require('run-sequence');
 var browserSync = require('browser-sync').create();
 
 // Development Tasks 
@@ -28,7 +28,6 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('dist')) // Outputs it in the css folder
 });
 
-// Watchers
 gulp.task('watch', function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
   gulp.watch('src/js/**/*.js', ['javascript']);
@@ -45,7 +44,15 @@ gulp.task('serve', ['sass', 'javascript', 'watch'], function() {
    gulp.watch("index.html").on('change', browserSync.reload);
 });
 
-// Build Sequences
-// --------------
+gulp.task('moveLibs', function() {
+   gulp.src([
+      'bower_components/angular/angular.min.js',
+      'bower_components/papaparse/papaparse.min.js',
+      'bower_components/lodash/dist/lodash.min.js',
+      'bower_components/bootstrap/dist/css/bootstrap.css',
+      'bower_components/bootstrap/dist/css/bootstrap-theme.css'
+   ],{base:"." })
+   .pipe(gulp.dest('dist/'))
+});
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['moveLibs', 'serve']);

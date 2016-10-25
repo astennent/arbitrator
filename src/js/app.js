@@ -1,7 +1,15 @@
 var app = angular.module('Arbitrator', []);
 
 app.controller('projectController', ['$scope', 'Project', function ($scope, Project) {
-   $scope.projectName = Project.name();
+   $scope.project = Project.get();
+   $scope.editingTitle = false;
+   $scope.toggleEditing = function() {
+      $scope.editingTitle = !$scope.editingTitle;
+   };
+
+   
+   $scope.dirty = Project.isDirty;
+   $scope.markDirty = Project.markDirty;
 }]);
 
 app.factory('currentPage', function () {

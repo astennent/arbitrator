@@ -2,7 +2,7 @@
 <html ng-app="Arbitrator" ng-controller="projectController">
 <head>
     <meta charset="utf-8">
-    <title>{{projectName}}</title>
+    <title>{{project.name}}</title>
 
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/papaparse/papaparse.min.js"></script>
@@ -30,14 +30,30 @@
                 <span class="icon-bar"></span>
             </button>
             <button class="button btn-link navbar-brand" ng-click="switchToSetup()">Arbitrator</button>
+            <button class="button btn-link navbar-brand title-button"
+               ng-if="!editingTitle" ng-click="toggleEditing()">
+                {{project.name}}
+            </button>
+            <input type="text"
+                   ng-if="editingTitle" ng-blur="toggleEditing()"
+                   ng-change="markDirty()"
+                   class="button navbar-brand title-text"
+                   ng-model="project.name"/>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li> <a class="glyphicon glyphicon-floppy-disk"
+                <li>
+                    <a class="glyphicon glyphicon-floppy-disk"
                         uib-tooltip="{{dirty() ? 'Save Changes' : 'No New Changes'}}"
                         ng-click='dirty() && save()'
-                        aria-hidden="true"></a></li>
-                <li> <a class="glyphicon glyphicon-folder-open" ng-click='open()' aria-hidden="true"></a></li>
+                        aria-hidden="true"></a>
+                </li>
+                <li>
+                    <label for="loadProjectButton" id="load-label">
+                        <i class="glyphicon glyphicon-folder-open"></i>
+                    </label>
+                    <input style="display:none" id="loadProjectButton" type="file" accept=".arb" file-reader class="form-control">
+                </li>
                 <li> <a href="#">Help</a> </li>
             </ul>
         </div>

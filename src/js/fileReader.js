@@ -22,6 +22,7 @@ app.directive('fileReader', function () {
          element.on('change', function (changeEvent) {
             var files = changeEvent.target.files;
             readFiles(files, $scope);
+            element[0].value = null;
          });
       }
    };

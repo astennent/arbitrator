@@ -1,52 +1,50 @@
-app.factory('disk', ['Project', 'arbitratorData', '$q', function(Project, arbitratorData, $q) {
+app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorData) {
 
-   function writeToDisk(saveData) {
-      chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: 'suggestedName.arb'}, function(writableFileEntry) {
-         writableFileEntry.createWriter(function(writer) {
-            writer.onwriteend = function(e) {
-               console.log("File saved complete!")
-            };
+   var savableServices = {
+      arbitrator: arbitratorData,
+      projectMeta: Project
+   };
 
-            var pretty = true;
-            var stringData = pretty ?
-               JSON.stringify(saveData, null, 3) :
-               JSON.stringify(saveData);
+   function writeToDisk(saveData) { // aka "Download"
+      var pretty = true;
+      var stringData = pretty ?
+         JSON.stringify(saveData, null, 3) :
+         JSON.stringify(saveData);
 
-            writer.write(new Blob([stringData]), {type: 'text/json'});
-         }, null);
-      });
-   }
+      var element = document.createElement('a');
+      var projectName = Project.get().name || 'Unnamed Project';
+      var filename = projectName + ".arb";
 
-   function readFromDisk() {
-      var deferred = $q.defer();
-      chrome.fileSystem.chooseEntry({type: 'openFile', accepts:[ {extensions: ['arb']}] }, function(fileEntry) {
-         if (!fileEntry) {
-            console.log("Did not choose file");
-            return;
-         }
-         fileEntry.file(function(file) {
-            var reader = new FileReader();
-            reader.onload = function(event) {
-               var loadedData = JSON.parse(event.target.result);
-               deferred.resolve(loadedData);
-            };
-            reader.readAsText(file);
-         });
-      });
-      return deferred.promise;
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(stringData));
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+
    }
 
    function save() {
       Project.clearDirtyFlag();
-      writeToDisk({
-         arbitrator: arbitratorData.getDataForSaving()
-      });
+
+      var saveData = _.reduce(savableServices, function(result, service, serviceKey) {
+         result[serviceKey] = service.getDataForSaving();
+         return result;
+      }, {});
+
+      writeToDisk(saveData);
    }
 
-   function load() {
+   function load(fileContents) {
       Project.clearDirtyFlag();
-      readFromDisk().then(function(saveData) {
-         arbitratorData.setDataFromLoading(saveData.arbitrator);
+      var saveData = JSON.parse(fileContents);
+      _.each(saveData, function(storedValue, serviceKey) {
+         var service = savableServices[serviceKey];
+         if (service) {
+            service.setDataFromLoading(storedValue);
+         } else {
+            console.warn("Skipped value for " + serviceKey);
+         }
       });
    }
 
