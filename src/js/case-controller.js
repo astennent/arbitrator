@@ -116,8 +116,8 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    };
 
    $scope.acceptCoder = function(questionId, coder) {
-      $scope.arbitrator[questionId] = coder[questionId];
-      setArbitrated(questionId, true);
+      $scope.arbitrator[questionId].value = coder[questionId];
+      setArbitrated(questionId, Status.Arbitrated);
    }
 }]);
 

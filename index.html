@@ -142,7 +142,7 @@
                             <th style="width: 9%">#</th>
                             <th style="width: 28%">Coder 1 ({{coder1Name}})</th>
                             <th style="width: 28%">Coder 2 ({{coder2Name}})</th>
-                            <th style="width: 35%">Arbitrator</th>
+                            <th style="width: 35%">Rbitrator</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -173,7 +173,8 @@
                                     <button tabindex=-1 type="button" class="btn btn-default accept-button"
                                             ng-click='acceptCoder(questionId, coder2)'> 2
                                     </button>
-                                    <input type='text' ng-model='arbitrator[questionId].value'
+                                    <input class="arbitrator-textbox"
+                                            type='text' ng-model='arbitrator[questionId].value'
                                            ng-enter='enableArbitration(questionId)'
                                            ng-change='onArbitrationChange(questionId)'>
                                     </input>
