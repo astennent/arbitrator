@@ -6,7 +6,7 @@ app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorDa
    };
 
    function writeToDisk(saveData) { // aka "Download"
-      var pretty = true;
+      var pretty = false;
       var stringData = pretty ?
          JSON.stringify(saveData, null, 3) :
          JSON.stringify(saveData);

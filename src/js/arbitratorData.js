@@ -16,7 +16,7 @@ app.factory('arbitratorData', function() {
       for (var caseKey in cases) {
          for (var questionKey in cases[caseKey]) {
             if (!(questionKey in fullToShortKeyMap)) {
-               var shortenedKey = (++i).toString(34);
+               var shortenedKey = (++i).toString(36);
                fullToShortKeyMap[questionKey] = shortenedKey;
                shortToFullKeyMap[shortenedKey] = questionKey;
             }
@@ -39,12 +39,12 @@ app.factory('arbitratorData', function() {
          var keyMaps = generateKeyMaps();
          var fullToShortKeyMap = keyMaps.fullToShortKeyMap;
          var shortToFullKeyMap = keyMaps.shortToFullKeyMap;
-         var remapped = {};
+         var shortMappedData = {};
          for (var caseId in cases) {
-            remapped[caseId] = remapKeys(fullToShortKeyMap, cases[caseId]);
+            shortMappedData[caseId] = remapKeys(fullToShortKeyMap, cases[caseId]);
          }
          return {
-            data: remapped,
+            data: shortMappedData,
             keyMap: shortToFullKeyMap
          };
       },
