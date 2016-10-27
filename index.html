@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <button class="button btn-link navbar-brand" ng-click="switchToSetup()">Arbitrator</button>
+            <button class="button btn-link navbar-brand" ng-click="switchToSetup()">Rbitrator</button>
             <button class="button btn-link navbar-brand title-button"
                ng-if="!editingTitle" ng-click="toggleEditing()">
                 {{project.name}}
@@ -43,13 +43,19 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a class="glyphicon glyphicon-save"
+                       title="Export Arbitrated Data"
+                       ng-click='export()'
+                       aria-hidden="true"></a>
+                </li>
+                <li>
                     <a class="glyphicon glyphicon-floppy-disk"
-                        uib-tooltip="{{dirty() ? 'Save Changes' : 'No New Changes'}}"
+                        title="Save Project {{dirty() ? '' : '(No New Changes)'}}"
                         ng-click='dirty() && save()'
                         aria-hidden="true"></a>
                 </li>
                 <li>
-                    <label for="loadProjectButton" id="load-label">
+                    <label title="Load Existing Project" for="loadProjectButton" id="load-label">
                         <i class="glyphicon glyphicon-folder-open"></i>
                     </label>
                     <input style="display:none" id="loadProjectButton" type="file" accept=".arb" file-reader class="form-control">

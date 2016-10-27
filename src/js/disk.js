@@ -5,16 +5,12 @@ app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorDa
       projectMeta: Project
    };
 
-   function writeToDisk(saveData) { // aka "Download"
-      var pretty = false;
-      var stringData = pretty ?
-         JSON.stringify(saveData, null, 3) :
-         JSON.stringify(saveData);
+   function getFilename() {
+      return projectName = Project.get().name || 'Unnamed Project';
+   }
 
+   function writeToDisk(stringData, filename) { // aka "Download"
       var element = document.createElement('a');
-      var projectName = Project.get().name || 'Unnamed Project';
-      var filename = projectName + ".arb";
-
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(stringData));
       element.setAttribute('download', filename);
       element.style.display = 'none';
@@ -27,12 +23,19 @@ app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorDa
    function save() {
       Project.clearDirtyFlag();
 
-      var saveData = _.reduce(savableServices, function(result, service, serviceKey) {
+      var projectData = _.reduce(savableServices, function(result, service, serviceKey) {
          result[serviceKey] = service.getDataForSaving();
          return result;
       }, {});
 
-      writeToDisk(saveData);
+      var filename = getFilename() + ".arb";
+
+      var pretty = false;
+      var stringData = pretty ?
+         JSON.stringify(projectData, null, 3) :
+         JSON.stringify(projectData);
+
+      writeToDisk(stringData, filename);
    }
 
    function load(fileContents) {
@@ -48,8 +51,16 @@ app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorDa
       });
    }
 
+   function exportCsv() {
+      var exportData = arbitratorData.getExportData();
+      var stringData = Papa.unparse(exportData, {delimiter: ','})
+      var filename = getFilename() + ".csv";
+      writeToDisk(stringData, filename);
+   }
+
    return {
       load: load,
-      save: save
+      save: save,
+      exportCsv: exportCsv
    }
 }]);

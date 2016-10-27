@@ -54,6 +54,18 @@ app.factory('arbitratorData', function() {
          for (var caseId in cases) {
             cases[caseId] = remapKeys(shortToFullKeyMap, cases[caseId]);
          }
+      },
+      getExportData: function() {
+         var output = [];
+         for (var caseId in cases) {
+            var currentCase = cases[caseId];
+            var row = {};
+            for (var questionId in currentCase) {
+               row[questionId] = currentCase[questionId].value;
+            }
+            output.push(row);
+         }
+         return output;
       }
    }
 
