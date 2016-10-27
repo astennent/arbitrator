@@ -6,7 +6,7 @@ app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorDa
    };
 
    function getFilename() {
-      return projectName = Project.get().name || 'Unnamed Project';
+      return Project.get().name || 'Unnamed Project';
    }
 
    function writeToDisk(stringData, filename) { // aka "Download"
