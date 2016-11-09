@@ -135,6 +135,15 @@ body {
     padding-top: 15px;
   }
 
+  .case-link {
+    &.selected-case {
+      background-color: #ccc;
+    }
+    &:active {
+      background: #bbb;
+    }
+  }
+
   hr {
     margin-top: 10px;
     margin-bottom: 10px;

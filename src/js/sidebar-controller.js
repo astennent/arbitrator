@@ -1,5 +1,5 @@
-app.controller('sidebarController', ['$scope', 'coderData', 'currentPage', 'Case', function($scope, coderData, currentPage, Case) {
-   $scope.getCases = coderData.getCases;
+app.controller('sidebarController', ['$scope', 'sidebarDisplayCases', 'currentPage', 'Case', function($scope, sidebarDisplayCases, currentPage, Case) {
+   $scope.getCases = sidebarDisplayCases.get;
    var includeSingleCoded = {
       display: 'Include Single Coded',
       value: false
@@ -22,14 +22,19 @@ app.controller('sidebarController', ['$scope', 'coderData', 'currentPage', 'Case
       if (caseObject.count == 1) {
          return includeSingleCoded.value;
       }
-      return caseObject.isFullyArbitrated ?
+      return caseObject.fullyArbitrated ?
          includeFullyArbitrated.value :
          includeDoubleCoded.value;
-   }
+   };
 
    $scope.switchToCase = function(caseKey) {
       currentPage.switchToCase();
+      sidebarDisplayCases.refresh();
       Case.setCurrent(caseKey);
+   };
+
+   $scope.isSelected = function(caseId) {
+      return Case.getCurrent() === caseId;
    }
 }]);
 

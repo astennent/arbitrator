@@ -1,15 +1,5 @@
 app.factory('coderData', function() {
    var cases = {};
-   var displayCases = [];
-
-   function updateDisplayCases() {
-      displayCases = Object.keys(cases).map(function(caseId) {
-         return {
-            id: caseId,
-            count: Object.keys(cases[caseId]).length
-         }
-      });
-   }
 
    function importCaseData(coderId, parsedData) {
       for (var caseId in parsedData) {
@@ -18,7 +8,6 @@ app.factory('coderData', function() {
          }
          cases[caseId][coderId] = parsedData[caseId];
       }
-      updateDisplayCases();
    }
 
    function importRawData(fileContents, caseIdKey, coderIdKey) {
@@ -33,11 +22,11 @@ app.factory('coderData', function() {
    }
 
    return {
-      getCases: function () {
-         return displayCases;
-      },
       getCase: function (caseId) {
          return cases[caseId];
+      },
+      getCases: function() {
+         return cases;
       },
       importRawData: importRawData
    }

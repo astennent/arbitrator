@@ -66,6 +66,18 @@ app.factory('arbitratorData', function() {
             output.push(row);
          }
          return output;
+      },
+      isFullyArbitrated: function(caseId) {
+         var currentCase = cases[caseId];
+         if (!currentCase) {
+            return false;
+         }
+         for (var questionKey in currentCase) {
+            if (currentCase[questionKey].status === 0) {
+               return false;
+            }
+         }
+         return true;
       }
    }
 

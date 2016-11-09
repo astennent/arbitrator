@@ -1,4 +1,4 @@
-app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorData) {
+app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', function(Project, arbitratorData, sidebarDisplayCases) {
 
    var savableServices = {
       arbitrator: arbitratorData,
@@ -49,6 +49,7 @@ app.factory('disk', ['Project', 'arbitratorData', function(Project, arbitratorDa
             console.warn("Skipped value for " + serviceKey);
          }
       });
+      sidebarDisplayCases.refresh();
    }
 
    function exportCsv() {
