@@ -30,11 +30,17 @@ app.factory('arbitratorData', function() {
 
    function importRawData(fileContents, caseIdKey, coderIdKey) {
       var parsedContents = Papa.parse(fileContents, {header: true});
-      var parsedData = {};
-      var coderId = 'IMPORTED';
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[caseIdKey];
-         parsedData[caseId] = caseObject;
+         var currentCase = cases[caseId] || {};
+         for (var questionId in caseObject) {
+            currentCase[questionId] = {
+               value: caseObject[questionId],
+               status: 1
+            }
+         }
+         currentCase[coderIdKey] = 'IMPORTED';
+         cases[caseId] = currentCase;
       });
    }
 
