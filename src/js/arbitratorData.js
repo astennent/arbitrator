@@ -28,6 +28,16 @@ app.factory('arbitratorData', function() {
       };
    }
 
+   function importRawData(fileContents, caseIdKey, coderIdKey) {
+      var parsedContents = Papa.parse(fileContents, {header: true});
+      var parsedData = {};
+      var coderId = 'IMPORTED';
+      parsedContents.data.forEach(function (caseObject) {
+         var caseId = caseObject[caseIdKey];
+         parsedData[caseId] = caseObject;
+      });
+   }
+
    return {
       getCase: function (caseKey) {
          if (!(caseKey in cases)) {
@@ -48,6 +58,7 @@ app.factory('arbitratorData', function() {
             keyMap: shortToFullKeyMap
          };
       },
+      importRawData: importRawData,
       setDataFromLoading: function(arbitrationValues) {
          cases = arbitrationValues.data;
          var shortToFullKeyMap = arbitrationValues.keyMap;
