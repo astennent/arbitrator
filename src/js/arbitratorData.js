@@ -28,7 +28,7 @@ app.factory('arbitratorData', function() {
       };
    }
 
-   function importRawData(fileContents, caseIdKey, coderIdKey) {
+   function importRawData(fileContents, caseIdKey) {
       var parsedContents = Papa.parse(fileContents, {header: true});
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[caseIdKey];
@@ -39,7 +39,6 @@ app.factory('arbitratorData', function() {
                status: 1
             }
          }
-         currentCase[coderIdKey] = 'IMPORTED';
          cases[caseId] = currentCase;
       });
    }

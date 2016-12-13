@@ -10,7 +10,7 @@ app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sid
    };
 
    $scope.handleArbitratorLoad = function(fileContents) {
-      arbitratorData.importRawData(fileContents, $scope.caseIdKey, $scope.coderIdKey);
+      arbitratorData.importRawData(fileContents, $scope.caseIdKey);
       sidebarDisplayCases.refresh();
    }
 }]);

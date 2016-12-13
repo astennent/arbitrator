@@ -3,7 +3,6 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
 
    Case.subscribe(onSetCase);
 
-
    var Status = {
       NotArbitrated: 0,
       Arbitrated: 1
