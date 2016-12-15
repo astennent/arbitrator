@@ -52,8 +52,8 @@ app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', functio
       sidebarDisplayCases.refresh();
    }
 
-   function exportCsv() {
-      var exportData = arbitratorData.getExportData();
+   function exportCsv(onlyExportFullyArbitrated) {
+      var exportData = arbitratorData.getExportData(onlyExportFullyArbitrated);
       var stringData = Papa.unparse(exportData, {delimiter: ','})
       var filename = getFilename() + ".csv";
       writeToDisk(stringData, filename);

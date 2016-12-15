@@ -43,6 +43,72 @@ app.factory('arbitratorData', function() {
       });
    }
 
+   function isFullyArbitrated(caseId) {
+      var currentCase = cases[caseId];
+      if (!currentCase) {
+         return false;
+      }
+      for (var questionKey in currentCase) {
+         if (currentCase[questionKey].status === 0) {
+            return false;
+         }
+      }
+      return true;
+   }
+
+   function shaeSort(a, b) {
+      function qualtricsNum(questionId) {  // Not proud of this function
+         try {
+            questionId = questionId.split(" ")[0];
+            var undIndex = questionId.indexOf("_");
+            if (undIndex == -1) {
+               undIndex = questionId.length;
+            }
+            var questionNum = parseInt(questionId.substring(1, undIndex+1));
+            questionId = questionId.substring(undIndex+1);
+            var nextUndIndex = questionId.indexOf("_");
+            if (nextUndIndex == -1) {
+               return questionNum;
+            }
+            var subNum = parseInt(questionId.substring(0, undIndex+1));
+            return questionNum + subNum/100;
+         } catch (e) {
+            return -1;
+         }
+      }
+      return qualtricsNum(a) - qualtricsNum(b);
+   }
+
+   function getSortedQuestionIds() {
+      var uniqueKeys = {};
+      for (var caseId in cases) {
+         var currentCase = cases[caseId];
+         for (var questionId in currentCase) {
+            uniqueKeys[questionId] = undefined;
+         }
+      }
+      return Object.keys(uniqueKeys).sort(shaeSort)
+   }
+
+   function getExportData(onlyIncludeFullyArbitrated) {
+      var output = [];
+      var questionIds = getSortedQuestionIds();
+      for (var caseId in cases) {
+         var currentCase = cases[caseId];
+         if (onlyIncludeFullyArbitrated && !isFullyArbitrated(caseId)) {
+            continue;
+         }
+         var row = [];
+         for (var questionId in questionIds) {
+            var questionObject = currentCase[questionId];
+            var value = questionObject ? questionObject.value : "";
+            row.push(value);
+         }
+         output.push(row);
+      }
+      return output;
+   }
+
    return {
       getCase: function (caseKey) {
          if (!(caseKey in cases)) {
@@ -71,30 +137,8 @@ app.factory('arbitratorData', function() {
             cases[caseId] = remapKeys(shortToFullKeyMap, cases[caseId]);
          }
       },
-      getExportData: function() {
-         var output = [];
-         for (var caseId in cases) {
-            var currentCase = cases[caseId];
-            var row = {};
-            for (var questionId in currentCase) {
-               row[questionId] = currentCase[questionId].value;
-            }
-            output.push(row);
-         }
-         return output;
-      },
-      isFullyArbitrated: function(caseId) {
-         var currentCase = cases[caseId];
-         if (!currentCase) {
-            return false;
-         }
-         for (var questionKey in currentCase) {
-            if (currentCase[questionKey].status === 0) {
-               return false;
-            }
-         }
-         return true;
-      }
+      getExportData: getExportData,
+      isFullyArbitrated: isFullyArbitrated
    }
 
 });

@@ -43,6 +43,13 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <input id="onlyIncludeCheck"
+                           class="checkbox-inline"
+                           type="checkbox"
+                           ng-model="onlyIncludeFullyArbitrated.value">
+                    <label for="onlyIncludeCheck"> Only export fully arbitrated cases </label>
+                </li>
+                <li>
                     <a class="glyphicon glyphicon-save"
                        title="Export Arbitrated Data"
                        ng-click='export()'
