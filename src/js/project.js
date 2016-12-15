@@ -1,7 +1,7 @@
 app.factory('Project', function() {
 
    var project = {
-      name: 'Unnamed Project'
+      name: 'Arbitration'
    };
 
    var dirty = false;

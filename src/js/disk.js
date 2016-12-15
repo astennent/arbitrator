@@ -6,18 +6,24 @@ app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', functio
    };
 
    function getFilename() {
-      return Project.get().name || 'Unnamed Project';
+      var name = Project.get().name || 'Arbitration';
+      var d = new Date();
+      var dateString =  d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate() + " " +
+         d.getHours() + "_" + d.getMinutes();
+      return name + "_" + dateString
    }
 
    function writeToDisk(stringData, filename) { // aka "Download"
-      var element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(stringData));
-      element.setAttribute('download', filename);
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
+      var a = window.document.createElement('a');
+      a.href = window.URL.createObjectURL(new Blob([stringData], {type: 'text'}));
+      a.download = filename;
 
+      // Append anchor to body.
+      document.body.appendChild(a)
+      a.click();
+
+      // Remove anchor from body
+      document.body.removeChild(a)
    }
 
    function save() {
