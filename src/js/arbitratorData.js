@@ -93,6 +93,7 @@ app.factory('arbitratorData', function() {
    function getExportData(onlyIncludeFullyArbitrated) {
       var output = [];
       var questionIds = getSortedQuestionIds();
+      output.push(questionIds);
       for (var caseId in cases) {
          var currentCase = cases[caseId];
          if (onlyIncludeFullyArbitrated && !isFullyArbitrated(caseId)) {
