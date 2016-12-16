@@ -17,14 +17,22 @@ app.controller('sidebarController', ['$scope', 'sidebarDisplayCases', 'currentPa
       includeDoubleCoded,
       includeFullyArbitrated
    ];
+   $scope.filterText = "";
 
-   $scope.shouldDisplay = function(caseObject) {
+   function canDisplayFromArbitrationCheckboxes(caseObject) {
       if (caseObject.count == 1) {
          return includeSingleCoded.value;
       }
       return caseObject.fullyArbitrated ?
          includeFullyArbitrated.value :
          includeDoubleCoded.value;
+   }
+
+   $scope.shouldDisplay = function(caseObject) {
+      if (!canDisplayFromArbitrationCheckboxes(caseObject)) {
+         return false;
+      }
+      return $scope.filterText == "" || caseObject.displayText.indexOf($scope.filterText) > -1;
    };
 
    $scope.switchToCase = function(caseKey) {

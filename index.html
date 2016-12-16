@@ -90,10 +90,11 @@
                                 {{filter.display}}
                             </label>
                         </div>
+                        <div> <input type="text" ng-model="filterText" placeholder="Filter by name"></div>
                     </div>
                     <hr>
                     <span ng-if="getCases().length > 0">
-                       <span id='case-count'> Displaying <b> {{filteredCases.length}} / {{getCases().length}} </b> cases </span>
+                       <span id='case-count'> Displaying <b> {{filteredCases.length}} / {{getCases().length}} </b> </span>
                         <hr>
                     </span>
                     <span ng-if="getCases().length === 0">
@@ -103,7 +104,7 @@
                         <li class='active' ng-repeat="case in getCases() | filter:shouldDisplay as filteredCases">
                         <a href="#" ng-click="switchToCase(case.id)"
                            class="case-link"
-                           ng-class="isSelected(case.id) ? 'selected-case' : ''"> Case {{case.id}} </a>
+                           ng-class="isSelected(case.id) ? 'selected-case' : ''"> {{case.displayText}} </a>
                         </li>
                     </ul>
                 </div>

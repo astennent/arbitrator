@@ -164,6 +164,10 @@ body {
     margin-bottom: 10px;
   }
 
+  input[type='text'] {
+    width: 80%;
+  }
+
   ul.nav-sidebar {
     overflow-y: scroll;
     position: absolute;

@@ -8,7 +8,8 @@ app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', function(code
          return {
             id: caseId,
             count: Object.keys(cases[caseId]).length,
-            fullyArbitrated: arbitratorData.isFullyArbitrated(caseId)
+            fullyArbitrated: arbitratorData.isFullyArbitrated(caseId),
+            displayText: 'Case ' + caseId
          }
       });
    }
