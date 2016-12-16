@@ -138,6 +138,11 @@ body {
   }
 }
 
+#sidebarTd {
+  position: absolute;
+  width: 20%;
+}
+
 #Sidebar {
   #no-cases {
     font-style: italic;
@@ -157,6 +162,13 @@ body {
   hr {
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  ul.nav-sidebar {
+    overflow-y: scroll;
+    position: absolute;
+    height: calc(100vh - 250px);
+    width: calc(100% - 15px);
   }
 }
 

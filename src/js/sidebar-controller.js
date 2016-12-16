@@ -1,15 +1,15 @@
 app.controller('sidebarController', ['$scope', 'sidebarDisplayCases', 'currentPage', 'Case', function($scope, sidebarDisplayCases, currentPage, Case) {
    $scope.getCases = sidebarDisplayCases.get;
    var includeSingleCoded = {
-      display: 'Include Single Coded',
+      display: 'Single Coded',
       value: false
    };
    var includeDoubleCoded = {
-      display: 'Include Double Coded',
+      display: 'Double Coded',
       value: true
    };
    var includeFullyArbitrated = {
-      display: 'Include Fully Arbitrated',
+      display: 'Fully Arbitrated',
       value: false
    };
    $scope.filters = [
