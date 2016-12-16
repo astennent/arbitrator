@@ -99,7 +99,8 @@ app.factory('arbitratorData', function() {
             continue;
          }
          var row = [];
-         for (var questionId in questionIds) {
+         for (var i in questionIds) {
+            var questionId = questionIds[i];
             var questionObject = currentCase[questionId];
             var value = questionObject ? questionObject.value : "";
             row.push(value);
