@@ -1,16 +1,15 @@
-app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases',
-      function($scope, coderData, arbitratorData, sidebarDisplayCases) {
+app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases', 'Project',
+      function($scope, coderData, arbitratorData, sidebarDisplayCases, Project) {
 
-   $scope.caseIdKey = 'Q2 - ID #'; // TODO: Don't hard-code these.
-   $scope.coderIdKey = 'Q101 - Name of Coder - Selected Choice';
-
+   $scope.project = Project.get();
+         
    $scope.handleLoad = function(fileContents) {
-      coderData.importRawData(fileContents, $scope.caseIdKey, $scope.coderIdKey);
+      coderData.importRawData(fileContents, $scope.project.caseIdKey, $scope.project.coderIdKey);
       sidebarDisplayCases.refresh();
    };
 
    $scope.handleArbitratorLoad = function(fileContents) {
-      arbitratorData.importRawData(fileContents, $scope.caseIdKey);
+      arbitratorData.importRawData(fileContents, $scope.project.caseIdKey);
       sidebarDisplayCases.refresh();
    }
 }]);

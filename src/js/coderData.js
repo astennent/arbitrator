@@ -10,12 +10,19 @@ app.factory('coderData', function() {
       }
    }
 
+   function trimWhitespaceInValues(caseObject) {
+      for (var key in caseObject) {
+         caseObject[key] = caseObject[key].trim();
+      }
+   }
+
    function importRawData(fileContents, caseIdKey, coderIdKey) {
       var parsedContents = Papa.parse(fileContents, {header: true});
       var parsedData = {};
       var coderId = parsedContents.data[0][coderIdKey];
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[caseIdKey];
+         trimWhitespaceInValues(caseObject);
          parsedData[caseId] = caseObject;
       });
       importCaseData(coderId, parsedData);

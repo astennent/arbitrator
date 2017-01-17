@@ -1,7 +1,9 @@
 app.factory('Project', function() {
 
    var project = {
-      name: 'Arbitration'
+      name: 'Arbitration',
+      caseIdKey: 'Q2 - ID #', // TODO: Don't hard-code these.
+      coderIdKey: 'Q101 - Name of Coder - Selected Choice'
    };
 
    var dirty = false;
