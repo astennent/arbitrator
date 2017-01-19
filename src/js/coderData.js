@@ -1,4 +1,4 @@
-app.factory('coderData', function() {
+app.factory('coderData', ['normalizedKeys', function(normalizedKeys) {
    var cases = {};
 
    function importCaseData(coderId, parsedData) {
@@ -23,7 +23,8 @@ app.factory('coderData', function() {
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[caseIdKey];
          trimWhitespaceInValues(caseObject);
-         parsedData[caseId] = caseObject;
+         var normalizedCaseObject = normalizedKeys.apply(caseObject);
+         parsedData[caseId] = normalizedCaseObject;
       });
       importCaseData(coderId, parsedData);
    }
@@ -37,4 +38,4 @@ app.factory('coderData', function() {
       },
       importRawData: importRawData
    }
-});
+}]);

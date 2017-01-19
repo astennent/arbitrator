@@ -1,16 +1,7 @@
-app.factory('arbitratorData', function() {
+app.factory('arbitratorData', ['keyRemapper', 'normalizedKeys', function(keyRemapper, normalizedKeys) {
    var cases = {};
 
-   function remapKeys(keyMap, object) {
-      return _.reduce(object, function (result, value, key) {
-         key = keyMap[key];
-         result[key] = value;
-         return result;
-      }, {});
-   }
-
    function generateKeyMaps() {
-      var i = 0;
       var fullToShortKeyMap = {};
       var shortToFullKeyMap = {};
       for (var caseKey in cases) {
@@ -111,6 +102,81 @@ app.factory('arbitratorData', function() {
       return output;
    }
 
+   var ellipsesToNonEllipsis = {};
+
+   function normalizeKeys() {
+      for (var currentCase in cases) {
+         identifyLongNames(cases[currentCase]);
+      }
+      normalizedKeys.set(ellipsesToNonEllipsis);
+
+      for (var caseId in cases) {
+         fixLongNamesInCase(cases[caseId], caseId);
+      }
+   }
+
+   function fixLongNamesInCase(currentCase, caseId) {
+      for (var questionId in currentCase) {
+         var longName = ellipsesToNonEllipsis[questionId];
+         if (longName) {
+            var longData = currentCase[longName];
+            var shortData = currentCase[questionId];
+
+            if (!longData) {
+               currentCase[longName] = shortData;
+               delete currentCase[questionId];
+               continue;
+            }
+
+            if (angular.equals(longData, shortData)) {
+               delete currentCase[questionId];
+               continue;
+            }
+
+            if (longData.value === "") {
+               currentCase[longName] = currentCase[shortData];
+               delete currentCase[questionId];
+               continue;
+            }
+
+            if (shortData.value === "") {
+               delete currentCase[questionId];
+               continue;
+            }
+
+            console.log("Couldn't automatically fix case ", caseId, ". Question #" + questionId);
+            delete currentCase[questionId];
+            currentCase[longName].status =  0;
+         }
+      }
+   }
+
+   function identifyLongNames(currentCase) {
+      function calculateLongVersion(abbreviatedQuestionId) {
+         if (!questionId.endsWith('...')) {
+            return;
+         }
+
+         if (abbreviatedQuestionId in ellipsesToNonEllipsis) {
+            return;
+         }
+
+         var removedEllipses = abbreviatedQuestionId.substring(0, abbreviatedQuestionId.length - 3);
+         var wasSet = false;
+         for (var otherId in currentCase) {
+            if (otherId.startsWith(removedEllipses) && otherId !== abbreviatedQuestionId) {
+               ellipsesToNonEllipsis[abbreviatedQuestionId] = otherId;
+               wasSet = true;
+               break;
+            }
+         }
+      }
+
+      for (var questionId in currentCase) {
+         calculateLongVersion(questionId);
+      }
+   }
+
    return {
       getCase: function (caseKey) {
          if (!(caseKey in cases)) {
@@ -124,7 +190,7 @@ app.factory('arbitratorData', function() {
          var shortToFullKeyMap = keyMaps.shortToFullKeyMap;
          var shortMappedData = {};
          for (var caseId in cases) {
-            shortMappedData[caseId] = remapKeys(fullToShortKeyMap, cases[caseId]);
+            shortMappedData[caseId] = keyRemapper.remapKeys(fullToShortKeyMap, cases[caseId]);
          }
          return {
             data: shortMappedData,
@@ -133,14 +199,15 @@ app.factory('arbitratorData', function() {
       },
       importRawData: importRawData,
       setDataFromLoading: function(arbitrationValues) {
-         cases = arbitrationValues.data;
+         var unmappedCases = arbitrationValues.data;
          var shortToFullKeyMap = arbitrationValues.keyMap;
-         for (var caseId in cases) {
-            cases[caseId] = remapKeys(shortToFullKeyMap, cases[caseId]);
+         for (var caseId in unmappedCases) {
+            cases[caseId] = keyRemapper.remapKeys(shortToFullKeyMap, unmappedCases[caseId]);
          }
+         normalizeKeys();
       },
       getExportData: getExportData,
       isFullyArbitrated: isFullyArbitrated
    }
 
-});
+}]);

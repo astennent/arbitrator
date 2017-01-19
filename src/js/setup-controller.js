@@ -1,5 +1,5 @@
-app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases', 'Project',
-      function($scope, coderData, arbitratorData, sidebarDisplayCases, Project) {
+app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases', 'Project', 'normalizedKeys',
+      function($scope, coderData, arbitratorData, sidebarDisplayCases, Project, normalizedKeys) {
 
    $scope.project = Project.get();
          
@@ -11,5 +11,7 @@ app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sid
    $scope.handleArbitratorLoad = function(fileContents) {
       arbitratorData.importRawData(fileContents, $scope.project.caseIdKey);
       sidebarDisplayCases.refresh();
-   }
+   };
+         
+   $scope.normalizedKeyMap = normalizedKeys.get();
 }]);
