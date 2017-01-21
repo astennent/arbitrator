@@ -23,9 +23,6 @@ app.factory('coderData', ['questionNormalization', function(questionNormalizatio
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[caseIdKey];
          trimWhitespaceInValues(caseObject);
-         if (caseId == '39') {
-            console.log(39);
-         }
          var normalizedCaseObject = questionNormalization.normalizeCaseQuestions(caseObject);
          parsedData[caseId] = normalizedCaseObject;
       });
