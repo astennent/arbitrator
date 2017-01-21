@@ -1,8 +1,10 @@
-app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', function(Project, arbitratorData, sidebarDisplayCases) {
+app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', 'questionNormalization',
+   function(Project, arbitratorData, sidebarDisplayCases, questionNormalization) {
 
    var savableServices = {
       arbitrator: arbitratorData,
-      projectMeta: Project
+      projectMeta: Project,
+      questionNormalization: questionNormalization
    };
 
    function getFilename() {

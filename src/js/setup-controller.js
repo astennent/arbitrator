@@ -1,5 +1,5 @@
-app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases', 'Project', 'normalizedKeys',
-      function($scope, coderData, arbitratorData, sidebarDisplayCases, Project, normalizedKeys) {
+app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases', 'Project', 'questionNormalization',
+      function($scope, coderData, arbitratorData, sidebarDisplayCases, Project, questionNormalization) {
 
    $scope.project = Project.get();
          
@@ -13,5 +13,5 @@ app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sid
       sidebarDisplayCases.refresh();
    };
          
-   $scope.normalizedKeyMap = normalizedKeys.get();
+   $scope.normalizedKeyMap = questionNormalization.get();
 }]);

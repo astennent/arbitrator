@@ -1,14 +1,22 @@
-app.factory('normalizedKeys', ['keyRemapper', function(keyRemapper) {
+app.factory('questionNormalization', ['keyRemapper', function(keyRemapper) {
    var keyMap = {};
+
+   function mergeKeysIntoMap(value) {
+      angular.merge(keyMap, value);
+   }
+
+   function getCurrentMap() {
+      return keyMap;
+   }
+
    return {
-      set: function(value) {
-         angular.merge(keyMap, value);
-      },
-      apply: function(object) {
+      set: mergeKeysIntoMap,
+      setDataFromLoading: mergeKeysIntoMap,
+      get: getCurrentMap,
+      getDataForSaving: getCurrentMap,
+      
+      normalizeCaseQuestions: function(object) {
          return keyRemapper.remapKeys(keyMap, object)
-      },
-      get: function() {
-         return keyMap;
       }
    }
 }]);

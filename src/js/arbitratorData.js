@@ -1,9 +1,10 @@
-app.factory('arbitratorData', ['keyRemapper', 'normalizedKeys', function(keyRemapper, normalizedKeys) {
+app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', function(keyRemapper, questionNormalization) {
    var cases = {};
 
    function generateKeyMaps() {
       var fullToShortKeyMap = {};
       var shortToFullKeyMap = {};
+      var i = 0;
       for (var caseKey in cases) {
          for (var questionKey in cases[caseKey]) {
             if (!(questionKey in fullToShortKeyMap)) {
@@ -108,7 +109,7 @@ app.factory('arbitratorData', ['keyRemapper', 'normalizedKeys', function(keyRema
       for (var currentCase in cases) {
          identifyLongNames(cases[currentCase]);
       }
-      normalizedKeys.set(ellipsesToNonEllipsis);
+      questionNormalization.set(ellipsesToNonEllipsis);
 
       for (var caseId in cases) {
          fixLongNamesInCase(cases[caseId], caseId);

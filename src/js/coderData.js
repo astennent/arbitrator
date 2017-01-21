@@ -1,4 +1,4 @@
-app.factory('coderData', ['normalizedKeys', function(normalizedKeys) {
+app.factory('coderData', ['questionNormalization', function(questionNormalization) {
    var cases = {};
 
    function importCaseData(coderId, parsedData) {
@@ -23,7 +23,10 @@ app.factory('coderData', ['normalizedKeys', function(normalizedKeys) {
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[caseIdKey];
          trimWhitespaceInValues(caseObject);
-         var normalizedCaseObject = normalizedKeys.apply(caseObject);
+         if (caseId == '39') {
+            console.log(39);
+         }
+         var normalizedCaseObject = questionNormalization.normalizeCaseQuestions(caseObject);
          parsedData[caseId] = normalizedCaseObject;
       });
       importCaseData(coderId, parsedData);
