@@ -1,0 +1,32 @@
+<div id="SetupPage" ng-if="isOnSetup()" ng-controller='setupController' col-sm-3 col-md-10 >
+    <div class="form-group">
+        <label for="caseIdHeader">Case Id Header</label>
+        <input type="text" class="form-control" id='caseIdHeader' ng-model='project.caseIdKey'>
+    </div>
+    <div class="form-group">
+        <label for="coderHeader">Coder Header</label>
+        <input type="text" class="form-control" id='coderHeader' ng-model='project.coderIdKey'>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="coderFiles">Coder Files</label>
+        <input type="file" multiple file-reader='coder1Content' class="form-control" id='coderFiles' accept=".csv" >
+    </div>
+    <div class="form-group">
+        <label for="arbitratorFile">Exported arbitrator file:</label>
+        <input type="file" file-reader='arbitratorContent' class="form-control" id='arbitratorFile' accept=".csv">
+    </div>
+
+    <hr>
+    <div id="normalizationTable">
+        <h4> Normalized Keys </h4>
+        <table class="table">
+            <th> Old Key </th> <th> Updated Key </th>
+            <tr ng-repeat="(oldValue, newValue) in normalizedKeyMap">
+                <td> {{oldValue}} </td>
+                <td> {{newValue}} </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

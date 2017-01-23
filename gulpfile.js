@@ -2,7 +2,8 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
-var connect = require('gulp-connect')
+var connect = require('gulp-connect');
+var templateCache = require('gulp-angular-templatecache');
 
 // Development Tasks 
 // -----------------
@@ -24,9 +25,16 @@ gulp.task('sass', function() {
 gulp.task('watch', function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
   gulp.watch('src/js/**/*.js', ['javascript']);
+  gulp.watch('src/partials/**/*', ['templates']);
 });
 
-gulp.task('build', ['sass', 'javascript']);
+gulp.task('templates', function () {
+   return gulp.src('src/partials/**/*.html')
+      .pipe(templateCache({ module: 'Arbitrator' }))
+      .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build', ['sass', 'javascript', 'templates']);
 
 gulp.task('default', ['serveprod']);
 
