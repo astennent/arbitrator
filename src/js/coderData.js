@@ -1,4 +1,4 @@
-app.factory('coderData', ['questionNormalization', function(questionNormalization) {
+app.factory('coderData', ['questionNormalization', 'keyRemapper', function(questionNormalization, keyRemapper) {
    var cases = {};
 
    function importCaseData(coderId, parsedData) {
@@ -20,13 +20,26 @@ app.factory('coderData', ['questionNormalization', function(questionNormalizatio
       var parsedContents = Papa.parse(fileContents, {header: true});
       var parsedData = {};
       var coderId = parsedContents.data[0][coderIdKey];
+
+      var existingMappings = questionNormalization.getCurrentMap();
       parsedContents.data.forEach(function (caseObject) {
          var caseId = caseObject[caseIdKey];
          trimWhitespaceInValues(caseObject);
-         var normalizedCaseObject = questionNormalization.normalizeCaseQuestions(caseObject);
+         var normalizedCaseObject = keyRemapper.remapKeys(existingMappings, caseObject);
          parsedData[caseId] = normalizedCaseObject;
       });
       importCaseData(coderId, parsedData);
+   }
+
+
+   questionNormalization.addRemappingCallback(renameColumn);
+   function renameColumn(oldName, newName) {
+      _.forEach(cases, function(caseObject) {
+         _.forEach(caseObject, function(coderObject) {
+            coderObject[newName] = coderObject[oldName];
+            delete coderObject[oldName];
+         });
+      })
    }
 
    return {

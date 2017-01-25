@@ -1,5 +1,7 @@
-app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', 'questionNormalization',
-   function(Project, arbitratorData, sidebarDisplayCases, questionNormalization) {
+app.factory('disk', ['Project', 'arbitratorData', 'questionNormalization',
+function(Project, arbitratorData, questionNormalization) {
+
+   var loadCompleteCallbacks = jQuery.Callbacks();
 
    var savableServices = {
       arbitrator: arbitratorData,
@@ -57,7 +59,7 @@ app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', 'questi
             console.warn("Skipped value for " + serviceKey);
          }
       });
-      sidebarDisplayCases.refresh();
+      loadCompleteCallbacks.fire();
    }
 
    function exportCsv(onlyExportFullyArbitrated) {
@@ -67,9 +69,14 @@ app.factory('disk', ['Project', 'arbitratorData', 'sidebarDisplayCases', 'questi
       writeToDisk(stringData, filename);
    }
 
+   function addLoadCompleteCallback(callback) {
+      loadCompleteCallbacks.add(callback);
+   }
+
    return {
       load: load,
       save: save,
-      exportCsv: exportCsv
+      exportCsv: exportCsv,
+      addLoadCompleteCallback: addLoadCompleteCallback,
    }
 }]);

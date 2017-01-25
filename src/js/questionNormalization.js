@@ -1,14 +1,45 @@
-app.factory('keyRemapper', function() {
+app.factory('questionNormalization', ['questionSorter', function(questionSorter) {
+   var keyMap = {};
 
-   function remapKeys(keyMap, object) {
-      return _.reduce(object, function (result, value, currentKey) {
-         var updatedKey = keyMap[currentKey] || currentKey;
-         result[updatedKey] = value;
-         return result;
-      }, {});
+   var remappingCallbacks = jQuery.Callbacks();
+
+   function addMappings(mappings) {
+      angular.merge(keyMap, mappings);
+      _.forEach(mappings, function(newName, oldName) {
+         remappingCallbacks.fire(oldName, newName);
+      });
+   }
+
+   function removeMapping(oldName) {
+      var newName = keyMap[oldName];
+      remappingCallbacks.fire(newName, oldName);
+      delete keyMap[oldName];
+   }
+
+   function getCurrentMap() {
+      return keyMap;
+   }
+
+   function getSortedMap() {
+      var sortedKeys = questionSorter.getSortedKeys(keyMap, false);
+      return sortedKeys.map(function(key) {
+         return {
+            oldName: key,
+            newName: keyMap[key]
+         }
+      });
    }
 
    return {
-      remapKeys: remapKeys
+      addMappings: addMappings,
+      removeMapping: removeMapping,
+      setDataFromLoading: addMappings,
+      getCurrentMap: getCurrentMap,
+      getSortedMap: getSortedMap,
+      getDataForSaving: getCurrentMap,
+
+      addRemappingCallback: function (callback) {
+         remappingCallbacks.add(callback);
+      }
    }
-});
+}]);

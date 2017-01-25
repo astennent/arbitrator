@@ -1,4 +1,4 @@
-app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', function(keyRemapper, questionNormalization) {
+app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'questionSorter', function(keyRemapper, questionNormalization, questionSorter) {
    var cases = {};
 
    function generateKeyMaps() {
@@ -48,43 +48,9 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', function(
       return true;
    }
 
-   function shaeSort(a, b) {
-      function qualtricsNum(questionId) {  // Not proud of this function
-         try {
-            questionId = questionId.split(" ")[0];
-            var undIndex = questionId.indexOf("_");
-            if (undIndex == -1) {
-               undIndex = questionId.length;
-            }
-            var questionNum = parseInt(questionId.substring(1, undIndex+1));
-            questionId = questionId.substring(undIndex+1);
-            var nextUndIndex = questionId.indexOf("_");
-            if (nextUndIndex == -1) {
-               return questionNum;
-            }
-            var subNum = parseInt(questionId.substring(0, undIndex+1));
-            return questionNum + subNum/100;
-         } catch (e) {
-            return -1;
-         }
-      }
-      return qualtricsNum(a) - qualtricsNum(b);
-   }
-
-   function getSortedQuestionIds() {
-      var uniqueKeys = {};
-      for (var caseId in cases) {
-         var currentCase = cases[caseId];
-         for (var questionId in currentCase) {
-            uniqueKeys[questionId] = undefined;
-         }
-      }
-      return Object.keys(uniqueKeys).sort(shaeSort)
-   }
-
    function getExportData(onlyIncludeFullyArbitrated) {
       var output = [];
-      var questionIds = getSortedQuestionIds();
+      var questionIds = questionSorter.getSortedKeys(cases, true);
       output.push(questionIds);
       for (var caseId in cases) {
          var currentCase = cases[caseId];
@@ -103,54 +69,19 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', function(
       return output;
    }
 
-   var ellipsesToNonEllipsis = {};
 
    function normalizeKeys() {
+      var existingMappings = questionNormalization.getCurrentMap();
+      _.forEach(existingMappings, function(newName, oldName) {
+         renameColumn(oldName, newName);
+      });
       for (var currentCase in cases) {
          identifyLongNames(cases[currentCase]);
       }
-      questionNormalization.set(ellipsesToNonEllipsis);
-
-      for (var caseId in cases) {
-         fixLongNamesInCase(cases[caseId], caseId);
-      }
+      questionNormalization.addMappings(ellipsesToNonEllipsis);
    }
 
-   function fixLongNamesInCase(currentCase, caseId) {
-      for (var questionId in currentCase) {
-         var longName = ellipsesToNonEllipsis[questionId];
-         if (longName) {
-            var longData = currentCase[longName];
-            var shortData = currentCase[questionId];
-
-            if (!longData) {
-               currentCase[longName] = shortData;
-               delete currentCase[questionId];
-               continue;
-            }
-
-            if (angular.equals(longData, shortData)) {
-               delete currentCase[questionId];
-               continue;
-            }
-
-            if (longData.value === "") {
-               currentCase[longName] = currentCase[shortData];
-               delete currentCase[questionId];
-               continue;
-            }
-
-            if (shortData.value === "") {
-               delete currentCase[questionId];
-               continue;
-            }
-
-            console.log("Couldn't automatically fix case ", caseId, ". Question #" + questionId);
-            delete currentCase[questionId];
-            currentCase[longName].status =  0;
-         }
-      }
-   }
+   var ellipsesToNonEllipsis = {};
 
    function identifyLongNames(currentCase) {
       function calculateLongVersion(abbreviatedQuestionId) {
@@ -176,6 +107,38 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', function(
       for (var questionId in currentCase) {
          calculateLongVersion(questionId);
       }
+   }
+
+   questionNormalization.addRemappingCallback(renameColumn);
+   function renameColumn(oldKey, newKey) {
+      for (var caseId in cases) {
+         var caseObject = cases[caseId];
+         remapCaseColumnNames(oldKey, newKey, caseObject, caseId);
+      }
+   }
+
+   function remapCaseColumnNames(oldName, updatedName, caseObject, caseId) {
+      var oldValue = caseObject[oldName];
+      if (!oldValue) {
+         return;
+      }
+      var alreadyRemappedValue = caseObject[updatedName];
+
+      delete caseObject[oldName];
+
+      var preferOldValue = !alreadyRemappedValue || alreadyRemappedValue.value === "";
+      if (preferOldValue) {
+         caseObject[updatedName] = oldValue;
+         return;
+      }
+
+      var keepUpdatedValue = angular.equals(alreadyRemappedValue, oldValue) || oldValue.value === "";
+      if (keepUpdatedValue) {
+         return;
+      }
+
+      console.log("Unable to fix case ", caseId, " for: ", oldName);
+      caseObject[updatedName].status =  0;
    }
 
    return {

@@ -1,4 +1,4 @@
-var app = angular.module('Arbitrator', []);
+var app = angular.module('Arbitrator', ['ui.bootstrap']);
 
 app.controller('projectController', ['$scope', 'Project', function ($scope, Project) {
    $scope.project = Project.get();
@@ -69,4 +69,3 @@ app.directive('ngEnter', function () {
       });
    };
 });
-

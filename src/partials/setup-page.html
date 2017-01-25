@@ -19,12 +19,41 @@
 
     <hr>
     <div id="normalizationTable">
-        <h4> Normalized Keys </h4>
-        <table class="table">
-            <th> Old Key </th> <th> Updated Key </th>
-            <tr ng-repeat="(oldValue, newValue) in normalizedKeyMap">
-                <td> {{oldValue}} </td>
-                <td> {{newValue}} </td>
+        <h4> Remapping Column Names
+            <button ng-show="!adding" class="btn btn-success" ng-click="startAdding()"
+                    tooltip-placement="right" uib-tooltip="Add new column name mapping">
+                <i class='glyphicon glyphicon-plus'></i>
+            </button>
+            <button ng-show="adding" class="btn btn-danger" ng-click="cancelAdding()"
+                    tooltip-placement="right" uib-tooltip="Cancel new mapping">
+                <i class='glyphicon glyphicon-remove'></i>
+            </button>
+        </h4>
+        <table class="table table-striped">
+            <th  style="width:46%"> Old Name </th> <th style="width:46%"> New Name </th> <th style="width:4%"></th> <th style="width:4%"></th>
+            <tr ng-show="adding" class="adding-row">
+                <td>  <input type="text" ng-model="addedOld" class="form-control"> </td>
+                <td> <input type="text" ng-model="addedNew" class="form-control"> </td>
+
+                <td> <button class="btn btn-success" ng-click="finishAdding()">
+                    <i class='glyphicon glyphicon-ok'></i>
+                </button> </td>
+
+                <td> <button class="btn btn-danger" ng-click="cancelAdding()"
+                             tooltip-placement="left" uib-tooltip="Cancel new column name mapping">
+                    <i class='glyphicon glyphicon-remove'></i>
+                </button> </td>
+            </tr>
+            <tr ng-repeat="row in normalizedKeyMap"
+                ng-class="isEditing(row.oldName) ? 'editing-row' : ''">
+                <td> {{row.oldName}} </td>
+                <td> {{row.newName}} </td>
+                <td> <button class="btn btn-info" ng-click="edit(row.oldName, row.newName)">
+                    <i class='glyphicon glyphicon-edit'></i>
+                </button> </td>
+                <td> <button class="btn btn-danger" ng-click="removeMapping(row.oldName)">
+                    <i class='glyphicon glyphicon-remove'></i>
+                </button> </td>
             </tr>
         </table>
     </div>

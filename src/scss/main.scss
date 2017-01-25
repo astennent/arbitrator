@@ -142,6 +142,21 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
   }
+
+  #normalizationTable td{
+    padding-right: 5px;
+  }
+
+  .editing-row {
+    outline: 2px solid #6eb5ff;
+    outline-offset: -1px;
+    background-color: #abdeff;
+  }
+
+  .adding-row td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
 }
 
 #sidebarTd {
@@ -170,16 +185,16 @@ body {
     margin-bottom: 10px;
   }
 
-  input[type='text'] {
-    width: 80%;
-  }
-
   ul.nav-sidebar {
     overflow-y: scroll;
     position: absolute;
     height: calc(100vh - 250px);
     width: calc(100% - 15px);
   }
+}
+
+.arb-tip {
+  color: #2e6da4;
 }
 
 
