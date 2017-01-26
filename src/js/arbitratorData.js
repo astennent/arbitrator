@@ -1,5 +1,6 @@
 app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'questionSorter', function(keyRemapper, questionNormalization, questionSorter) {
    var cases = {};
+   var loadCompleteCallbacks = jQuery.Callbacks();
 
    function generateKeyMaps() {
       var fullToShortKeyMap = {};
@@ -33,6 +34,7 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'question
          }
          cases[caseId] = currentCase;
       });
+      loadCompleteCallbacks.fire();
    }
 
    function isFullyArbitrated(caseId) {
@@ -141,6 +143,8 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'question
       caseObject[updatedName].status =  0;
    }
 
+
+
    return {
       getCase: function (caseKey) {
          if (!(caseKey in cases)) {
@@ -169,9 +173,13 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'question
             cases[caseId] = keyRemapper.remapKeys(shortToFullKeyMap, unmappedCases[caseId]);
          }
          normalizeKeys();
+         loadCompleteCallbacks.fire();
       },
       getExportData: getExportData,
-      isFullyArbitrated: isFullyArbitrated
+      isFullyArbitrated: isFullyArbitrated,
+      addLoadCompleteCallback: function(callback) {
+         loadCompleteCallbacks.add(callback);
+      },
    }
 
 }]);

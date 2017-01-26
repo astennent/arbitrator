@@ -1,6 +1,6 @@
 app.factory('questionSorter', function() {
 
-   function shaeSort(a, b) {
+   function qualtricsSort(a, b) {
       function qualtricsNum(questionId) {  // Not proud of this function
          try {
             questionId = questionId.split(" ")[0];
@@ -35,7 +35,7 @@ app.factory('questionSorter', function() {
             uniqueKeys[baseKey] = undefined;
          }
       }
-      return Object.keys(uniqueKeys).sort(shaeSort)
+      return Object.keys(uniqueKeys).sort(qualtricsSort)
    }
 
    return {

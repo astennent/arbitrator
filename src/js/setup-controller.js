@@ -1,16 +1,14 @@
-app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases', 'Project', 'questionNormalization', 'disk',
-      function($scope, coderData, arbitratorData, sidebarDisplayCases, Project, questionNormalization, disk) {
+app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sidebarDisplayCases', 'Project', 'questionNormalization',
+      function($scope, coderData, arbitratorData, sidebarDisplayCases, Project, questionNormalization) {
 
    $scope.project = Project.get();
-         
+
    $scope.handleLoad = function(fileContents) {
       coderData.importRawData(fileContents, $scope.project.caseIdKey, $scope.project.coderIdKey);
-      sidebarDisplayCases.refresh();
    };
 
    $scope.handleArbitratorLoad = function(fileContents) {
       arbitratorData.importRawData(fileContents, $scope.project.caseIdKey);
-      sidebarDisplayCases.refresh();
    };
 
 
@@ -27,6 +25,7 @@ app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sid
    };
 
    $scope.finishAdding = function() {
+      // TODO Validate
       $scope.adding = false;
       if (editedRowKey) {
          questionNormalization.removeMapping(editedRowKey);
@@ -63,5 +62,5 @@ app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sid
    function refresh() {
       $scope.normalizedKeyMap = questionNormalization.getSortedMap();
    }
-   disk.addLoadCompleteCallback(refresh);
+   arbitratorData.addLoadCompleteCallback(refresh);
 }]);

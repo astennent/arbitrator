@@ -37,7 +37,6 @@ app.controller('sidebarController', ['$scope', 'sidebarDisplayCases', 'currentPa
 
    $scope.switchToCase = function(caseKey) {
       currentPage.switchToCase();
-      sidebarDisplayCases.refresh();
       Case.setCurrent(caseKey);
    };
 

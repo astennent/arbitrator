@@ -1,4 +1,4 @@
-app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', 'disk', function(coderData, arbitratorData, disk) {
+app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', function(coderData, arbitratorData) {
    var displayCases = [];
 
    function refresh() {
@@ -13,7 +13,8 @@ app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', 'disk', funct
       });
    }
 
-   disk.addLoadCompleteCallback(refresh);
+   arbitratorData.addLoadCompleteCallback(refresh);
+   coderData.addLoadCompleteCallback(refresh);
 
    return {
       get: function() {

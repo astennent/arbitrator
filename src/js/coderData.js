@@ -1,5 +1,6 @@
 app.factory('coderData', ['questionNormalization', 'keyRemapper', function(questionNormalization, keyRemapper) {
    var cases = {};
+   var loadCompleteCallbacks = jQuery.Callbacks();
 
    function importCaseData(coderId, parsedData) {
       for (var caseId in parsedData) {
@@ -29,8 +30,8 @@ app.factory('coderData', ['questionNormalization', 'keyRemapper', function(quest
          parsedData[caseId] = normalizedCaseObject;
       });
       importCaseData(coderId, parsedData);
+      loadCompleteCallbacks.fire();
    }
-
 
    questionNormalization.addRemappingCallback(renameColumn);
    function renameColumn(oldName, newName) {
@@ -49,6 +50,9 @@ app.factory('coderData', ['questionNormalization', 'keyRemapper', function(quest
       getCases: function() {
          return cases;
       },
-      importRawData: importRawData
+      importRawData: importRawData,
+      addLoadCompleteCallback: function(callback) {
+         loadCompleteCallbacks.add(callback);
+      },
    }
 }]);

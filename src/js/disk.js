@@ -1,8 +1,6 @@
 app.factory('disk', ['Project', 'arbitratorData', 'questionNormalization',
 function(Project, arbitratorData, questionNormalization) {
 
-   var loadCompleteCallbacks = jQuery.Callbacks();
-
    var savableServices = {
       arbitrator: arbitratorData,
       projectMeta: Project,
@@ -48,7 +46,7 @@ function(Project, arbitratorData, questionNormalization) {
       writeToDisk(stringData, filename);
    }
 
-   function load(fileContents) {
+   function loadProject(fileContents) {
       Project.clearDirtyFlag();
       var saveData = JSON.parse(fileContents);
       _.each(saveData, function(storedValue, serviceKey) {
@@ -59,7 +57,6 @@ function(Project, arbitratorData, questionNormalization) {
             console.warn("Skipped value for " + serviceKey);
          }
       });
-      loadCompleteCallbacks.fire();
    }
 
    function exportCsv(onlyExportFullyArbitrated) {
@@ -69,14 +66,9 @@ function(Project, arbitratorData, questionNormalization) {
       writeToDisk(stringData, filename);
    }
 
-   function addLoadCompleteCallback(callback) {
-      loadCompleteCallbacks.add(callback);
-   }
-
    return {
-      load: load,
+      load: loadProject,
       save: save,
       exportCsv: exportCsv,
-      addLoadCompleteCallback: addLoadCompleteCallback,
    }
 }]);
