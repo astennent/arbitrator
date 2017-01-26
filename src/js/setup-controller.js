@@ -25,13 +25,13 @@ app.controller('setupController', ['$scope', 'coderData', 'arbitratorData', 'sid
    };
 
    $scope.finishAdding = function() {
-      // TODO Validate
       $scope.adding = false;
-      if (editedRowKey) {
-         questionNormalization.removeMapping(editedRowKey);
+      var oldName = $scope.addedOld;
+      if (questionNormalization.getCurrentMap()[oldName]) {
+         questionNormalization.removeMapping(oldName);
       }
       var mapping = {};
-      mapping[$scope.addedOld] = $scope.addedNew;
+      mapping[oldName] = $scope.addedNew;
       questionNormalization.addMappings(mapping);
       clearAdding();
       refresh();
