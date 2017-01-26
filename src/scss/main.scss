@@ -96,6 +96,17 @@ body {
     }
   }
 
+  .hide-arbitrated .arbitrated-row {
+    display: none;
+  }
+
+  .hide-arbitrated-container {
+    font-size: 14px;
+    background-color: lightgray;
+    border: 2px solid darkgray;
+    padding: 10px;
+  }
+
   .accept-button {
     font-weight: bold;
     height: 40px;

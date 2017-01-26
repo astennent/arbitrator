@@ -9,6 +9,10 @@
                 ng-click="autoResolve()"
                 ng-disabled="!canAutoResolve()"> Auto-arbitrate
         </button>
+        <span class="hide-arbitrated-container">
+            <input id='hide-arb' type="checkbox" ng-model="hideArbitrated.value"/>
+            <label for="hide-arb"> Hide Arbitrated Rows </label>
+        </span>
     </h1>
     <div class="progress">
         <div class="progress-bar"
@@ -20,7 +24,7 @@
         </div>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped" ng-class="hideArbitrated.value ? 'hide-arbitrated' : ''">
         <thead>
         <tr>
             <th style="width: 9%">#</th>
@@ -31,7 +35,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat='questionId in questionIds' ng-class="{'unarbitrated-row': !isArbitrated(questionId)}">
+        <tr ng-repeat='questionId in questionIds' ng-class="isArbitrated(questionId) ? 'arbitrated-row' :  'unarbitrated-row'">
             <div class="form-group">
                 <td> {{questionId}} </td>
                 <td>

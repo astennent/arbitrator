@@ -8,6 +8,10 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       Arbitrated: 1
    };
 
+   $scope.hideArbitrated = {
+      value: false
+   };
+
    onSetCase(Case.getCurrent());
 
    function onSetCase(caseId) {
