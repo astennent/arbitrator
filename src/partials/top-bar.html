@@ -37,6 +37,12 @@
                        aria-hidden="true"></a>
                 </li>
                 <li>
+                    <a class="glyphicon glyphicon-equalizer"
+                       title="Intercoder Reliability"
+                       ng-click='exportReliability()'
+                       aria-hidden="true"></a>
+                </li>
+                <li>
                     <a class="glyphicon glyphicon-floppy-disk"
                        title="Save Project {{dirty() ? '' : '(No New Changes)'}}"
                        ng-click='dirty() && save()'

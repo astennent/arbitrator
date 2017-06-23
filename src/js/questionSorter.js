@@ -23,13 +23,20 @@ app.factory('questionSorter', function() {
       return qualtricsNum(a) - qualtricsNum(b);
    }
 
-   function getSortedKeys(objectWithKeys, useNested) {
+   function getSortedKeys(objectWithKeys, depth) {
       var uniqueKeys = {};
       for (var baseKey in objectWithKeys) {
-         if (useNested) {
+         if (depth > 0) {
             var nestedObject = objectWithKeys[baseKey];
             for (var nestedKey in nestedObject) {
-               uniqueKeys[nestedKey] = undefined;
+               if (depth > 1) {
+                  var nestedNestedObject = nestedObject[nestedKey];
+                  for (var doubleNestedKey in nestedNestedObject) {
+                     uniqueKeys[doubleNestedKey] = undefined;
+                  }
+               } else {
+                  uniqueKeys[nestedKey] = undefined;
+               }
             }
          } else {
             uniqueKeys[baseKey] = undefined;

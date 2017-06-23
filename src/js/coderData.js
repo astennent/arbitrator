@@ -1,4 +1,5 @@
-app.factory('coderData', ['questionNormalization', 'keyRemapper', function(questionNormalization, keyRemapper) {
+app.factory('coderData', ['questionNormalization', 'keyRemapper', 'questionSorter',
+ function(questionNormalization, keyRemapper, questionSorter) {
    var cases = {};
    var loadCompleteCallbacks = jQuery.Callbacks();
 
@@ -43,6 +44,49 @@ app.factory('coderData', ['questionNormalization', 'keyRemapper', function(quest
       })
    }
 
+   function getReliability() {
+      var questionIds = questionSorter.getSortedKeys(cases, 2)
+      var headerRow = ['Case Id'].concat(questionIds);
+      headerRow.push('Case Average');
+      var output = [headerRow];
+
+      var questionMatchCounts = {};
+      _.forEach(questionIds, function(questionId) {
+         questionMatchCounts[questionId] = 0;
+      });
+
+      var doubleCountedCount = 0;
+      _.forEach(cases, function(caseObject, caseId) {
+         var coderKeys = Object.keys(caseObject);
+         var coder1 = caseObject[coderKeys[0]];
+
+         var row = [caseId];
+         if (coderKeys.length === 2) {
+            doubleCountedCount += 1;
+            var coder2 = caseObject[coderKeys[1]];
+            var caseMatchCount = 0;
+            _.forEach(questionIds, function(questionId) {
+               var matchValue = coder1[questionId] === coder2[questionId] ? 1 : 0;
+               caseMatchCount += matchValue;
+               questionMatchCounts[questionId] += matchValue;
+               row.push(matchValue);
+            });
+            row.push(caseMatchCount / questionIds.length);
+         }
+
+         output.push(row);
+      })
+
+      var totalRow = ['Question Average'];
+      _.forEach(questionIds, function(questionId) {
+         var questionMatchCount = questionMatchCounts[questionId]
+         totalRow.push(questionMatchCount / doubleCountedCount);
+      })
+      output.push(totalRow);
+
+      return output;
+   }
+
    return {
       getCase: function (caseId) {
          return cases[caseId];
@@ -54,5 +98,6 @@ app.factory('coderData', ['questionNormalization', 'keyRemapper', function(quest
       addLoadCompleteCallback: function(callback) {
          loadCompleteCallbacks.add(callback);
       },
+      getReliability: getReliability,
    }
 }]);

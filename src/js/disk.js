@@ -1,5 +1,5 @@
-app.factory('disk', ['Project', 'arbitratorData', 'questionNormalization',
-function(Project, arbitratorData, questionNormalization) {
+app.factory('disk', ['Project', 'arbitratorData', 'questionNormalization', 'coderData',
+function(Project, arbitratorData, questionNormalization, coderData) {
 
    var savableServices = {
       arbitrator: arbitratorData,
@@ -66,9 +66,17 @@ function(Project, arbitratorData, questionNormalization) {
       writeToDisk(stringData, filename);
    }
 
+   function exportReliability() {
+      var reliabilityData = coderData.getReliability();
+      var stringData = Papa.unparse(reliabilityData, {delimiter: ','})
+      var filename = "Reliability_" + getFilename() + ".csv"
+      writeToDisk(stringData, filename);
+   }
+
    return {
       load: loadProject,
       save: save,
       exportCsv: exportCsv,
+      exportReliability: exportReliability,
    }
 }]);

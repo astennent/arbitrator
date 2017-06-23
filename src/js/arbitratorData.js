@@ -52,7 +52,7 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'question
 
    function getExportData(onlyIncludeFullyArbitrated) {
       var output = [];
-      var questionIds = questionSorter.getSortedKeys(cases, true);
+      var questionIds = questionSorter.getSortedKeys(cases, 1);
       output.push(questionIds);
       for (var caseId in cases) {
          var currentCase = cases[caseId];

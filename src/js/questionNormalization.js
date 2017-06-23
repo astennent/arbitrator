@@ -21,7 +21,7 @@ app.factory('questionNormalization', ['questionSorter', function(questionSorter)
    }
 
    function getSortedMap() {
-      var sortedKeys = questionSorter.getSortedKeys(keyMap, false);
+      var sortedKeys = questionSorter.getSortedKeys(keyMap, 0);
       return sortedKeys.map(function(key) {
          return {
             oldName: key,
