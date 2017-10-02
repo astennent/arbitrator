@@ -2,8 +2,8 @@ app.factory('Project', function() {
 
    var project = {
       name: 'Arbitration',
-      caseIdKey: 'Q2 - ID #', // TODO: Don't hard-code these.
-      coderIdKey: 'Q101 - Name of Coder - Selected Choice'
+      caseIdKey: 'Q38 Case ID (from spreadsheet)', // TODO: Don't hard-code these.
+      coderIdKey: 'Q39 Coder:'
    };
 
    var dirty = false;
