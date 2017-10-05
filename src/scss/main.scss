@@ -100,7 +100,11 @@ body {
     display: none;
   }
 
-  .hide-arbitrated-container {
+  .hide-blanks .blank-row {
+    display: none;
+  }
+
+  .hide-arbitrated-container, .hide-blanks-container {
     font-size: 14px;
     background-color: lightgray;
     border: 2px solid darkgray;

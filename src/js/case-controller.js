@@ -12,6 +12,10 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       value: false
    };
 
+   $scope.hideBlanks = {
+      value: false
+   };
+
    onSetCase(Case.getCurrent());
 
    function onSetCase(caseId) {
@@ -91,6 +95,10 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    $scope.isArbitrated = function(questionId) {
       return $scope.arbitrator[questionId].status === Status.Arbitrated;
    };
+
+   $scope.isBlank = function(questionId) {
+      return $scope.coder1[questionId] === "" && $scope.coder2[questionId] === "";
+   }
 
    function setArbitrated(questionId, value) {
       $scope.arbitrator[questionId].status = value;
