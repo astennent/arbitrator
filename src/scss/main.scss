@@ -128,6 +128,10 @@ body {
     width: 80px;
   }
 
+  #auto-arbitrate-button {
+    margin-left: 5px;
+  }
+
   .coder-label {
     text-overflow: ellipsis;
     word-break: break-word;
@@ -137,6 +141,14 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
     border-top: 1px solid #5c5c5c;
+  }
+
+  div.progress {
+    width:calc(100% - 20px);
+  }
+  div.progress-container {
+    display: flex;
+    margin-top: 10px;
   }
 }
 

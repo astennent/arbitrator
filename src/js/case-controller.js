@@ -3,7 +3,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
 
    Case.subscribe(onSetCase);
 
-   var Status = {
+   let Status = {
       NotArbitrated: 0,
       Arbitrated: 1
    };
@@ -19,10 +19,19 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    onSetCase(Case.getCurrent());
 
    function onSetCase(caseId) {
-      var caseData = coderData.getCase(caseId);
+      let caseData = coderData.getCase(caseId);
+
+      const project = Project.get();
+
+      const allCaseInfos = project.caseInfo;
+      $scope.caseInfo = allCaseInfos[caseId] || {
+         notes: "",
+         needsReview: false,
+      };
+      allCaseInfos[caseId] = $scope.caseInfo;
 
       $scope.caseId = caseId;
-      var coderKeys = Object.keys(caseData);
+      let coderKeys = Object.keys(caseData);
 
       $scope.coder1Name = coderKeys[0];
       $scope.coder1 = caseData[$scope.coder1Name];
@@ -38,12 +47,20 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       $scope.expandedRows = {};
       $scope.questionIds = Object.keys($scope.coder1);
 
+      $scope.invariateHeader = "";
+      for (header of project.invariateHeaders) {
+         $scope.invariateHeader += $scope.coder1[header];
+      }
+      $scope.invariateHeader = project.invariateHeaders.map((header) => {
+         return $scope.coder1[header]
+      }).join(' ');
+
       loadArbitratedData(caseId);
       guessArbitratedData();
    }
 
    function loadArbitratedData(caseId) {
-      var storedArbitration  = arbitratorData.getCase(caseId);
+      let storedArbitration  = arbitratorData.getCase(caseId);
       angular.forEach($scope.questionIds, function(questionId) {
          if (angular.isUndefined(storedArbitration[questionId])) {
             storedArbitration[questionId] =  {value: "", status:Status.NotArbitrated};
@@ -58,13 +75,13 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
 
    function getQuestionsToResolve() {
       return $scope.questionIds.filter(function(questionId) {
-         var alreadyArbitrated = $scope.arbitrator[questionId] && $scope.arbitrator[questionId].status;
+         let alreadyArbitrated = $scope.arbitrator[questionId] && $scope.arbitrator[questionId].status;
          return !alreadyArbitrated && $scope.coder1[questionId] === $scope.coder2[questionId];
       })
    }
 
    $scope.autoResolve = function() {
-      var questions = getQuestionsToResolve();
+      let questions = getQuestionsToResolve();
       questions.forEach(function(questionId) {
          $scope.arbitrator[questionId].value = $scope.coder1[questionId];
          $scope.arbitrator[questionId].status = Status.Arbitrated;
@@ -77,7 +94,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    };
 
    $scope.progress = function() {
-      var arbitratedCount = 0;
+      let arbitratedCount = 0;
       angular.forEach($scope.questionIds, function(questionId) {
          if ($scope.isArbitrated(questionId)) {
             arbitratedCount++;
@@ -87,8 +104,8 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    };
 
    $scope.isEquivalent = function(questionId) {
-      var value1 = $scope.coder1[questionId];
-      var value2 = $scope.coder2[questionId];
+      let value1 = $scope.coder1[questionId];
+      let value2 = $scope.coder2[questionId];
       return value1 === value2;
    };
 

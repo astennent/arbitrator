@@ -8,7 +8,7 @@ function(Project, arbitratorData, questionNormalization, coderData) {
    };
 
    function getFilename() {
-      var name = Project.get().name || 'Arbitration';
+      var name = Project.get().getName() || 'Arbitration';
       var d = new Date();
       var dateString =  d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate() + " " +
          d.getHours() + "_" + d.getMinutes();
