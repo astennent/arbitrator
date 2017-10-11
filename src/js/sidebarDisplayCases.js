@@ -1,4 +1,4 @@
-app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', function(coderData, arbitratorData) {
+app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', 'caseInfoService', function(coderData, arbitratorData, caseInfoService) {
    var displayCases = [];
 
    function refresh() {
@@ -8,7 +8,7 @@ app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', function(code
             id: caseId,
             count: Object.keys(cases[caseId]).length,
             fullyArbitrated: arbitratorData.isFullyArbitrated(caseId),
-            displayText: 'Case ' + caseId
+            displayText: caseInfoService.getFullTitle(caseId),
          }
       });
    }

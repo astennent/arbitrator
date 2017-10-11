@@ -1,5 +1,5 @@
-app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData', 'Project',
-   function($scope, Case, coderData, arbitratorData, Project) {
+app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData', 'Project', 'caseInfoService',
+   function($scope, Case, coderData, arbitratorData, Project, caseInfoService) {
 
    Case.subscribe(onSetCase);
 
@@ -31,7 +31,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       allCaseInfos[caseId] = $scope.caseInfo;
 
       $scope.caseId = caseId;
-      let coderKeys = Object.keys(caseData);
+      const coderKeys = Object.keys(caseData);
 
       $scope.coder1Name = coderKeys[0];
       $scope.coder1 = caseData[$scope.coder1Name];
@@ -47,13 +47,8 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       $scope.expandedRows = {};
       $scope.questionIds = Object.keys($scope.coder1);
 
-      $scope.invariateHeader = "";
-      for (header of project.invariateHeaders) {
-         $scope.invariateHeader += $scope.coder1[header];
-      }
-      $scope.invariateHeader = project.invariateHeaders.map((header) => {
-         return $scope.coder1[header]
-      }).join(' ');
+      $scope.caseTitle = caseInfoService.getFullTitle(caseId);
+
 
       loadArbitratedData(caseId);
       guessArbitratedData();
