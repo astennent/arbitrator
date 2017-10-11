@@ -1,7 +1,6 @@
 app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'questionSorter', function(keyRemapper, questionNormalization, questionSorter) {
    var cases = {};
    const loadCompleteCallbacks = jQuery.Callbacks();
-   const arbitrationStateChangeCallbacks = jQuery.Callbacks();
 
    function generateKeyMaps() {
       var fullToShortKeyMap = {};
@@ -194,12 +193,6 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'question
       isPartiallyArbitrated: isPartiallyArbitrated,
       addLoadCompleteCallback: function(callback) {
          loadCompleteCallbacks.add(callback);
-      },
-      addFullyArbitratedStateChangeCallback: function(callback) {
-         arbitrationStateChangeCallbacks.add(callback);
-      },
-      fireArbitrationChanged: function(questionIds) {
-         arbitrationStateChangeCallbacks.fire(questionIds);
       },
    }
 

@@ -1,5 +1,5 @@
-app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData', 'Project', 'caseInfoService',
-   function($scope, Case, coderData, arbitratorData, Project, caseInfoService) {
+app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData', 'Project', 'caseInfoService', 'sidebarRefreshService',
+   function($scope, Case, coderData, arbitratorData, Project, caseInfoService, sidebarRefreshService) {
 
    Case.subscribe(onSetCase);
 
@@ -26,7 +26,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
       const allCaseInfos = project.caseInfo;
       $scope.caseInfo = allCaseInfos[caseId] || {
          notes: "",
-         needsReview: false,
+         flag: 0,
       };
       allCaseInfos[caseId] = $scope.caseInfo;
 
@@ -82,7 +82,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
          $scope.arbitrator[questionId].status = Status.Arbitrated;
       });
       Project.markDirty();
-      arbitratorData.fireArbitrationChanged([questions]);
+      sidebarRefreshService.triggerRefresh($scope.caseId);
    };
 
    $scope.canAutoResolve = function() {
@@ -116,7 +116,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    function setArbitrated(questionId, value) {
       $scope.arbitrator[questionId].status = value;
       Project.markDirty();
-      arbitratorData.fireArbitrationChanged([questionId]);
+      sidebarRefreshService.triggerRefresh($scope.caseId);
    }
 
    $scope.disableArbitration = function(questionId) {
@@ -130,7 +130,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    $scope.onArbitrationChange = function(questionId) {
       $scope.disableArbitration(questionId);
       Project.markDirty();
-      arbitratorData.fireArbitrationChanged([questionId]);
+      sidebarRefreshService.triggerRefresh($scope.caseId);
    };
 
    $scope.toggleArbitration = function(questionId) {
@@ -144,6 +144,13 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    $scope.acceptCoder = function(questionId, coder) {
       $scope.arbitrator[questionId].value = coder[questionId];
       setArbitrated(questionId, Status.Arbitrated);
+   }
+
+   $scope.cycleFlag = function() {
+      const numFlags = 4;
+      $scope.caseInfo.flag = ($scope.caseInfo.flag + 1) % numFlags;
+      Project.markDirty();
+      sidebarRefreshService.triggerRefresh($scope.caseId);
    }
 }]);
 

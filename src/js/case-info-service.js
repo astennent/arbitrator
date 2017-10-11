@@ -10,7 +10,13 @@ app.factory('caseInfoService', ['Project', 'coderData', function(Project, coderD
       return `Case ${caseId} | ${titleFromHeaders}`
    }
 
+   function getFlag(caseId) {
+      const caseInfo = Project.get().caseInfo[caseId];
+      return caseInfo ? caseInfo.flag : 0;
+   }
+
    return {
-      getFullTitle: getFullTitle
+      getFullTitle: getFullTitle,
+      getFlag: getFlag,
    }
 }]);

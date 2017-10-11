@@ -5,8 +5,10 @@
 
         
     <h2 class="page-header"> {{caseTitle}} 
-        
-    </h2>
+        <button class="flag-button" ng-click="cycleFlag()">
+            <span class="glyphicon glyphicon-flag flag-{{caseInfo.flag}}" ></span>
+        </button> 
+    </h2> 
     <div>
         <span class="hide-arbitrated-container">
             <input id='hide-arb' type="checkbox" ng-model="hideArbitrated.value"/>

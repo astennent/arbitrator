@@ -12,6 +12,7 @@ app.controller('sidebarController', ['$scope', 'sidebarDisplayCases', 'currentPa
       display: 'Fully Arbitrated',
       value: false
    };
+
    $scope.filters = [
       includeSingleCoded,
       includeDoubleCoded,
@@ -19,7 +20,7 @@ app.controller('sidebarController', ['$scope', 'sidebarDisplayCases', 'currentPa
    ];
    $scope.filterText = "";
 
-   function canDisplayFromArbitrationCheckboxes(caseObject) {
+   function passesArbitrationCheckboxes(caseObject) {
       if (caseObject.count == 1) {
          return includeSingleCoded.value;
       }
@@ -28,11 +29,17 @@ app.controller('sidebarController', ['$scope', 'sidebarDisplayCases', 'currentPa
          includeDoubleCoded.value;
    }
 
+   function passesFilterText(caseObject) {
+      return $scope.filterText == "" ||
+             caseObject.displayText.indexOf($scope.filterText) > -1;
+   }
+
+   function passesCoderCheckboxes(caseObject) {
+
+   }
+
    $scope.shouldDisplay = function(caseObject) {
-      if (!canDisplayFromArbitrationCheckboxes(caseObject)) {
-         return false;
-      }
-      return $scope.filterText == "" || caseObject.displayText.indexOf($scope.filterText) > -1;
+      return passesArbitrationCheckboxes(caseObject) && passesFilterText(caseObject);
    };
 
    $scope.switchToCase = function(caseKey) {

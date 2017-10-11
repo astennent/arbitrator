@@ -1,4 +1,5 @@
-app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', 'caseInfoService', function(coderData, arbitratorData, caseInfoService) {
+app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', 'caseInfoService', 'sidebarRefreshService',
+function(coderData, arbitratorData, caseInfoService, sidebarRefreshService) {
    var displayCases = [];
 
    function refresh() {
@@ -10,13 +11,19 @@ app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', 'caseInfoServ
             fullyArbitrated: arbitratorData.isFullyArbitrated(caseId),
             partiallyArbitrated: arbitratorData.isPartiallyArbitrated(caseId),
             displayText: caseInfoService.getFullTitle(caseId),
+            flag: caseInfoService.getFlag(caseId),
          }
       });
    }
 
+   function refreshCase(caseId) {
+      console.log(caseId);
+      refresh(); //TODO This is more than necessary.
+   }
+
    arbitratorData.addLoadCompleteCallback(refresh);
-   arbitratorData.addFullyArbitratedStateChangeCallback(refresh)
    coderData.addLoadCompleteCallback(refresh);
+   sidebarRefreshService.subscribeToRefresh(refreshCase);
 
    return {
       get: function() {

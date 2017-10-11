@@ -1,5 +1,4 @@
 <span class="sidebar-offcanvas" id="Sidebar" role="navigation" ng-controller="sidebarController">
-    <hr>
     <div class='sidebar-filters'>
         <div class="form-check" ng-repeat="filter in filters">
             <label class="form-check-label">
@@ -27,9 +26,12 @@
                 'partially-arbitrated': case.partiallyArbitrated,
             }"
         >
-        <a ng-click="switchToCase(case.id)"
-           class="case-link"
-           ng-class="isSelected(case.id) ? 'selected-case' : ''"> {{case.displayText}} </a>
+            <a ng-click="switchToCase(case.id)"
+               class="case-link"
+               ng-class="isSelected(case.id) ? 'selected-case' : ''"> 
+               <span class="glyphicon glyphicon-flag" ng-class="'flag-' + case.flag" ></span> 
+               <span>{{case.displayText}}</span>
+            </a>
         </li>
     </ul>
 </span>

@@ -6,6 +6,8 @@ html, body {
 
 #main {
   margin-top: -50px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 body {
@@ -67,11 +69,44 @@ body {
 }
 
 #CasePage {
+  .flag-0 {
+    color: #ddd;
+  }
+}
+#Sidebar {
+  .flag-0 {
+    display: none;
+  }
+}
+#CasePage, #Sidebar {
+
+  .flag-1 {
+    color: #444;
+  }
+  .flag-2 {
+    color: #f44336;
+  }
+  .flag-3 {
+    color: #4caf50;
+  }
+} 
+
+#CasePage {
   padding-left: 0;
 
   small {
     color: #888;
     padding-left: 15px;
+  }
+
+  .flag-button {
+    width: 27px;
+    height: 27px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+
   }
 
   .table td, .table th {
@@ -202,7 +237,7 @@ body {
     border-left: 1px solid #03a9f4;
   }
   li.fully-arbitrated {
-    border-left: 2px solid green;
+    border-left: 2px solid #2196f3;
   }
 
   .case-link {
