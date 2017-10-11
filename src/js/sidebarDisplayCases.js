@@ -8,12 +8,14 @@ app.factory('sidebarDisplayCases', ['coderData', 'arbitratorData', 'caseInfoServ
             id: caseId,
             count: Object.keys(cases[caseId]).length,
             fullyArbitrated: arbitratorData.isFullyArbitrated(caseId),
+            partiallyArbitrated: arbitratorData.isPartiallyArbitrated(caseId),
             displayText: caseInfoService.getFullTitle(caseId),
          }
       });
    }
 
    arbitratorData.addLoadCompleteCallback(refresh);
+   arbitratorData.addFullyArbitratedStateChangeCallback(refresh)
    coderData.addLoadCompleteCallback(refresh);
 
    return {

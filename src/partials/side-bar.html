@@ -18,7 +18,15 @@
        <span id='no-cases'> No Cases </span>
     </span>
     <ul class="nav nav-sidebar">
-        <li class='active' ng-repeat="case in getCases() | filter:shouldDisplay as filteredCases">
+        <li class='active' 
+            ng-repeat="case in getCases() | filter:shouldDisplay as filteredCases"
+            ng-class="{
+                'double-coded': case.count > 1,
+                'single-coded': case.count == 1,
+                'fully-arbitrated': case.fullyArbitrated,
+                'partially-arbitrated': case.partiallyArbitrated,
+            }"
+        >
         <a ng-click="switchToCase(case.id)"
            class="case-link"
            ng-class="isSelected(case.id) ? 'selected-case' : ''"> {{case.displayText}} </a>

@@ -82,6 +82,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
          $scope.arbitrator[questionId].status = Status.Arbitrated;
       });
       Project.markDirty();
+      arbitratorData.fireArbitrationChanged([questions]);
    };
 
    $scope.canAutoResolve = function() {
@@ -115,6 +116,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    function setArbitrated(questionId, value) {
       $scope.arbitrator[questionId].status = value;
       Project.markDirty();
+      arbitratorData.fireArbitrationChanged([questionId]);
    }
 
    $scope.disableArbitration = function(questionId) {
@@ -128,6 +130,7 @@ app.controller('caseController', ['$scope', 'Case', 'coderData', 'arbitratorData
    $scope.onArbitrationChange = function(questionId) {
       $scope.disableArbitration(questionId);
       Project.markDirty();
+      arbitratorData.fireArbitrationChanged([questionId]);
    };
 
    $scope.toggleArbitration = function(questionId) {

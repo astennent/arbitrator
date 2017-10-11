@@ -1,6 +1,7 @@
 app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'questionSorter', function(keyRemapper, questionNormalization, questionSorter) {
    var cases = {};
-   var loadCompleteCallbacks = jQuery.Callbacks();
+   const loadCompleteCallbacks = jQuery.Callbacks();
+   const arbitrationStateChangeCallbacks = jQuery.Callbacks();
 
    function generateKeyMaps() {
       var fullToShortKeyMap = {};
@@ -48,6 +49,19 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'question
          }
       }
       return true;
+   }
+
+   function isPartiallyArbitrated(caseId) {
+      const currentCase = cases[caseId];
+      if (!currentCase) {
+         return false;
+      }
+      for (var questionKey in currentCase) {
+         if (currentCase[questionKey].status === 1) {
+            return true;
+         }
+      }
+      return false;
    }
 
    function getExportData(onlyIncludeFullyArbitrated) {
@@ -177,8 +191,15 @@ app.factory('arbitratorData', ['keyRemapper', 'questionNormalization', 'question
       },
       getExportData: getExportData,
       isFullyArbitrated: isFullyArbitrated,
+      isPartiallyArbitrated: isPartiallyArbitrated,
       addLoadCompleteCallback: function(callback) {
          loadCompleteCallbacks.add(callback);
+      },
+      addFullyArbitratedStateChangeCallback: function(callback) {
+         arbitrationStateChangeCallbacks.add(callback);
+      },
+      fireArbitrationChanged: function(questionIds) {
+         arbitrationStateChangeCallbacks.fire(questionIds);
       },
    }
 

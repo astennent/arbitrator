@@ -198,6 +198,13 @@ body {
     padding-top: 15px;
   }
 
+  li.partially-arbitrated {
+    border-left: 1px solid #03a9f4;
+  }
+  li.fully-arbitrated {
+    border-left: 2px solid green;
+  }
+
   .case-link {
     cursor: pointer;
     &.selected-case {
