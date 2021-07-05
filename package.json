@@ -31,6 +31,8 @@
     "gulp-connect": "^5.7.0",
     "gulp-sourcemaps": "^3.0.0",
     "logfmt": "^1.2.0",
+    "node-sass": "^6.0.1",
+    "sass": "^1.35.1"
   },
   "engines": {
     "node": "6.10.3"
