@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass')(require('sass'));
+var sass = require('gulp-sass')(require('node-sass'));
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
