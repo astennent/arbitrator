@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-// var sass = require('gulp-sass')(require('node-sass'));
+var sass = require('gulp-sass')(require('node-sass'));
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
@@ -16,10 +16,9 @@ gulp.task('javascript', function() {
     .pipe(gulp.dest('dist'));
 });
 
-// Doesn't actually do sass because it doesn't work on heroku. Don't care.
 gulp.task('sass', function() {
-  return gulp.src('src/scss/**/*.css') // Gets all files ending with .scss in src/scss and children dirs
-    // .pipe(sass()) // Passes it through a gulp-sass
+  return gulp.src('src/scss/**/*.scss') // Gets all files ending with .scss in src/scss and children dirs
+    .pipe(sass()) // Passes it through a gulp-sass
     .pipe(gulp.dest('dist')) // Outputs it in the css folder
 });
 
