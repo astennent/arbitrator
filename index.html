@@ -19,21 +19,21 @@
 
 <body>
 
-<ng-include src="'top-bar.html'"> </ng-include>
+<ng-include src="'dist/top-bar.html'"> </ng-include>
 
 <div id="main" class="container-fluid" ng-controller="pageController">
     <table class="table">
         <tr>
             <td id="sidebarTd">
                 <!-- Sidebar -->
-                <ng-include src="'side-bar.html'"> </ng-include>
+                <ng-include src="'dist/side-bar.html'"> </ng-include>
 
             </td>
 
             <td style="width: 80%">
                 <!-- Setup Page -->
-                <ng-include ng-if='isOnSetup()' src="'setup-page.html'"> </ng-include>
-                <ng-include ng-if='isOnCase()' src="'case-page.html'"> </ng-include>
+                <ng-include ng-if='isOnSetup()' src="'dist/setup-page.html'"> </ng-include>
+                <ng-include ng-if='isOnCase()' src="'dist/case-page.html'"> </ng-include>
             </td>
         </tr>
     </table>

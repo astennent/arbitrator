@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('sass'));
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
@@ -30,15 +30,13 @@ gulp.task('watch', function() {
 
 gulp.task('templates', function () {
    return gulp.src('src/partials/**/*.html')
-      .pipe(templateCache({ module: 'Arbitrator' }))
+      // .pipe(templateCache({ module: 'Arbitrator' }))
       .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['sass', 'javascript', 'templates']);
+gulp.task('build', gulp.series('sass', 'javascript', 'templates'));
 
-gulp.task('default', ['serveprod']);
-
-gulp.task('serveprod', ['build', 'watch'], function() {
+gulp.task('serveprod', gulp.series('build', 'watch'), function() {
    connect.server({
       root: ["."],
       port: process.env.PORT || 5000, // localhost:5000
@@ -46,3 +44,4 @@ gulp.task('serveprod', ['build', 'watch'], function() {
    });
 });
 
+gulp.task('default', gulp.series('serveprod'));
