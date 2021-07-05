@@ -30,7 +30,7 @@
     "gulp-angular-templatecache": "^2.0.0",
     "gulp-connect": "^5.7.0",
     "gulp-sourcemaps": "^3.0.0",
-    "logfmt": "^1.2.0"
+    "logfmt": "^1.2.0",
   },
   "engines": {
     "node": "6.10.3"
